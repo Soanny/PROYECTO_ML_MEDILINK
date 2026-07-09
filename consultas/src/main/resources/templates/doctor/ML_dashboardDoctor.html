@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel del Doctor</title>
+    <link rel="stylesheet" th:href="@{/css/ML_dashboardAdmin.css}" href="/css/ML_dashboardAdmin.css">
+    <link rel="stylesheet" th:href="@{/css/ML_doctor.css}" href="/css/ML_doctor.css">
+    <link rel="stylesheet" th:href="@{/css/ML_iconos.css}" href="/css/ML_iconos.css">
+</head>
+<body>
+
+<div class="ML_dashboard_layout">
+
+    <aside class="ML_sidebar">
+        <div class="ML_sidebar_marca">
+            <div class="ML_marca_icono">+</div>
+            <div>
+                <h2>MediLink</h2>
+                <p>Sistema de<br>Citas Médicas</p>
+            </div>
+        </div>
+
+        <nav class="ML_menu">
+            <a th:href="@{/doctor/dashboard}" class="ML_menu_link ML_activo">
+                <span class="ML_menu_icono"><span class="ML_icon ML_icon_home" aria-hidden="true"></span></span>
+                <span>Principal</span>
+            </a>
+            <a th:href="@{/doctor/citas}" class="ML_menu_link">
+                <span class="ML_menu_icono"><span class="ML_icon ML_icon_appointment" aria-hidden="true"></span></span>
+                <span>Citas asignadas</span>
+            </a>
+            <a th:href="@{/doctor/seguimiento}" class="ML_menu_link">
+                <span class="ML_menu_icono"><span class="ML_icon ML_icon_pill" aria-hidden="true"></span></span>
+                <span>Seguimiento</span>
+            </a>
+        </nav>
+
+        <div class="ML_sidebar_footer">
+            <form th:action="@{/logout}" method="post">
+                <button type="submit" class="ML_btn_logout">Cerrar sesión</button>
+            </form>
+        </div>
+    </aside>
+
+    <main class="ML_contenido ML_doctor_contenido">
+
+        <section class="ML_pacientes_topbar">
+            <div class="ML_topbar_left">
+                <span class="ML_topbar_menu"><span class="ML_icon ML_icon_menu" aria-hidden="true"></span></span>
+                <h1>Panel del Doctor</h1>
+            </div>
+
+            <div class="ML_topbar_user">
+                <span class="ML_notificacion"><span class="ML_icon ML_icon_bell" aria-hidden="true"></span></span>
+                <div class="ML_topbar_avatar">D</div>
+                <div>
+                    <strong th:text="${ML_perfilDoctor.doctor}">Doctor</strong>
+                    <p th:text="${ML_perfilDoctor.especialidad}">Especialidad</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="ML_doctor_bienvenida">
+            <div>
+                <h2 th:text="${'Bienvenido, ' + ML_perfilDoctor.doctor}">Bienvenido, Doctor</h2>
+                <p>
+                    Revisa tus citas asignadas y agrega registros clínicos acumulativos en la ventana Seguimiento.
+                </p>
+            </div>
+            <div class="ML_doctor_info_box">
+                <span>Consultorio</span>
+                <strong th:text="${ML_perfilDoctor.consultorio}">Consultorio</strong>
+                <small th:text="${ML_perfilDoctor.ubicacion_consultorio + ' - Piso ' + ML_perfilDoctor.piso_consultorio}">Ubicación</small>
+            </div>
+        </section>
+
+        <section class="ML_paneles ML_doctor_resumen">
+            <div class="ML_panel">
+                <div>
+                    <p>Citas asignadas</p>
+                    <h2 th:text="${ML_totalCitas}">0</h2>
+                    <span class="ML_badge ML_badge_azul">Total</span>
+                </div>
+                <div class="ML_panel_icono ML_icono_azul"><span class="ML_icon ML_icon_clipboard" aria-hidden="true"></span></div>
+            </div>
+
+            <div class="ML_panel">
+                <div>
+                    <p>Citas de hoy</p>
+                    <h2 th:text="${ML_citasHoy}">0</h2>
+                    <span class="ML_badge ML_badge_naranja">Agenda diaria</span>
+                </div>
+                <div class="ML_panel_icono ML_icono_naranja"><span class="ML_icon ML_icon_clock" aria-hidden="true"></span></div>
+            </div>
+
+            <div class="ML_panel">
+                <div>
+                    <p>Pendientes</p>
+                    <h2 th:text="${ML_citasPendientes}">0</h2>
+                    <span class="ML_badge ML_badge_morado">Por atender</span>
+                </div>
+                <div class="ML_panel_icono ML_icono_morado"><span class="ML_icon ML_icon_hourglass" aria-hidden="true"></span></div>
+            </div>
+
+            <div class="ML_panel">
+                <div>
+                    <p>Atendidas</p>
+                    <h2 th:text="${ML_citasAtendidas}">0</h2>
+                    <span class="ML_badge ML_badge_verde">Finalizadas</span>
+                </div>
+                <div class="ML_panel_icono ML_icono_verde"><span class="ML_icon ML_icon_check-circle" aria-hidden="true"></span></div>
+            </div>
+        </section>
+
+        <section class="ML_doctor_grid">
+            <div class="ML_doctor_panel">
+                <div class="ML_doctor_panel_header">
+                    <div>
+                        <h3>Próximas citas asignadas</h3>
+                        <p>Citas pendientes o confirmadas que debes atender.</p>
+                    </div>
+                    <a th:href="@{/doctor/citas}" class="ML_btn_doctor_primary">Ver todas</a>
+                </div>
+
+                <div class="ML_tabla_contenedor">
+                    <table class="ML_tabla_pacientes_admin ML_tabla_doctor">
+                        <thead>
+                        <tr>
+                            <th>Paciente</th>
+                            <th>Fecha</th>
+                            <th>Hora</th>
+                            <th>Motivo</th>
+                            <th>Estado</th>
+                            <th>Atención</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:if="${#lists.isEmpty(ML_proximasCitas)}">
+                            <td colspan="6" class="ML_tabla_vacia">No hay próximas citas asignadas.</td>
+                        </tr>
+                        <tr th:each="ML_cita : ${ML_proximasCitas}">
+                            <td>
+                                <div class="ML_paciente_info">
+                                    <div class="ML_paciente_foto" th:text="${#strings.substring(ML_cita.paciente, 0, 1)}">P</div>
+                                    <div>
+                                        <strong th:text="${ML_cita.paciente}">Paciente</strong>
+                                        <span th:text="${'DNI: ' + ML_cita.dni_paciente}">DNI</span>
+                                    </div>
+                                </div>
+                            </td>
+                            <td th:text="${ML_cita.fecha_cita_texto}">00/00/0000</td>
+                            <td th:text="${ML_cita.hora_inicio_texto + ' - ' + ML_cita.hora_fin_texto}">Hora</td>
+                            <td th:text="${ML_cita.motivo}">Motivo</td>
+                            <td>
+                                <span class="ML_estado" th:text="${ML_cita.estado}"
+                                      th:classappend="${#strings.equalsIgnoreCase(ML_cita.estado, 'Confirmada')} ? ' ML_estado_confirmada' : (${#strings.equalsIgnoreCase(ML_cita.estado, 'Pendiente')} ? ' ML_estado_pendiente' : (${#strings.equalsIgnoreCase(ML_cita.estado, 'Cancelada')} ? ' ML_estado_cancelada' : ' ML_estado_atendida'))">
+                                    Pendiente
+                                </span>
+                            </td>
+                            <td>
+                                <a th:href="@{/doctor/seguimiento/registros/{id}(id=${ML_cita.id_cita})}" class="ML_btn_doctor_table">Agregar registros</a>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="ML_doctor_panel ML_doctor_perfil">
+                <h3>Datos profesionales</h3>
+                <div class="ML_doctor_perfil_avatar">D</div>
+                <h4 th:text="${ML_perfilDoctor.doctor}">Doctor</h4>
+                <p th:text="${ML_perfilDoctor.especialidad}">Especialidad</p>
+                <div class="ML_doctor_perfil_lista">
+                    <div>
+                        <span>Colegiatura</span>
+                        <strong th:text="${ML_perfilDoctor.nro_colegiatura}">CMP</strong>
+                    </div>
+                    <div>
+                        <span>Correo</span>
+                        <strong th:text="${ML_perfilDoctor.correo}">correo</strong>
+                    </div>
+                    <div>
+                        <span>Celular</span>
+                        <strong th:text="${ML_perfilDoctor.celular}">celular</strong>
+                    </div>
+                    <div>
+                        <span>Registros clínicos</span>
+                        <strong th:text="${ML_historialesRegistrados}">0</strong>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+</div>
+
+</body>
+</html>

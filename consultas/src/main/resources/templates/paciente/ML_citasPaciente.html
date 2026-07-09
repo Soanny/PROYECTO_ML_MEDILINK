@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mis Citas Asignadas</title>
+    <link rel="stylesheet" th:href="@{/css/ML_dashboardAdmin.css}" href="/css/ML_dashboardAdmin.css">
+    <link rel="stylesheet" th:href="@{/css/ML_citasAdmin.css}" href="/css/ML_citasAdmin.css">
+    <link rel="stylesheet" th:href="@{/css/ML_paciente.css}" href="/css/ML_paciente.css">
+    <link rel="stylesheet" th:href="@{/css/ML_iconos.css}" href="/css/ML_iconos.css">
+</head>
+<body>
+<div class="ML_dashboard_layout">
+    <aside class="ML_sidebar">
+        <div class="ML_sidebar_marca"><div class="ML_marca_icono">+</div><div><h2>MediLink</h2><p>Sistema de<br>Citas Médicas</p></div></div>
+        <nav class="ML_menu">
+            <a th:href="@{/paciente/dashboard}" class="ML_menu_link"><span class="ML_menu_icono"><span class="ML_icon ML_icon_home" aria-hidden="true"></span></span><span>Principal</span></a>
+            <a th:href="@{/paciente/citas}" class="ML_menu_link ML_activo"><span class="ML_menu_icono"><span class="ML_icon ML_icon_appointment" aria-hidden="true"></span></span><span>Citas asignadas</span></a>
+            <a th:href="@{/paciente/historial}" class="ML_menu_link"><span class="ML_menu_icono"><span class="ML_icon ML_icon_history" aria-hidden="true"></span></span><span>Historial</span></a>
+            <a th:href="@{/paciente/pagos}" class="ML_menu_link"><span class="ML_menu_icono"><span class="ML_icon ML_icon_payment" aria-hidden="true"></span></span><span>Pago</span></a>
+        </nav>
+        <div class="ML_sidebar_footer"><form th:action="@{/logout}" method="post"><button type="submit" class="ML_btn_logout">Cerrar sesión</button></form></div>
+    </aside>
+
+    <main class="ML_contenido ML_paciente_contenido">
+        <section class="ML_pacientes_topbar">
+            <div class="ML_topbar_left"><span class="ML_topbar_menu"><span class="ML_icon ML_icon_menu" aria-hidden="true"></span></span><h1>Mis citas asignadas</h1></div>
+            <div class="ML_topbar_user"><span class="ML_notificacion"><span class="ML_icon ML_icon_bell" aria-hidden="true"></span></span><div class="ML_topbar_avatar">P</div><div><strong th:text="${ML_perfilPaciente.paciente ?: 'Paciente'}">Paciente</strong><p>Paciente</p></div></div>
+        </section>
+
+        <section class="ML_paciente_header">
+            <div><h2>Citas asignadas al paciente</h2><p>Revisa tus citas registradas, el doctor asignado, consultorio, estado de atención y estado de pago.</p></div>
+        </section>
+
+        <div class="ML_alerta_exito" th:if="${ML_mensajeExito}" th:text="${ML_mensajeExito}">Correcto</div>
+        <div class="ML_alerta_error" th:if="${ML_mensajeError}" th:text="${ML_mensajeError}">Error</div>
+
+        <section class="ML_paneles ML_paciente_resumen">
+            <div class="ML_panel"><div><p>Total citas</p><h2 th:text="${ML_totalCitas}">0</h2><span class="ML_badge ML_badge_azul">Asignadas</span></div><div class="ML_panel_icono ML_icono_azul"><span class="ML_icon ML_icon_appointment" aria-hidden="true"></span></div></div>
+            <div class="ML_panel"><div><p>Pendientes</p><h2 th:text="${ML_citasPendientes}">0</h2><span class="ML_badge ML_badge_amarillo">Por confirmar</span></div><div class="ML_panel_icono ML_icono_amarillo"><span class="ML_icon ML_icon_clock" aria-hidden="true"></span></div></div>
+            <div class="ML_panel"><div><p>Confirmadas</p><h2 th:text="${ML_citasConfirmadas}">0</h2><span class="ML_badge ML_badge_verde">Agendadas</span></div><div class="ML_panel_icono ML_icono_verde"><span class="ML_icon ML_icon_check" aria-hidden="true"></span></div></div>
+            <div class="ML_panel"><div><p>Atendidas</p><h2 th:text="${ML_citasAtendidas}">0</h2><span class="ML_badge ML_badge_morado">Con atención</span></div><div class="ML_panel_icono ML_icono_morado"><span class="ML_icon ML_icon_doctor" aria-hidden="true"></span></div></div>
+        </section>
+
+        <section class="ML_paciente_panel">
+            <div class="ML_paciente_panel_header">
+                <div><h3>Listado de citas</h3><p>Los datos personales del paciente son solo de lectura; aquí se muestra la cita asignada.</p></div>
+                <div class="ML_buscador"><span><span class="ML_icon ML_icon_search" aria-hidden="true"></span></span><input type="text" id="ML_buscarCitasPaciente" placeholder="Buscar por doctor, especialidad, estado o motivo..."></div>
+            </div>
+            <div class="ML_tabla_contenedor">
+                <table class="ML_tabla_pacientes_admin" id="ML_tablaCitasPaciente">
+                    <thead>
+                    <tr><th>Cita</th><th>Doctor</th><th>Fecha y hora</th><th>Consultorio</th><th>Motivo</th><th>Estado</th><th>Pago</th><th>Acción</th></tr>
+                    </thead>
+                    <tbody>
+                    <tr th:if="${#lists.isEmpty(ML_citas)}"><td colspan="8" class="ML_tabla_vacia">No tienes citas asignadas.</td></tr>
+                    <tr th:each="ML_cita : ${ML_citas}">
+                        <td th:text="${'#C-' + ML_cita.id_cita}">#C-1</td>
+                        <td><strong th:text="${ML_cita.doctor}">Doctor</strong><span class="ML_texto_muted" th:text="${ML_cita.especialidad}">Especialidad</span></td>
+                        <td><span th:text="${ML_cita.fecha_cita_texto}">Fecha</span><span class="ML_texto_muted" th:text="${ML_cita.hora_inicio_texto + ' - ' + ML_cita.hora_fin_texto}">Hora</span></td>
+                        <td><span th:text="${ML_cita.consultorio}">Consultorio</span><span class="ML_texto_muted" th:text="${ML_cita.ubicacion_consultorio}">Ubicación</span></td>
+                        <td th:text="${ML_cita.motivo != null ? ML_cita.motivo : 'Sin motivo'}">Motivo</td>
+                        <td><span class="ML_estado_cita_select" th:classappend="${ML_cita.estado == 'Confirmada' ? ' ML_estado_confirmada' : (ML_cita.estado == 'Pendiente' ? ' ML_estado_pendiente' : (ML_cita.estado == 'Atendida' ? ' ML_estado_atendida' : ' ML_estado_cancelada'))}" th:text="${ML_cita.estado}">Estado</span></td>
+                        <td><strong th:text="${ML_cita.ultimo_estado_pago}">Sin pago</strong><span class="ML_texto_muted" th:text="${'Saldo: S/ ' + ML_cita.saldo_pendiente}">Saldo</span></td>
+                        <td>
+                            <a th:if="${ML_cita.saldo_pendiente > 0 && ML_cita.estado != 'Cancelada'}" th:href="@{/paciente/pagos/{id}/realizar(id=${ML_cita.id_cita})}" class="ML_btn_paciente_table">Pagar</a>
+                            <span th:if="${ML_cita.saldo_pendiente <= 0 || ML_cita.estado == 'Cancelada'}" class="ML_texto_muted">Sin acción</span>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </main>
+</div>
+<script>
+const ML_buscarCitasPaciente = document.getElementById('ML_buscarCitasPaciente');
+const ML_tablaCitasPaciente = document.getElementById('ML_tablaCitasPaciente');
+if (ML_buscarCitasPaciente && ML_tablaCitasPaciente) {
+    ML_buscarCitasPaciente.addEventListener('keyup', () => {
+        const texto = ML_buscarCitasPaciente.value.toLowerCase();
+        ML_tablaCitasPaciente.querySelectorAll('tbody tr').forEach(fila => {
+            fila.style.display = fila.textContent.toLowerCase().includes(texto) ? '' : 'none';
+        });
+    });
+}
+</script>
+</body>
+</html>

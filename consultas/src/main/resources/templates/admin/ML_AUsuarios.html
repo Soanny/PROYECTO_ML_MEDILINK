@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Usuarios</title>
+    <link rel="stylesheet" th:href="@{/css/ML_dashboardAdmin.css}" href="/css/ML_dashboardAdmin.css">
+    <link rel="stylesheet" th:href="@{/css/ML_iconos.css}" href="/css/ML_iconos.css">
+</head>
+<body>
+
+<div class="ML_dashboard_layout">
+
+    <aside class="ML_sidebar">
+
+        <div class="ML_sidebar_marca">
+            <div class="ML_marca_icono">+</div>
+            <div>
+                <h2>MediLink</h2>
+                <p>Sistema de<br>Citas Médicas</p>
+            </div>
+        </div>
+
+        <nav class="ML_menu">
+
+            <a th:href="@{/admin/dashboard}" class="ML_menu_link">
+                <span class="ML_menu_icono"><span class="ML_icon ML_icon_home" aria-hidden="true"></span></span>
+                <span>Principal</span>
+            </a>
+
+            <a th:href="@{/admin/usuarios}" class="ML_menu_link ML_activo">
+                <span class="ML_menu_icono"><span class="ML_icon ML_icon_users" aria-hidden="true"></span></span>
+                <span>Usuarios</span>
+            </a>
+
+            <a th:href="@{/admin/citas}" class="ML_menu_link">
+                <span class="ML_menu_icono"><span class="ML_icon ML_icon_appointment" aria-hidden="true"></span></span>
+                <span>Citas</span>
+            </a>
+
+            <a th:href="@{/admin/horarios}" class="ML_menu_link">
+                <span class="ML_menu_icono"><span class="ML_icon ML_icon_calendar" aria-hidden="true"></span></span>
+                <span>Calendario</span>
+            </a>
+
+            <a th:href="@{/admin/disponibilidad}" class="ML_menu_link">
+                <span class="ML_menu_icono"><span class="ML_icon ML_icon_clock" aria-hidden="true"></span></span>
+                <span>Disponibilidad</span>
+            </a>
+            <a th:href="@{/admin/horarios-doctores}" class="ML_menu_link">
+                <span class="ML_menu_icono"><span class="ML_icon ML_icon_clock" aria-hidden="true"></span></span>
+                <span>Horarios doctores</span>
+            </a>
+
+            <a th:href="@{/admin/consultorios}" class="ML_menu_link">
+                <span class="ML_menu_icono"><span class="ML_icon ML_icon_clipboard" aria-hidden="true"></span></span>
+                <span>Consultorios</span>
+            </a>
+
+            <a th:href="@{/admin/pagos}" class="ML_menu_link">
+                <span class="ML_menu_icono"><span class="ML_icon ML_icon_payment" aria-hidden="true"></span></span>
+                <span>Pagos</span>
+            </a>
+            <a th:href="@{/admin/correos}" class="ML_menu_link">
+                <span class="ML_menu_icono"><span class="ML_icon ML_icon_report" aria-hidden="true"></span></span>
+                <span>Notificaciones</span>
+            </a>
+
+            <a th:href="@{/admin/reportes}" class="ML_menu_link">
+                <span class="ML_menu_icono"><span class="ML_icon ML_icon_report" aria-hidden="true"></span></span>
+                <span>Reportes</span>
+            </a>
+
+            <a th:href="@{/admin/especialidades}" class="ML_menu_link">
+                <span class="ML_menu_icono"><span class="ML_icon ML_icon_add" aria-hidden="true"></span></span>
+                <span>Especialidades</span>
+            </a>
+
+            <a th:href="@{/admin/ranking-doctores}" class="ML_menu_link">
+                <span class="ML_menu_icono"><span class="ML_icon ML_icon_ranking" aria-hidden="true"></span></span>
+                <span>Ranking Doctores</span>
+            </a>
+
+            <a th:href="@{/admin/historial}" class="ML_menu_link">
+                <span class="ML_menu_icono"><span class="ML_icon ML_icon_history" aria-hidden="true"></span></span>
+                <span>Historial Clínico</span>
+            </a>
+
+        </nav>
+
+        <div class="ML_sidebar_footer">
+            <form th:action="@{/logout}" method="post">
+                <button type="submit" class="ML_btn_logout">Cerrar sesión</button>
+            </form>
+        </div>
+
+    </aside>
+
+    <main class="ML_contenido">
+
+        <section class="ML_header">
+            <div>
+                <h1 th:text="${ML_tituloPagina}">Usuarios</h1>
+                <p>Accede desde un solo apartado a pacientes, doctores y secretarias.</p>
+            </div>
+
+            <div class="ML_usuario_panel">
+                <div class="ML_usuario_texto">
+                    <strong>Administrador</strong>
+                    <span>Gestión de usuarios</span>
+                </div>
+                <div class="ML_avatar">A</div>
+            </div>
+        </section>
+
+        <section class="ML_usuarios_portada">
+            <div>
+                <span class="ML_badge ML_badge_azul">Panel unificado</span>
+                <h2>Administración de Usuarios</h2>
+                <p>
+                    Selecciona el tipo de usuario que deseas administrar. Cada opción te llevará
+                    a su panel correspondiente sin saturar la barra lateral.
+                </p>
+            </div>
+            <div class="ML_usuarios_total">
+                <span>Total usuarios</span>
+                <strong th:text="${ML_totalUsuarios}">0</strong>
+            </div>
+        </section>
+
+        <section class="ML_usuarios_cards">
+
+            <a th:href="@{/admin/pacientes}" class="ML_usuario_opcion">
+                <div class="ML_usuario_opcion_icono ML_icono_azul">
+                    <span class="ML_icon ML_icon_users" aria-hidden="true"></span>
+                </div>
+                <div class="ML_usuario_opcion_texto">
+                    <span class="ML_badge ML_badge_azul">Pacientes</span>
+                    <h3>Panel de Pacientes</h3>
+                    <p>Consulta y administra los pacientes registrados en el sistema.</p>
+                </div>
+                <div class="ML_usuario_opcion_contador">
+                    <small>Registrados</small>
+                    <strong th:text="${ML_totalPacientes}">0</strong>
+                </div>
+            </a>
+
+            <a th:href="@{/admin/doctores}" class="ML_usuario_opcion">
+                <div class="ML_usuario_opcion_icono ML_icono_verde">
+                    <span class="ML_icon ML_icon_doctor" aria-hidden="true"></span>
+                </div>
+                <div class="ML_usuario_opcion_texto">
+                    <span class="ML_badge ML_badge_verde">Doctores</span>
+                    <h3>Panel de Doctores</h3>
+                    <p>Gestiona doctores, especialidades, consultorios y estado de acceso.</p>
+                </div>
+                <div class="ML_usuario_opcion_contador">
+                    <small>Registrados</small>
+                    <strong th:text="${ML_totalDoctores}">0</strong>
+                </div>
+            </a>
+
+            <a th:href="@{/admin/secretarias}" class="ML_usuario_opcion">
+                <div class="ML_usuario_opcion_icono ML_icono_morado">
+                    <span class="ML_icon ML_icon_secretary" aria-hidden="true"></span>
+                </div>
+                <div class="ML_usuario_opcion_texto">
+                    <span class="ML_badge ML_badge_morado">Secretarias</span>
+                    <h3>Panel de Secretarias</h3>
+                    <p>Revisa secretarias, turnos asignados y permisos de acceso al sistema.</p>
+                </div>
+                <div class="ML_usuario_opcion_contador">
+                    <small>Registradas</small>
+                    <strong th:text="${ML_totalSecretarias}">0</strong>
+                </div>
+            </a>
+
+        </section>
+
+        <section class="ML_usuarios_atajos">
+            <div class="ML_usuarios_atajo">
+                <h3>Acciones rápidas</h3>
+                <p>Desde este panel puedes entrar a cada módulo sin perder la organización del menú principal.</p>
+            </div>
+            <div class="ML_usuarios_atajo_botones">
+                <a th:href="@{/admin/doctores/nuevo}" class="ML_btn_principal">Nuevo Doctor</a>
+                <a th:href="@{/admin/secretarias/nuevo}" class="ML_btn_secundario">Nueva Secretaria</a>
+            </div>
+        </section>
+
+    </main>
+
+</div>
+
+</body>
+</html>

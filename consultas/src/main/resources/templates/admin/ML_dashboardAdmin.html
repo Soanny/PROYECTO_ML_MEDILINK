@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bienvenido Administrador</title>
+    <link rel="stylesheet" th:href="@{/css/ML_dashboardAdmin.css}" href="/css/ML_dashboardAdmin.css">
+    <link rel="stylesheet" th:href="@{/css/ML_iconos.css}" href="/css/ML_iconos.css">
+</head>
+<body>
+
+<div class="ML_dashboard_layout">
+
+    <aside class="ML_sidebar">
+
+        <div class="ML_sidebar_marca">
+            <div class="ML_marca_icono">+</div>
+            <div>
+                <h2>MediLink</h2>
+                <p>Sistema de<br>Citas Médicas</p>
+            </div>
+        </div>
+
+        <nav class="ML_menu">
+
+            <a th:href="@{/admin/dashboard}" class="ML_menu_link ML_activo">
+                <span class="ML_menu_icono"><span class="ML_icon ML_icon_home" aria-hidden="true"></span></span>
+                <span>Principal</span>
+            </a>
+            <a th:href="@{/admin/usuarios}" class="ML_menu_link">
+                <span class="ML_menu_icono"><span class="ML_icon ML_icon_users" aria-hidden="true"></span></span>
+                <span>Usuarios</span>
+            </a>
+
+            <a th:href="@{/admin/citas}" class="ML_menu_link">
+                <span class="ML_menu_icono"><span class="ML_icon ML_icon_appointment" aria-hidden="true"></span></span>
+                <span>Citas</span>
+            </a>
+
+            <a th:href="@{/admin/horarios}" class="ML_menu_link">
+                <span class="ML_menu_icono"><span class="ML_icon ML_icon_calendar" aria-hidden="true"></span></span>
+                <span>Calendario</span>
+            </a>
+
+            
+            <a th:href="@{/admin/disponibilidad}" class="ML_menu_link">
+                <span class="ML_menu_icono"><span class="ML_icon ML_icon_clock" aria-hidden="true"></span></span>
+                <span>Disponibilidad</span>
+            </a>
+            <a th:href="@{/admin/horarios-doctores}" class="ML_menu_link">
+                <span class="ML_menu_icono"><span class="ML_icon ML_icon_clock" aria-hidden="true"></span></span>
+                <span>Horarios doctores</span>
+            </a>
+
+            <a th:href="@{/admin/consultorios}" class="ML_menu_link">
+                <span class="ML_menu_icono"><span class="ML_icon ML_icon_clipboard" aria-hidden="true"></span></span>
+                <span>Consultorios</span>
+            </a>
+
+            <a th:href="@{/admin/pagos}" class="ML_menu_link">
+                <span class="ML_menu_icono"><span class="ML_icon ML_icon_payment" aria-hidden="true"></span></span>
+                <span>Pagos</span>
+            </a>
+            <a th:href="@{/admin/correos}" class="ML_menu_link">
+                <span class="ML_menu_icono"><span class="ML_icon ML_icon_report" aria-hidden="true"></span></span>
+                <span>Notificaciones</span>
+            </a>
+<a th:href="@{/admin/reportes}" class="ML_menu_link">
+                <span class="ML_menu_icono"><span class="ML_icon ML_icon_report" aria-hidden="true"></span></span>
+                <span>Reportes</span>
+            </a>
+
+            <a th:href="@{/admin/especialidades}" class="ML_menu_link">
+                <span class="ML_menu_icono"><span class="ML_icon ML_icon_add" aria-hidden="true"></span></span>
+                <span>Especialidades</span>
+            </a>
+
+            <a th:href="@{/admin/ranking-doctores}" class="ML_menu_link">
+                <span class="ML_menu_icono"><span class="ML_icon ML_icon_ranking" aria-hidden="true"></span></span>
+                <span>Ranking Doctores</span>
+            </a>
+
+            <a th:href="@{/admin/historial}" class="ML_menu_link">
+                <span class="ML_menu_icono"><span class="ML_icon ML_icon_history" aria-hidden="true"></span></span>
+                <span>Historial Clínico</span>
+            </a>
+
+        </nav>
+
+        <div class="ML_sidebar_footer">
+            <form th:action="@{/logout}" method="post">
+                <button type="submit" class="ML_btn_logout">Cerrar sesión</button>
+            </form>
+        </div>
+
+    </aside>
+
+    <main class="ML_contenido">
+
+        <section class="ML_header">
+            <div>
+                <h1 th:text="${ML_tituloPagina}">Bienvenido Administrador</h1>
+                <p>Resumen general del sistema de citas médicas</p>
+            </div>
+
+            <div class="ML_usuario_panel">
+                <div class="ML_usuario_texto">
+                    <strong>Administrador</strong>
+                    <span>Panel principal</span>
+                </div>
+                <div class="ML_avatar">A</div>
+            </div>
+        </section>
+
+        <section class="ML_tarjetas_totales">
+
+            <div class="ML_panel_resumen">
+                <div class="ML_panel_resumen_texto">
+                    <p>Pacientes</p>
+                    <h2 th:text="${ML_totalPacientes}">0</h2>
+                    <span class="ML_badge ML_badge_azul">Reg.</span>
+                </div>
+                <div class="ML_panel_icono ML_icono_azul"><span class="ML_icon ML_icon_users" aria-hidden="true"></span></div>
+            </div>
+
+            <div class="ML_panel_resumen">
+                <div class="ML_panel_resumen_texto">
+                    <p>Doctores</p>
+                    <h2 th:text="${ML_totalDoctores}">0</h2>
+                    <span class="ML_badge ML_badge_verde">Activos</span>
+                </div>
+                <div class="ML_panel_icono ML_icono_verde"><span class="ML_icon ML_icon_doctor" aria-hidden="true"></span></div>
+            </div>
+
+            <div class="ML_panel_resumen">
+                <div class="ML_panel_resumen_texto">
+                    <p>Citas</p>
+                    <h2 th:text="${ML_totalCitas}">0</h2>
+                    <span class="ML_badge ML_badge_naranja">Reg.</span>
+                </div>
+                <div class="ML_panel_icono ML_icono_naranja"><span class="ML_icon ML_icon_clipboard" aria-hidden="true"></span></div>
+            </div>
+
+            <div class="ML_panel_resumen">
+                <div class="ML_panel_resumen_texto">
+                    <p>Pagos</p>
+                    <h2 th:text="${ML_totalPagos}">S/ 0.00</h2>
+                    <span class="ML_badge ML_badge_morado">OK</span>
+                </div>
+                <div class="ML_panel_icono ML_icono_morado"><span class="ML_icon ML_icon_payment" aria-hidden="true"></span></div>
+            </div>
+
+        
+            <div class="ML_panel_resumen">
+                <div class="ML_panel_resumen_texto"><p>Usuarios</p><h2 th:text="${ML_totalUsuarios}">0</h2><span class="ML_badge ML_badge_azul">Reg.</span></div>
+                <div class="ML_panel_icono ML_icono_azul"><span class="ML_icon ML_icon_users" aria-hidden="true"></span></div>
+            </div>
+
+            <div class="ML_panel_resumen">
+                <div class="ML_panel_resumen_texto"><p>Secretarias</p><h2 th:text="${ML_totalSecretarias}">0</h2><span class="ML_badge ML_badge_verde">Reg.</span></div>
+                <div class="ML_panel_icono ML_icono_verde"><span class="ML_icon ML_icon_secretary" aria-hidden="true"></span></div>
+            </div>
+
+            <div class="ML_panel_resumen">
+                <div class="ML_panel_resumen_texto"><p>Consultorios</p><h2 th:text="${ML_totalConsultorios}">0</h2><span class="ML_badge ML_badge_naranja">Reg.</span></div>
+                <div class="ML_panel_icono ML_icono_naranja"><span class="ML_icon ML_icon_clipboard" aria-hidden="true"></span></div>
+            </div>
+
+            <div class="ML_panel_resumen">
+                <div class="ML_panel_resumen_texto"><p>Reservas</p><h2 th:text="${ML_totalReservas}">0</h2><span class="ML_badge ML_badge_morado">Citas</span></div>
+                <div class="ML_panel_icono ML_icono_morado"><span class="ML_icon ML_icon_calendar" aria-hidden="true"></span></div>
+            </div>
+</section>
+
+        <section class="ML_dashboard_superior">
+
+            <div class="ML_panel ML_panel_grafico_tarta ML_panel_ordenado">
+                <div class="ML_panel_header_vertical">
+                    <div>
+                        <h3>Resumen Semanal de Citas</h3>
+                        <p>Visualización semanal en gráfico tipo tarta.</p>
+                    </div>
+                    <a th:href="@{/admin/reportes}" class="ML_btn_panel ML_btn_panel_bloque">Ver reporte</a>
+                </div>
+
+                <div class="ML_contenido_panel">
+                    <div class="ML_tarta_layout">
+                        <div class="ML_tarta_wrap">
+                            <div class="ML_tarta" id="ML_tartaSemanal">
+                                <div class="ML_tarta_centro">
+                                    <strong id="ML_tartaTotal">0</strong>
+                                    <span>Citas</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="ML_tarta_leyenda" id="ML_tartaLeyenda"></div>
+                    </div>
+
+                    <div id="ML_resumenSemanalDatos" class="ML_oculto_datos">
+                        <span th:each="ML_item : ${ML_resumenSemanal}"
+                              th:attr="data-dia=${ML_item.ML_dia},data-total=${ML_item.ML_total}"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="ML_panel ML_panel_ranking_dashboard ML_panel_ordenado">
+                <div class="ML_panel_header_vertical">
+                    <div>
+                        <h3>Ranking de Doctores</h3>
+                        <p>Doctores ordenados por horas trabajadas y cantidad de citas.</p>
+                    </div>
+                    <a th:href="@{/admin/ranking-doctores}" class="ML_btn_panel ML_btn_panel_bloque">Ver ranking</a>
+                </div>
+
+                <div class="ML_contenido_panel">
+                    <div class="ML_tabla_contenedor ML_ranking_dashboard_contenedor">
+                        <table class="ML_tabla ML_ranking_dashboard_tabla">
+                            <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Doctor</th>
+                                <th>Especialidad</th>
+                                <th>Horas</th>
+                                <th>Citas</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr th:if="${#lists.isEmpty(ML_rankingDoctoresHoras)}">
+                                <td colspan="5" class="ML_tabla_vacia">No hay información de doctores para el ranking.</td>
+                            </tr>
+                            <tr th:each="ML_doc, ML_iter : ${ML_rankingDoctoresHoras}"
+                                th:classappend="${ML_iter.index == 0} ? 'ML_ranking_fila_oro' : (${ML_iter.index == 1} ? 'ML_ranking_fila_plata' : (${ML_iter.index == 2} ? 'ML_ranking_fila_bronce' : ''))">
+                                <td><span class="ML_ranking_numero" th:text="${ML_iter.index + 1}">1</span></td>
+                                <td class="ML_ranking_doctor" th:text="${ML_doc.doctor}">Doctor</td>
+                                <td th:text="${ML_doc.especialidad}">Especialidad</td>
+                                <td><strong th:text="${ML_doc.horas_trabajadas}">0 h 0 min</strong></td>
+                                <td th:text="${ML_doc.total_citas}">0</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+        <section class="ML_dashboard_inferior">
+
+            <div class="ML_panel ML_panel_tabla_vertical ML_panel_ordenado">
+                <div class="ML_panel_header_vertical">
+                    <div>
+                        <h3>Próximas Citas</h3>
+                        <p>Primero se muestran las citas registradas y debajo la tabla completa.</p>
+                    </div>
+                    <a th:href="@{/admin/citas}" class="ML_btn_panel ML_btn_panel_bloque">Ver citas</a>
+                </div>
+
+                <div class="ML_contenido_panel">
+                    <div class="ML_tabla_contenedor ML_tabla_contenedor_fija">
+                        <table class="ML_tabla">
+                            <thead>
+                            <tr>
+                                <th>Paciente</th>
+                                <th>Doctor</th>
+                                <th>Hora</th>
+                                <th>Estado</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr th:if="${#lists.isEmpty(ML_proximasCitas)}">
+                                <td colspan="4" class="ML_tabla_vacia">No hay citas registradas</td>
+                            </tr>
+                            <tr th:each="ML_cita : ${ML_proximasCitas}">
+                                <td th:text="${ML_cita.ML_paciente}">Paciente</td>
+                                <td th:text="${ML_cita.ML_doctor}">Doctor</td>
+                                <td th:text="${ML_cita.ML_hora}">09:00 AM</td>
+                                <td>
+                                    <span class="ML_estado"
+                                          th:classappend="${ML_cita.ML_estadoClase}"
+                                          th:text="${ML_cita.ML_estado}">
+                                        Confirmada
+                                    </span>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+    </main>
+
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    const nodos = document.querySelectorAll('#ML_resumenSemanalDatos span');
+    const chart = document.getElementById('ML_tartaSemanal');
+    const legend = document.getElementById('ML_tartaLeyenda');
+    const totalEl = document.getElementById('ML_tartaTotal');
+
+    if (!chart || !legend || !totalEl) {
+        return;
+    }
+
+    const labels = [];
+    const values = [];
+
+    nodos.forEach(function (nodo) {
+        labels.push(nodo.dataset.dia || '');
+        values.push(parseInt(nodo.dataset.total || '0', 10));
+    });
+
+    const total = values.reduce(function (acum, valor) {
+        return acum + valor;
+    }, 0);
+
+    totalEl.textContent = total;
+
+    if (!values.length || total === 0) {
+        chart.style.background = 'conic-gradient(#dbe3ee 0deg 360deg)';
+        legend.innerHTML = '<div class="ML_leyenda_vacia">No hay citas registradas esta semana.</div>';
+        return;
+    }
+
+    const colores = ['#2f6df6', '#60a5fa', '#22c55e', '#f59e0b', '#a855f7', '#ef4444', '#06b6d4'];
+    let acumulado = 0;
+    const segmentos = values.map(function (valor, indice) {
+        const angulo = (valor / total) * 360;
+        const inicio = acumulado;
+        acumulado += angulo;
+        return colores[indice % colores.length] + ' ' + inicio + 'deg ' + acumulado + 'deg';
+    });
+
+    chart.style.background = 'conic-gradient(' + segmentos.join(', ') + ')';
+
+    legend.innerHTML = labels.map(function (label, indice) {
+        const valor = values[indice];
+        const porcentaje = total > 0 ? ((valor * 100) / total).toFixed(1) : '0.0';
+        return '' +
+            '<div class="ML_leyenda_item">' +
+                '<span class="ML_leyenda_color" style="background:' + colores[indice % colores.length] + ';"></span>' +
+                '<div class="ML_leyenda_texto">' +
+                    '<strong>' + label + '</strong>' +
+                    '<span>' + valor + ' cita(s) · ' + porcentaje + '%</span>' +
+                '</div>' +
+            '</div>';
+    }).join('');
+});
+</script>
+
+</body>
+</html>

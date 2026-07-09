@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Nueva Cita</title>
+
+    <link rel="stylesheet" th:href="@{/css/ML_dashboardAdmin.css}" href="/css/ML_dashboardAdmin.css">
+    <link rel="stylesheet" th:href="@{/css/ML_citasAdmin.css}" href="/css/ML_citasAdmin.css">
+    <link rel="stylesheet" href="../../static/css/ML_ARegistrarDoctor.css" type="text/css"/>
+
+    <link rel="stylesheet" th:href="@{/css/ML_iconos.css}" href="/css/ML_iconos.css">
+</head>
+
+<body class="ML_registrar_cita_page">
+
+<div class="ML_dashboard_layout">
+
+    <aside class="ML_sidebar">
+
+        <div class="ML_sidebar_marca">
+            <div class="ML_marca_icono">+</div>
+            <div>
+                <h2>MediLink</h2>
+                <p>Sistema de<br>Citas Médicas</p>
+            </div>
+        </div>
+
+        <nav class="ML_menu">
+
+            <a th:href="@{/admin/dashboard}" class="ML_menu_link">
+                <span class="ML_menu_icono"><span class="ML_icon ML_icon_home" aria-hidden="true"></span></span>
+                <span>Principal</span>
+            </a>
+            <a th:href="@{/admin/usuarios}" class="ML_menu_link">
+                <span class="ML_menu_icono"><span class="ML_icon ML_icon_users" aria-hidden="true"></span></span>
+                <span>Usuarios</span>
+            </a>
+
+            <a th:href="@{/admin/citas}" class="ML_menu_link ML_activo">
+                <span class="ML_menu_icono"><span class="ML_icon ML_icon_appointment" aria-hidden="true"></span></span>
+                <span>Citas</span>
+            </a>
+
+            <a th:href="@{/admin/horarios}" class="ML_menu_link">
+                <span class="ML_menu_icono"><span class="ML_icon ML_icon_calendar" aria-hidden="true"></span></span>
+                <span>Calendario</span>
+            </a>
+
+            
+            <a th:href="@{/admin/disponibilidad}" class="ML_menu_link">
+                <span class="ML_menu_icono"><span class="ML_icon ML_icon_clock" aria-hidden="true"></span></span>
+                <span>Disponibilidad</span>
+            </a>
+            <a th:href="@{/admin/horarios-doctores}" class="ML_menu_link">
+                <span class="ML_menu_icono"><span class="ML_icon ML_icon_clock" aria-hidden="true"></span></span>
+                <span>Horarios doctores</span>
+            </a>
+
+            <a th:href="@{/admin/consultorios}" class="ML_menu_link">
+                <span class="ML_menu_icono"><span class="ML_icon ML_icon_clipboard" aria-hidden="true"></span></span>
+                <span>Consultorios</span>
+            </a>
+
+            <a th:href="@{/admin/pagos}" class="ML_menu_link">
+                <span class="ML_menu_icono"><span class="ML_icon ML_icon_payment" aria-hidden="true"></span></span>
+                <span>Pagos</span>
+            </a>
+            <a th:href="@{/admin/correos}" class="ML_menu_link">
+                <span class="ML_menu_icono"><span class="ML_icon ML_icon_report" aria-hidden="true"></span></span>
+                <span>Notificaciones</span>
+            </a>
+<a th:href="@{/admin/reportes}" class="ML_menu_link">
+                <span class="ML_menu_icono"><span class="ML_icon ML_icon_report" aria-hidden="true"></span></span>
+                <span>Reportes</span>
+            </a>
+
+            <a th:href="@{/admin/especialidades}" class="ML_menu_link">
+                <span class="ML_menu_icono"><span class="ML_icon ML_icon_add" aria-hidden="true"></span></span>
+                <span>Especialidades</span>
+            </a>
+
+            <a th:href="@{/admin/ranking-doctores}" class="ML_menu_link">
+                <span class="ML_menu_icono"><span class="ML_icon ML_icon_ranking" aria-hidden="true"></span></span>
+                <span>Ranking Doctores</span>
+            </a>
+
+            <a th:href="@{/admin/historial}" class="ML_menu_link">
+                <span class="ML_menu_icono"><span class="ML_icon ML_icon_history" aria-hidden="true"></span></span>
+                <span>Historial Clínico</span>
+            </a>
+
+        </nav>
+
+        <div class="ML_sidebar_footer">
+            <form th:action="@{/logout}" method="post">
+                <button type="submit" class="ML_btn_logout">Cerrar sesión</button>
+            </form>
+        </div>
+
+    </aside>
+
+    <main class="ML_contenido">
+
+        <section class="ML_pacientes_topbar">
+            <div class="ML_topbar_left">
+                <span class="ML_topbar_menu"><span class="ML_icon ML_icon_menu" aria-hidden="true"></span></span>
+                <h1>Nueva Cita</h1>
+            </div>
+
+            <div class="ML_topbar_user">
+                <span class="ML_notificacion"><span class="ML_icon ML_icon_bell" aria-hidden="true"></span></span>
+                <div class="ML_topbar_avatar">A</div>
+                <div>
+                    <strong>Admin</strong>
+                    <p>Administrador</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="ML_pacientes_header">
+            <div>
+                <h2>Registrar Cita Médica</h2>
+                <p>Selecciona paciente, doctor, fecha y hora para programar la atención.</p>
+            </div>
+
+            <a th:href="@{/admin/citas}" class="ML_btn_volver_cita">
+                <span><span class="ML_icon ML_icon_arrow-left" aria-hidden="true"></span></span>
+                Volver
+            </a>
+        </section>
+
+        <section class="ML_form_admin_panel">
+
+            <div th:if="${ML_errorRegistro}" class="ML_admin_alerta ML_admin_alerta_error">
+                <span th:text="${ML_errorRegistro}">Error al registrar</span>
+            </div>
+
+            <form th:action="@{/admin/citas/guardar}"
+                  th:object="${ML_citaNueva}"
+                  method="post"
+                  class="ML_form_admin">
+
+                <div class="ML_form_section_header">
+                    <div class="ML_form_section_icon"><span class="ML_icon ML_icon_appointment" aria-hidden="true"></span></div>
+                    <div>
+                        <h3>Datos de la cita</h3>
+                        <p>Información principal para registrar una nueva cita médica.</p>
+                    </div>
+                </div>
+
+                <div class="ML_form_admin_grid">
+
+                    <div class="ML_form_admin_input">
+                        <label for="ML_idPaciente">Paciente <span>*</span></label>
+                        <select id="ML_idPaciente" th:field="*{ML_idPaciente}" required>
+                            <option value="">Seleccione paciente</option>
+                            <option th:each="ML_paciente : ${ML_pacientes}"
+                                    th:value="${ML_paciente.ML_id}"
+                                    th:text="${ML_paciente.ML_nombre}">
+                                Paciente
+                            </option>
+                        </select>
+                    </div>
+
+                    <div class="ML_form_admin_input">
+                        <label for="ML_idDoctor">Doctor <span>*</span></label>
+                        <select id="ML_idDoctor" th:field="*{ML_idDoctor}" required>
+                            <option value="">Seleccione doctor</option>
+                            <option th:each="ML_doctor : ${ML_doctores}"
+                                    th:value="${ML_doctor.ML_id}"
+                                    th:text="${ML_doctor.ML_nombre}">
+                                Doctor
+                            </option>
+                        </select>
+                    </div>
+
+                    <div class="ML_form_admin_input">
+                        <label for="ML_fechaCita">Fecha de la cita <span>*</span></label>
+                        <input type="date"
+                               id="ML_fechaCita"
+                               th:field="*{ML_fechaCita}"
+                               required>
+                    </div>
+
+                    <div class="ML_form_admin_input">
+                        <label for="ML_horaInicio">Hora de la cita <span>*</span></label>
+                        <input type="time"
+                               id="ML_horaInicio"
+                               th:field="*{ML_horaInicio}"
+                               required>
+                    </div>
+
+                    <div class="ML_form_admin_input ML_form_admin_full">
+                        <label for="ML_estado">Estado inicial <span>*</span></label>
+                        <select id="ML_estado" th:field="*{ML_estado}" required>
+                            <option value="Pendiente">Pendiente</option>
+                            <option value="Confirmada">Confirmada</option>
+                        </select>
+                    </div>
+
+                </div>
+
+                <div class="ML_form_admin_acciones">
+                    <a th:href="@{/admin/citas}" class="ML_btn_cancelar_admin">
+                        Cancelar
+                    </a>
+
+                    <button type="submit" class="ML_btn_guardar_admin">
+                        Guardar Cita
+                    </button>
+                </div>
+
+            </form>
+
+        </section>
+
+    </main>
+
+</div>
+
+</body>
+</html>

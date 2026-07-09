@@ -1,0 +1,331 @@
+/*
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/Other/CascadeStyleSheet.css to edit this template
+*/
+/* 
+    Created on : 1 jun. 2026, 23:43:29
+    Author     : Windows
+*/
+/* ============================= */
+/* REGISTRAR DOCTOR ADMIN */
+/* ============================= */
+
+/* ============================= */
+/* FORMULARIO REGISTRAR DOCTOR  */
+/* ============================= */
+
+.ML_registrar_doctor_page {
+    background: #f5f7fb;
+    color: #0f172a;
+}
+
+.ML_registrar_doctor_page .ML_contenido {
+    padding: 0;
+    background: #f5f7fb;
+    min-height: 100vh;
+}
+
+.ML_registrar_doctor_page .ML_pacientes_topbar {
+    height: 76px;
+    background: #ffffff;
+    border-bottom: 1px solid #e5e7eb;
+    padding: 0 34px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.ML_registrar_doctor_page .ML_topbar_left {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+}
+
+.ML_registrar_doctor_page .ML_topbar_menu {
+    color: #475569;
+    font-size: 22px;
+    font-weight: 800;
+}
+
+.ML_registrar_doctor_page .ML_topbar_left h1 {
+    font-size: 25px;
+    color: #0f172a;
+    font-weight: 900;
+}
+
+.ML_registrar_doctor_page .ML_topbar_user {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.ML_registrar_doctor_page .ML_topbar_user strong {
+    color: #0f172a;
+    font-size: 15px;
+}
+
+.ML_registrar_doctor_page .ML_topbar_user p {
+    color: #64748b;
+    font-size: 13px;
+    margin-top: 2px;
+}
+
+.ML_registrar_doctor_page .ML_notificacion {
+    font-size: 20px;
+}
+
+.ML_registrar_doctor_page .ML_topbar_avatar {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    background: #2f6df6;
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 900;
+}
+
+.ML_registrar_doctor_page .ML_pacientes_header {
+    padding: 34px 42px 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.ML_registrar_doctor_page .ML_pacientes_header h2 {
+    font-size: 28px;
+    color: #0f172a;
+    font-weight: 900;
+    margin-bottom: 8px;
+}
+
+.ML_registrar_doctor_page .ML_pacientes_header p {
+    color: #64748b;
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.ML_btn_volver_doctor {
+    height: 46px;
+    background: #ffffff;
+    color: #334155;
+    border: 1px solid #dbe3ee;
+    padding: 0 18px;
+    border-radius: 10px;
+    font-size: 15px;
+    font-weight: 800;
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    transition: 0.2s ease;
+}
+
+.ML_btn_volver_doctor:hover {
+    background: #f1f5f9;
+    color: #0b63e5;
+    border-color: #bfdbfe;
+}
+
+.ML_form_admin_panel {
+    background: #ffffff;
+    margin: 0 42px 42px;
+    border-radius: 16px;
+    padding: 30px;
+    box-shadow: 0 8px 25px rgba(15, 23, 42, 0.06);
+    border: 1px solid #e5e7eb;
+}
+
+.ML_form_admin {
+    width: 100%;
+}
+
+.ML_form_section_header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 24px;
+}
+
+.ML_form_section_header_second {
+    margin-top: 34px;
+    padding-top: 30px;
+    border-top: 1px solid #e5e7eb;
+}
+
+.ML_form_section_icon {
+    width: 46px;
+    height: 46px;
+    min-width: 46px;
+    border-radius: 50%;
+    background: #dbeafe;
+    color: #0b63e5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+}
+
+.ML_form_section_header h3 {
+    color: #0f172a;
+    font-size: 20px;
+    font-weight: 900;
+    margin: 0 0 5px;
+}
+
+.ML_form_section_header p {
+    color: #64748b;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.ML_form_admin_grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 20px 26px;
+}
+
+.ML_form_admin_input {
+    display: flex;
+    flex-direction: column;
+}
+
+.ML_form_admin_full {
+    grid-column: span 2;
+}
+
+.ML_form_admin_input label {
+    color: #111827;
+    font-weight: 800;
+    margin-bottom: 8px;
+    font-size: 14px;
+}
+
+.ML_form_admin_input label span {
+    color: #ef4444;
+}
+
+.ML_form_admin_input input,
+.ML_form_admin_input select {
+    width: 100%;
+    height: 50px;
+    border: 1px solid #d1d5db;
+    border-radius: 9px;
+    padding: 0 14px;
+    font-size: 15px;
+    outline: none;
+    color: #111827;
+    background: #ffffff;
+    transition: 0.2s ease;
+}
+
+.ML_form_admin_input input::placeholder {
+    color: #94a3b8;
+}
+
+.ML_form_admin_input input:focus,
+.ML_form_admin_input select:focus {
+    border-color: #0b63e5;
+    box-shadow: 0 0 0 3px rgba(11, 99, 229, 0.12);
+}
+
+.ML_admin_alerta {
+    width: 100%;
+    border-radius: 10px;
+    padding: 14px 16px;
+    font-weight: 800;
+    font-size: 14px;
+    margin-bottom: 20px;
+}
+
+.ML_admin_alerta_error {
+    color: #991b1b;
+    background: #fee2e2;
+    border: 1px solid #fecaca;
+}
+
+.ML_form_admin_acciones {
+    margin-top: 32px;
+    padding-top: 24px;
+    border-top: 1px solid #e5e7eb;
+    display: flex;
+    justify-content: flex-end;
+    gap: 14px;
+}
+
+.ML_btn_cancelar_admin,
+.ML_btn_guardar_admin {
+    height: 50px;
+    border-radius: 10px;
+    padding: 0 24px;
+    font-size: 15px;
+    font-weight: 900;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    transition: 0.2s ease;
+}
+
+.ML_btn_cancelar_admin {
+    background: #f1f5f9;
+    color: #334155;
+    border: 1px solid #e2e8f0;
+}
+
+.ML_btn_cancelar_admin:hover {
+    background: #e2e8f0;
+}
+
+.ML_btn_guardar_admin {
+    border: none;
+    background: #0b63e5;
+    color: #ffffff;
+    box-shadow: 0 8px 18px rgba(11, 99, 229, 0.22);
+}
+
+.ML_btn_guardar_admin:hover {
+    background: #084fc0;
+}
+
+@media (max-width: 1000px) {
+    .ML_form_admin_grid {
+        grid-template-columns: 1fr;
+    }
+
+    .ML_form_admin_full {
+        grid-column: span 1;
+    }
+}
+
+@media (max-width: 850px) {
+    .ML_registrar_doctor_page .ML_pacientes_header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 16px;
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+
+    .ML_form_admin_panel {
+        margin-left: 20px;
+        margin-right: 20px;
+        padding: 22px;
+    }
+
+    .ML_registrar_doctor_page .ML_pacientes_topbar {
+        padding: 0 20px;
+    }
+}
+
+@media (max-width: 650px) {
+    .ML_form_admin_acciones {
+        flex-direction: column;
+    }
+
+    .ML_btn_cancelar_admin,
+    .ML_btn_guardar_admin {
+        width: 100%;
+    }
+}

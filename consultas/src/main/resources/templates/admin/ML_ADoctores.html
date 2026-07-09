@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de Doctores</title>
+
+    <link rel="stylesheet" th:href="@{/css/ML_dashboardAdmin.css}" href="/css/ML_dashboardAdmin.css">
+    <link rel="stylesheet" th:href="@{/css/ML_iconos.css}" href="/css/ML_iconos.css">
+</head>
+
+<body>
+
+<div class="ML_dashboard_layout">
+
+    <aside class="ML_sidebar">
+
+        <div class="ML_sidebar_marca">
+            <div class="ML_marca_icono">+</div>
+            <div>
+                <h2>MediLink</h2>
+                <p>Sistema de<br>Citas Médicas</p>
+            </div>
+        </div>
+
+        <nav class="ML_menu">
+
+            <a th:href="@{/admin/dashboard}" class="ML_menu_link">
+                <span class="ML_menu_icono"><span class="ML_icon ML_icon_home" aria-hidden="true"></span></span>
+                <span>Principal</span>
+            </a>
+            <a th:href="@{/admin/usuarios}" class="ML_menu_link ML_activo">
+                <span class="ML_menu_icono"><span class="ML_icon ML_icon_users" aria-hidden="true"></span></span>
+                <span>Usuarios</span>
+            </a>
+
+            <a th:href="@{/admin/citas}" class="ML_menu_link">
+                <span class="ML_menu_icono"><span class="ML_icon ML_icon_appointment" aria-hidden="true"></span></span>
+                <span>Citas</span>
+            </a>
+
+            <a th:href="@{/admin/horarios}" class="ML_menu_link">
+                <span class="ML_menu_icono"><span class="ML_icon ML_icon_calendar" aria-hidden="true"></span></span>
+                <span>Calendario</span>
+            </a>
+
+            
+            <a th:href="@{/admin/disponibilidad}" class="ML_menu_link">
+                <span class="ML_menu_icono"><span class="ML_icon ML_icon_clock" aria-hidden="true"></span></span>
+                <span>Disponibilidad</span>
+            </a>
+            <a th:href="@{/admin/horarios-doctores}" class="ML_menu_link">
+                <span class="ML_menu_icono"><span class="ML_icon ML_icon_clock" aria-hidden="true"></span></span>
+                <span>Horarios doctores</span>
+            </a>
+
+            <a th:href="@{/admin/consultorios}" class="ML_menu_link">
+                <span class="ML_menu_icono"><span class="ML_icon ML_icon_clipboard" aria-hidden="true"></span></span>
+                <span>Consultorios</span>
+            </a>
+
+            <a th:href="@{/admin/pagos}" class="ML_menu_link">
+                <span class="ML_menu_icono"><span class="ML_icon ML_icon_payment" aria-hidden="true"></span></span>
+                <span>Pagos</span>
+            </a>
+            <a th:href="@{/admin/correos}" class="ML_menu_link">
+                <span class="ML_menu_icono"><span class="ML_icon ML_icon_report" aria-hidden="true"></span></span>
+                <span>Notificaciones</span>
+            </a>
+<a th:href="@{/admin/reportes}" class="ML_menu_link">
+                <span class="ML_menu_icono"><span class="ML_icon ML_icon_report" aria-hidden="true"></span></span>
+                <span>Reportes</span>
+            </a>
+
+            <a th:href="@{/admin/especialidades}" class="ML_menu_link">
+                <span class="ML_menu_icono"><span class="ML_icon ML_icon_add" aria-hidden="true"></span></span>
+                <span>Especialidades</span>
+            </a>
+
+            <a th:href="@{/admin/ranking-doctores}" class="ML_menu_link">
+                <span class="ML_menu_icono"><span class="ML_icon ML_icon_ranking" aria-hidden="true"></span></span>
+                <span>Ranking Doctores</span>
+            </a>
+
+            <a th:href="@{/admin/historial}" class="ML_menu_link">
+                <span class="ML_menu_icono"><span class="ML_icon ML_icon_history" aria-hidden="true"></span></span>
+                <span>Historial Clínico</span>
+            </a>
+
+        </nav>
+
+        <div class="ML_sidebar_footer">
+            <form th:action="@{/logout}" method="post">
+                <button type="submit" class="ML_btn_logout">Cerrar sesión</button>
+            </form>
+        </div>
+
+    </aside>
+
+    <main class="ML_contenido ML_doctores_contenido">
+
+        <section class="ML_pacientes_topbar">
+            <div class="ML_topbar_left">
+                <span class="ML_topbar_menu"><span class="ML_icon ML_icon_menu" aria-hidden="true"></span></span>
+                <h1>Doctores</h1>
+            </div>
+
+            <div class="ML_topbar_user">
+                <span class="ML_notificacion"><span class="ML_icon ML_icon_bell" aria-hidden="true"></span></span>
+
+                <div class="ML_topbar_avatar">
+                    A
+                </div>
+
+                <div>
+                    <strong>Admin</strong>
+                    <p>Administrador</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="ML_pacientes_header">
+            <div>
+                <h2>Gestión de Doctores</h2>
+                <p>Lista de doctores registrados en el sistema.</p>
+            </div>
+
+            <a th:href="@{/admin/doctores/nuevo}"
+               href="/admin/doctores/nuevo"
+               class="ML_btn_nuevo_paciente">
+                <span>+</span>
+                Crear nuevo doctor
+            </a>
+        </section>
+
+        <div th:if="${ML_mensajeExito}" class="ML_admin_alerta ML_admin_alerta_exito">
+            <span th:text="${ML_mensajeExito}">Operación realizada correctamente.</span>
+        </div>
+
+        <div th:if="${ML_mensajeError}" class="ML_admin_alerta ML_admin_alerta_error">
+            <span th:text="${ML_mensajeError}">Error al realizar la operación.</span>
+        </div>
+
+        <section class="ML_paneles ML_pacientes_resumen">
+
+            <div class="ML_panel">
+                <div>
+                    <p>Total Doctores</p>
+                    <h2 th:text="${ML_totalDoctores}">0</h2>
+                    <span class="ML_badge ML_badge_azul">Registrados</span>
+                </div>
+                <div class="ML_panel_icono ML_icono_azul"><span class="ML_icon ML_icon_doctor" aria-hidden="true"></span></div>
+            </div>
+
+            <div class="ML_panel">
+                <div>
+                    <p>Doctores Activos</p>
+                    <h2 th:text="${ML_doctoresActivos}">0</h2>
+                    <span class="ML_badge ML_badge_verde">Activos</span>
+                </div>
+                <div class="ML_panel_icono ML_icono_verde"><span class="ML_icon ML_icon_check" aria-hidden="true"></span></div>
+            </div>
+
+            <div class="ML_panel">
+                <div>
+                    <p>Especialidades</p>
+                    <h2 th:text="${ML_totalEspecialidades}">0</h2>
+                    <span class="ML_badge ML_badge_morado">Médicas</span>
+                </div>
+                <div class="ML_panel_icono ML_icono_morado"><span class="ML_icon ML_icon_add" aria-hidden="true"></span></div>
+            </div>
+
+        </section>
+
+        <section class="ML_pacientes_panel">
+
+            <div class="ML_pacientes_filtros">
+
+                <div class="ML_buscador">
+                    <span><span class="ML_icon ML_icon_search" aria-hidden="true"></span></span>
+                    <input type="text" id="ML_buscarDoctor" placeholder="Buscar doctor...">
+                </div>
+
+                <div class="ML_select_estado">
+                    <span><span class="ML_icon ML_icon_doctor" aria-hidden="true"></span></span>
+                    <select id="ML_filtrarEspecialidad">
+                        <option value="">Todas las especialidades</option>
+                        <option value="Medicina General">Medicina General</option>
+                        <option value="Pediatría">Pediatría</option>
+                        <option value="Cardiología">Cardiología</option>
+                        <option value="Dermatología">Dermatología</option>
+                    </select>
+                </div>
+
+            </div>
+
+            <div class="ML_tabla_contenedor">
+
+                <table class="ML_tabla_pacientes_admin" id="ML_tablaDoctores">
+
+                    <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Doctor</th>
+                        <th>DNI</th>
+                        <th>Teléfono</th>
+                        <th>Correo Electrónico</th>
+                        <th>Especialidad</th>
+                        <th>Consultorio</th>
+                        <th>Precio</th>
+                        <th>Estado</th>
+                        <th>Vista</th>
+                    </tr>
+                    </thead>
+
+                    <tbody>
+
+                    <tr th:if="${#lists.isEmpty(ML_doctores)}">
+                        <td colspan="10" class="ML_tabla_vacia">No hay doctores registrados</td>
+                    </tr>
+
+                    <tr th:each="ML_doctor : ${ML_doctores}">
+
+                        <td th:text="${ML_doctor.ML_idDoctor}">1</td>
+
+                        <td>
+                            <div class="ML_paciente_info">
+                                <div class="ML_paciente_foto"
+                                     th:text="${#strings.substring(ML_doctor.ML_nombres, 0, 1)}">
+                                    D
+                                </div>
+
+                                <div>
+                                    <strong th:text="${'Dr. ' + ML_doctor.ML_nombreCompleto}">
+                                        Dr. Nombre
+                                    </strong>
+                                    <span th:text="${ML_doctor.ML_nroColegiatura}">
+                                        CMP-00000
+                                    </span>
+                                </div>
+                            </div>
+                        </td>
+
+                        <td th:text="${ML_doctor.ML_dni}">00000000</td>
+                        <td th:text="${ML_doctor.ML_celular}">999999999</td>
+                        <td th:text="${ML_doctor.ML_correo}">doctor@gmail.com</td>
+                        <td th:text="${ML_doctor.ML_especialidad}">Especialidad</td>
+                        <td th:text="${ML_doctor.ML_consultorio}">Consultorio</td>
+                        <td th:text="${ML_doctor.ML_precioConsulta}">S/ 0.00</td>
+
+                        <td>
+                            <form th:action="@{/admin/doctores/{id}/estado(id=${ML_doctor.ML_idUsuario})}"
+                                  method="post"
+                                  class="ML_estado_click_form">
+
+                                <input type="hidden"
+                                       name="ML_estado"
+                                       th:value="${#strings.equalsIgnoreCase(ML_doctor.ML_estado, 'Activo')} ? 'Inactivo' : 'Activo'">
+
+                                <button type="submit"
+                                        class="ML_estado_tabla ML_estado_clickable"
+                                        th:text="${#strings.equalsIgnoreCase(ML_doctor.ML_estado, 'Activo')} ? 'Activo' : 'Inactivo'"
+                                        th:classappend="${#strings.equalsIgnoreCase(ML_doctor.ML_estado, 'Activo')} ? ' ML_estado_activo' : ' ML_estado_inactivo'"
+                                        title="Clic para cambiar el estado del doctor">
+                                    Activo
+                                </button>
+
+                            </form>
+                        </td>
+
+                        <td>
+                            <div class="ML_acciones_tabla">
+
+                                <button type="button"
+                                        class="ML_btn_vista"
+                                        title="Ver resumen del doctor"
+                                        th:attr="
+                                            data-id-doctor=${ML_doctor.ML_idDoctor},
+                                            data-id-usuario=${ML_doctor.ML_idUsuario},
+                                            data-nombre=${'Dr. ' + ML_doctor.ML_nombreCompleto},
+                                            data-dni=${ML_doctor.ML_dni},
+                                            data-celular=${ML_doctor.ML_celular},
+                                            data-correo=${ML_doctor.ML_correo},
+                                            data-direccion=${ML_doctor.ML_direccion},
+                                            data-especialidad=${ML_doctor.ML_especialidad},
+                                            data-consultorio=${ML_doctor.ML_consultorio},
+                                            data-ubicacion=${ML_doctor.ML_ubicacionConsultorio},
+                                            data-piso=${ML_doctor.ML_piso},
+                                            data-colegiatura=${ML_doctor.ML_nroColegiatura},
+                                            data-precio=${ML_doctor.ML_precioConsulta},
+                                            data-estado=${ML_doctor.ML_estado}">
+                                    <span class="ML_icon ML_icon_eye" aria-hidden="true"></span>
+                                </button>
+
+                            </div>
+                        </td>
+
+                    </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+            <div class="ML_paginacion_pacientes">
+                <p>Mostrando doctores registrados</p>
+
+                <div class="ML_paginacion_botones">
+                    <button class="ML_pagina_activa">1</button>
+                </div>
+            </div>
+
+        </section>
+
+    </main>
+
+</div>
+
+<div class="ML_modal_paciente" id="ML_modalDoctor">
+
+    <div class="ML_modal_contenido">
+
+        <div class="ML_modal_header">
+            <div>
+                <h2>Resumen del Doctor</h2>
+                <p>Información completa del doctor seleccionado.</p>
+            </div>
+
+            <button type="button" class="ML_modal_cerrar" id="ML_cerrarModalDoctor">
+                <span class="ML_icon ML_icon_close" aria-hidden="true"></span>
+            </button>
+        </div>
+
+        <div class="ML_modal_perfil">
+            <div class="ML_modal_avatar" id="ML_modalDoctorInicial">D</div>
+
+            <div>
+                <h3 id="ML_modalDoctorNombre">Doctor</h3>
+                <span id="ML_modalDoctorEstado" class="ML_estado_tabla ML_estado_activo">
+                    Activo
+                </span>
+            </div>
+        </div>
+
+        <div class="ML_modal_grid">
+
+            <div class="ML_modal_item">
+                <span>ID Doctor</span>
+                <strong id="ML_modalIdDoctor">-</strong>
+            </div>
+
+            <div class="ML_modal_item">
+                <span>ID Usuario</span>
+                <strong id="ML_modalIdUsuario">-</strong>
+            </div>
+
+            <div class="ML_modal_item">
+                <span>DNI</span>
+                <strong id="ML_modalDni">-</strong>
+            </div>
+
+            <div class="ML_modal_item">
+                <span>Celular</span>
+                <strong id="ML_modalCelular">-</strong>
+            </div>
+
+            <div class="ML_modal_item">
+                <span>Correo electrónico</span>
+                <strong id="ML_modalCorreo">-</strong>
+            </div>
+
+            <div class="ML_modal_item">
+                <span>Dirección</span>
+                <strong id="ML_modalDireccion">-</strong>
+            </div>
+
+            <div class="ML_modal_item">
+                <span>Especialidad</span>
+                <strong id="ML_modalEspecialidad">-</strong>
+            </div>
+
+            <div class="ML_modal_item">
+                <span>Consultorio</span>
+                <strong id="ML_modalConsultorio">-</strong>
+            </div>
+
+            <div class="ML_modal_item">
+                <span>Ubicación</span>
+                <strong id="ML_modalUbicacion">-</strong>
+            </div>
+
+            <div class="ML_modal_item">
+                <span>Piso</span>
+                <strong id="ML_modalPiso">-</strong>
+            </div>
+
+            <div class="ML_modal_item">
+                <span>Nro. Colegiatura</span>
+                <strong id="ML_modalColegiatura">-</strong>
+            </div>
+
+            <div class="ML_modal_item">
+                <span>Precio de consulta</span>
+                <strong id="ML_modalPrecio">-</strong>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<script>
+    const ML_buscarDoctor = document.getElementById("ML_buscarDoctor");
+    const ML_filtrarEspecialidad = document.getElementById("ML_filtrarEspecialidad");
+    const ML_tablaDoctores = document.getElementById("ML_tablaDoctores");
+
+    function ML_filtrarDoctores() {
+        const texto = ML_buscarDoctor.value.toLowerCase();
+        const especialidad = ML_filtrarEspecialidad.value.toLowerCase();
+        const filas = ML_tablaDoctores.querySelectorAll("tbody tr");
+
+        filas.forEach(fila => {
+            const contenido = fila.textContent.toLowerCase();
+
+            const coincideTexto = contenido.includes(texto);
+            const coincideEspecialidad = especialidad === "" || contenido.includes(especialidad);
+
+            fila.style.display = coincideTexto && coincideEspecialidad ? "" : "none";
+        });
+    }
+
+    if (ML_buscarDoctor && ML_filtrarEspecialidad && ML_tablaDoctores) {
+        ML_buscarDoctor.addEventListener("keyup", ML_filtrarDoctores);
+        ML_filtrarEspecialidad.addEventListener("change", ML_filtrarDoctores);
+    }
+
+    const ML_modalDoctor = document.getElementById("ML_modalDoctor");
+    const ML_cerrarModalDoctor = document.getElementById("ML_cerrarModalDoctor");
+    const ML_botonesVistaDoctor = document.querySelectorAll(".ML_btn_vista");
+
+    function ML_valor(valor) {
+        return valor && valor.trim() !== "" ? valor : "-";
+    }
+
+    ML_botonesVistaDoctor.forEach(boton => {
+        boton.addEventListener("click", () => {
+            const datos = boton.dataset;
+
+            const nombre = ML_valor(datos.nombre);
+
+            document.getElementById("ML_modalDoctorInicial").textContent =
+                nombre.length > 4 ? nombre.charAt(4).toUpperCase() : "D";
+
+            document.getElementById("ML_modalDoctorNombre").textContent = nombre;
+            document.getElementById("ML_modalIdDoctor").textContent = ML_valor(datos.idDoctor);
+            document.getElementById("ML_modalIdUsuario").textContent = ML_valor(datos.idUsuario);
+            document.getElementById("ML_modalDni").textContent = ML_valor(datos.dni);
+            document.getElementById("ML_modalCelular").textContent = ML_valor(datos.celular);
+            document.getElementById("ML_modalCorreo").textContent = ML_valor(datos.correo);
+            document.getElementById("ML_modalDireccion").textContent = ML_valor(datos.direccion);
+            document.getElementById("ML_modalEspecialidad").textContent = ML_valor(datos.especialidad);
+            document.getElementById("ML_modalConsultorio").textContent = ML_valor(datos.consultorio);
+            document.getElementById("ML_modalUbicacion").textContent = ML_valor(datos.ubicacion);
+            document.getElementById("ML_modalPiso").textContent = ML_valor(datos.piso);
+            document.getElementById("ML_modalColegiatura").textContent = ML_valor(datos.colegiatura);
+            document.getElementById("ML_modalPrecio").textContent = ML_valor(datos.precio);
+
+            const estado = document.getElementById("ML_modalDoctorEstado");
+            estado.textContent = ML_valor(datos.estado);
+            estado.className = "ML_estado_tabla";
+
+            if (datos.estado && datos.estado.toLowerCase() === "activo") {
+                estado.classList.add("ML_estado_activo");
+            } else {
+                estado.classList.add("ML_estado_inactivo");
+            }
+
+            ML_modalDoctor.classList.add("ML_modal_activo");
+        });
+    });
+
+    ML_cerrarModalDoctor.addEventListener("click", () => {
+        ML_modalDoctor.classList.remove("ML_modal_activo");
+    });
+
+    ML_modalDoctor.addEventListener("click", (event) => {
+        if (event.target === ML_modalDoctor) {
+            ML_modalDoctor.classList.remove("ML_modal_activo");
+        }
+    });
+</script>
+
+</body>
+</html>

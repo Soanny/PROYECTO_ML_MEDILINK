@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema de Citas Médicas</title>
+    <link rel="stylesheet" th:href="@{/css/ML_login.css}" href="/css/ML_login.css">
+    <link rel="stylesheet" th:href="@{/css/ML_iconos.css}" href="/css/ML_iconos.css">
+</head>
+<body>
+
+<div class="page">
+
+    <section class="left-panel">
+
+        <div class="left-brand">
+
+            <div class="left-logo-box">
+                <span class="left-logo-plus">+</span>
+            </div>
+
+            <div class="left-brand-text">
+                <h1>MediLink</h1>
+                <p class="left-description">
+                    Sistema de Gestión de citas médicas, de forma fácil y segura
+                </p>
+            </div>
+
+        </div>
+
+    </section>
+
+    <section class="right-panel">
+
+        <div class="login-content">
+
+            <div class="logo-area">
+                <img th:src="@{/images/ML_icono_usuario.png}"
+                     src="/images/ML_icono_usuario.png"
+                     alt="Usuario"
+                     class="user-icon">
+
+                <h2>Iniciar Sesión</h2>
+                <p class="subtitulo">Ingresa tus credenciales para acceder al sistema</p>
+            </div>
+
+            <div th:if="${param.registro}">
+                <p class="mensaje-exito">
+                    Paciente registrado correctamente. Ahora puedes iniciar sesión.
+                </p>
+            </div>
+
+            <div th:if="${param.error}">
+                <p class="mensaje-error">
+                    Correo o contraseña incorrectos, o usuario inactivo.
+                </p>
+            </div>
+
+            <div th:if="${param.captcha}">
+                <p class="mensaje-error">
+                    Código captcha incorrecto. Inténtalo nuevamente.
+                </p>
+            </div>
+
+            <div th:if="${param.logout}">
+                <p class="mensaje-exito">
+                    Sesión cerrada correctamente
+                </p>
+            </div>
+
+            <p id="ML_errorCaptchaCliente"
+               class="mensaje-error"
+               style="display: none;">
+                Código captcha incorrecto. Inténtalo nuevamente.
+            </p>
+
+            <form th:action="@{/login}" method="post" id="ML_formLogin" autocomplete="off">
+                <input type="hidden" th:if="${_csrf != null}" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+                <input type="hidden" name="ML_captchaToken" th:value="${ML_captchaToken}">
+
+                <div class="input-group">
+                    <label>Correo electrónico</label>
+                    <div class="input-icon">
+                        <input type="email"
+                               name="username"
+                               placeholder="Ingresa tu correo electrónico"
+                               autocomplete="username"
+                               required>
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <label>Contraseña</label>
+                    <div class="input-icon">
+                        <input type="password"
+                               id="ML_password"
+                               name="password"
+                               placeholder="Ingresa tu contraseña"
+                               autocomplete="current-password"
+                               required>
+                    </div>
+                </div>
+
+                <div class="options">
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="ML_verContrasena">
+                        Ver Contraseña
+                    </label>
+                </div>
+
+                <div class="input-group">
+                    <label>Captcha</label>
+
+                    <div class="ML_captcha_card">
+
+                        <div class="ML_captcha_imagen">
+                            <span id="ML_captchaCodigo" th:text="${ML_captchaCodigo}">83@5$</span>
+                        </div>
+
+                        <div class="ML_captcha_datos">
+                            <label for="ML_captchaRespuesta">Introduce el código</label>
+                            <input type="text"
+                                   id="ML_captchaRespuesta"
+                                   name="ML_captchaRespuesta"
+                                   autocomplete="off"
+                                   autocapitalize="characters"
+                                   spellcheck="false"
+                                   maxlength="5"
+                                   value=""
+                                   required>
+                        </div>
+
+                    </div>
+                </div>
+
+                <button type="submit" class="btn-login">Iniciar Sesión</button>
+
+            </form>
+
+            <div class="ML_login_divider">
+                <span></span>
+                <p>o continúa con</p>
+                <span></span>
+            </div>
+
+            <a th:href="@{/registro/paciente}" href="/registro/paciente" class="ML_btn_acceso_paciente">
+                <span class="ML_btn_acceso_icono"><span class="ML_icon ML_icon_user" aria-hidden="true"></span></span>
+                Crear Usuario Paciente
+            </a>
+
+        </div>
+
+        <footer>
+            © 2024 Sistema de Citas Médicas. Todos los derechos reservados.
+        </footer>
+
+    </section>
+
+</div>
+
+<script>
+    const ML_verContrasena = document.getElementById("ML_verContrasena");
+    const ML_password = document.getElementById("ML_password");
+    const ML_captchaRespuesta = document.getElementById("ML_captchaRespuesta");
+
+    ML_verContrasena.addEventListener("change", function () {
+        ML_password.type = ML_verContrasena.checked ? "text" : "password";
+    });
+
+    window.addEventListener("pageshow", function () {
+        ML_captchaRespuesta.value = "";
+    });
+
+    ML_captchaRespuesta.addEventListener("input", function () {
+        const ML_inicioCursor = ML_captchaRespuesta.selectionStart;
+        const ML_finCursor = ML_captchaRespuesta.selectionEnd;
+        ML_captchaRespuesta.value = ML_captchaRespuesta.value.replace(/\s+/g, "").toUpperCase();
+        ML_captchaRespuesta.setSelectionRange(ML_inicioCursor, ML_finCursor);
+    });
+</script>
+
+</body>
+</html>

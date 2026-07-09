@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Realizar Pago</title>
+    <link rel="stylesheet" th:href="@{/css/ML_dashboardAdmin.css}" href="/css/ML_dashboardAdmin.css">
+    <link rel="stylesheet" th:href="@{/css/ML_paciente.css}" href="/css/ML_paciente.css">
+    <link rel="stylesheet" th:href="@{/css/ML_iconos.css}" href="/css/ML_iconos.css">
+</head>
+<body>
+<div class="ML_dashboard_layout">
+    <aside class="ML_sidebar">
+        <div class="ML_sidebar_marca"><div class="ML_marca_icono">+</div><div><h2>MediLink</h2><p>Sistema de<br>Citas Médicas</p></div></div>
+        <nav class="ML_menu">
+            <a th:href="@{/paciente/dashboard}" class="ML_menu_link"><span class="ML_menu_icono"><span class="ML_icon ML_icon_home" aria-hidden="true"></span></span><span>Principal</span></a>
+            <a th:href="@{/paciente/citas}" class="ML_menu_link"><span class="ML_menu_icono"><span class="ML_icon ML_icon_appointment" aria-hidden="true"></span></span><span>Citas asignadas</span></a>
+            <a th:href="@{/paciente/historial}" class="ML_menu_link"><span class="ML_menu_icono"><span class="ML_icon ML_icon_history" aria-hidden="true"></span></span><span>Historial</span></a>
+            <a th:href="@{/paciente/pagos}" class="ML_menu_link ML_activo"><span class="ML_menu_icono"><span class="ML_icon ML_icon_payment" aria-hidden="true"></span></span><span>Pago</span></a>
+        </nav>
+        <div class="ML_sidebar_footer"><form th:action="@{/logout}" method="post"><button type="submit" class="ML_btn_logout">Cerrar sesión</button></form></div>
+    </aside>
+
+    <main class="ML_contenido ML_paciente_contenido">
+        <section class="ML_pacientes_topbar">
+            <div class="ML_topbar_left"><span class="ML_topbar_menu"><span class="ML_icon ML_icon_menu" aria-hidden="true"></span></span><h1>Realizar pago</h1></div>
+            <div class="ML_topbar_user"><span class="ML_notificacion"><span class="ML_icon ML_icon_bell" aria-hidden="true"></span></span><div class="ML_topbar_avatar">P</div><div><strong th:text="${ML_perfilPaciente.paciente ?: 'Paciente'}">Paciente</strong><p>Paciente</p></div></div>
+        </section>
+
+        <div class="ML_alerta_error" th:if="${ML_mensajeError}" th:text="${ML_mensajeError}">Error</div>
+
+        <section class="ML_paciente_grid">
+            <div class="ML_paciente_panel">
+                <div class="ML_paciente_panel_header">
+                    <div><h3>Datos de la cita</h3><p>Verifica la cita antes de confirmar el pago.</p></div>
+                    <a th:href="@{/paciente/pagos}" class="ML_btn_paciente_secondary">Volver</a>
+                </div>
+                <div class="ML_paciente_pago_detalle">
+                    <div><span>Cita</span><strong th:text="${'#C-' + ML_cita.id_cita}">#C-1</strong></div>
+                    <div><span>Doctor</span><strong th:text="${ML_cita.doctor}">Doctor</strong></div>
+                    <div><span>Especialidad</span><strong th:text="${ML_cita.especialidad}">Especialidad</strong></div>
+                    <div><span>Fecha</span><strong th:text="${ML_cita.fecha_cita_texto + ' - ' + ML_cita.hora_inicio_texto}">Fecha</strong></div>
+                    <div><span>Consultorio</span><strong th:text="${ML_cita.consultorio}">Consultorio</strong></div>
+                    <div><span>Estado</span><strong th:text="${ML_cita.estado}">Estado</strong></div>
+                    <div><span>Precio consulta</span><strong th:text="${'S/ ' + ML_cita.precio_consulta}">S/ 0.00</strong></div>
+                    <div><span>Saldo a pagar</span><strong th:text="${'S/ ' + ML_cita.saldo_pendiente}">S/ 0.00</strong></div>
+                </div>
+            </div>
+
+            <div class="ML_paciente_panel">
+                <div class="ML_paciente_panel_header">
+                    <div><h3>Formulario de pago</h3><p>El pago se registrará como pagado y se guardará el código de operación.</p></div>
+                </div>
+                <form th:action="@{/paciente/pagos/{id}/guardar(id=${ML_cita.id_cita})}" th:object="${ML_pagoForm}" method="post" class="ML_paciente_form">
+                    <input type="hidden" th:field="*{ML_idCita}">
+                    <div class="ML_form_grupo">
+                        <label>Monto a pagar</label>
+                        <input type="text" th:field="*{ML_monto}" readonly>
+                    </div>
+                    <div class="ML_form_grupo">
+                        <label>Método de pago</label>
+                        <select th:field="*{ML_metodoPago}" required>
+                            <option th:each="ML_metodo : ${ML_metodosPago}" th:value="${ML_metodo}" th:text="${ML_metodo}">Yape</option>
+                        </select>
+                    </div>
+                    <div class="ML_form_grupo">
+                        <label>Código de operación</label>
+                        <input type="text" th:field="*{ML_codigoOperacion}" placeholder="Ejemplo: YP-000123, PL-000456, TX-789">
+                        <small>Si lo dejas vacío, el sistema generará un código interno.</small>
+                    </div>
+                    <div class="ML_form_acciones">
+                        <a th:href="@{/paciente/pagos}" class="ML_btn_paciente_secondary">Cancelar</a>
+                        <button type="submit" class="ML_btn_paciente_primary">Confirmar pago</button>
+                    </div>
+                </form>
+            </div>
+        </section>
+    </main>
+</div>
+</body>
+</html>

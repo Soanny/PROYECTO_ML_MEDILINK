@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Reportes</title>
+
+    <link rel="stylesheet" th:href="@{/css/ML_dashboardAdmin.css}" href="/css/ML_dashboardAdmin.css">
+    <link rel="stylesheet" th:href="@{/css/ML_reportesAdmin.css}" href="/css/ML_reportesAdmin.css">
+    <link rel="stylesheet" th:href="@{/css/ML_iconos.css}" href="/css/ML_iconos.css">
+</head>
+
+<body>
+
+<div class="ML_dashboard_layout">
+
+    <aside class="ML_sidebar">
+
+        <div class="ML_sidebar_marca">
+            <div class="ML_marca_icono">+</div>
+            <div>
+                <h2>MediLink</h2>
+                <p>Sistema de<br>Citas Médicas</p>
+            </div>
+        </div>
+
+        <nav class="ML_menu">
+
+            <a th:href="@{/admin/dashboard}" class="ML_menu_link">
+                <span class="ML_menu_icono"><span class="ML_icon ML_icon_home" aria-hidden="true"></span></span>
+                <span>Principal</span>
+            </a>
+            <a th:href="@{/admin/usuarios}" class="ML_menu_link">
+                <span class="ML_menu_icono"><span class="ML_icon ML_icon_users" aria-hidden="true"></span></span>
+                <span>Usuarios</span>
+            </a>
+
+            <a th:href="@{/admin/citas}" class="ML_menu_link">
+                <span class="ML_menu_icono"><span class="ML_icon ML_icon_appointment" aria-hidden="true"></span></span>
+                <span>Citas</span>
+            </a>
+
+            <a th:href="@{/admin/horarios}" class="ML_menu_link">
+                <span class="ML_menu_icono"><span class="ML_icon ML_icon_calendar" aria-hidden="true"></span></span>
+                <span>Calendario</span>
+            </a>
+
+            
+            <a th:href="@{/admin/disponibilidad}" class="ML_menu_link">
+                <span class="ML_menu_icono"><span class="ML_icon ML_icon_clock" aria-hidden="true"></span></span>
+                <span>Disponibilidad</span>
+            </a>
+            <a th:href="@{/admin/horarios-doctores}" class="ML_menu_link">
+                <span class="ML_menu_icono"><span class="ML_icon ML_icon_clock" aria-hidden="true"></span></span>
+                <span>Horarios doctores</span>
+            </a>
+
+            <a th:href="@{/admin/consultorios}" class="ML_menu_link">
+                <span class="ML_menu_icono"><span class="ML_icon ML_icon_clipboard" aria-hidden="true"></span></span>
+                <span>Consultorios</span>
+            </a>
+
+            <a th:href="@{/admin/pagos}" class="ML_menu_link">
+                <span class="ML_menu_icono"><span class="ML_icon ML_icon_payment" aria-hidden="true"></span></span>
+                <span>Pagos</span>
+            </a>
+            <a th:href="@{/admin/correos}" class="ML_menu_link">
+                <span class="ML_menu_icono"><span class="ML_icon ML_icon_report" aria-hidden="true"></span></span>
+                <span>Notificaciones</span>
+            </a>
+<a th:href="@{/admin/reportes}" class="ML_menu_link ML_activo">
+                <span class="ML_menu_icono"><span class="ML_icon ML_icon_report" aria-hidden="true"></span></span>
+                <span>Reportes</span>
+            </a>
+
+            <a th:href="@{/admin/especialidades}" class="ML_menu_link">
+                <span class="ML_menu_icono"><span class="ML_icon ML_icon_add" aria-hidden="true"></span></span>
+                <span>Especialidades</span>
+            </a>
+
+            <a th:href="@{/admin/ranking-doctores}" class="ML_menu_link">
+                <span class="ML_menu_icono"><span class="ML_icon ML_icon_ranking" aria-hidden="true"></span></span>
+                <span>Ranking Doctores</span>
+            </a>
+
+            <a th:href="@{/admin/historial}" class="ML_menu_link">
+                <span class="ML_menu_icono"><span class="ML_icon ML_icon_history" aria-hidden="true"></span></span>
+                <span>Historial Clínico</span>
+            </a>
+
+        </nav>
+
+        <div class="ML_sidebar_footer">
+            <form th:action="@{/logout}" method="post">
+                <button type="submit" class="ML_btn_logout">Cerrar sesión</button>
+            </form>
+        </div>
+
+    </aside>
+
+    <main class="ML_contenido ML_reportes_contenido">
+
+        <section class="ML_pacientes_topbar">
+            <div class="ML_topbar_left">
+                <span class="ML_topbar_menu"><span class="ML_icon ML_icon_menu" aria-hidden="true"></span></span>
+                <h1>Reportes</h1>
+            </div>
+
+            <div class="ML_topbar_user">
+                <span class="ML_notificacion"><span class="ML_icon ML_icon_bell" aria-hidden="true"></span></span>
+                <div class="ML_topbar_avatar">A</div>
+                <div>
+                    <strong>Admin</strong>
+                    <p>Administrador</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="ML_reportes_header">
+            <div>
+                <h2>Reportes del Sistema</h2>
+                <p>Visualiza indicadores de citas, rendimiento médico, especialidades e ingresos.</p>
+            </div>
+
+            <span class="ML_reporte_modo_lectura">Solo visualización</span>
+        </section>
+
+        <section class="ML_reportes_paneles">
+
+            <div class="ML_reporte_card">
+                <div>
+                    <p>Total de Citas</p>
+                    <h2 th:text="${ML_totalCitas}">0</h2>
+                    <span>Registradas en el sistema</span>
+                </div>
+                <div class="ML_reporte_icono ML_reporte_icono_azul"><span class="ML_icon ML_icon_appointment" aria-hidden="true"></span></div>
+            </div>
+
+            <div class="ML_reporte_card">
+                <div>
+                    <p>Citas Confirmadas</p>
+                    <h2 th:text="${ML_citasConfirmadas}">0</h2>
+                    <span>Atenciones confirmadas</span>
+                </div>
+                <div class="ML_reporte_icono ML_reporte_icono_verde"><span class="ML_icon ML_icon_check" aria-hidden="true"></span></div>
+            </div>
+
+            <div class="ML_reporte_card">
+                <div>
+                    <p>Citas Pendientes</p>
+                    <h2 th:text="${ML_citasPendientes}">0</h2>
+                    <span>Esperando confirmación</span>
+                </div>
+                <div class="ML_reporte_icono ML_reporte_icono_amarillo"><span class="ML_icon ML_icon_clock" aria-hidden="true"></span></div>
+            </div>
+
+            <div class="ML_reporte_card">
+                <div>
+                    <p>Citas Canceladas</p>
+                    <h2 th:text="${ML_citasCanceladas}">0</h2>
+                    <span>No atendidas</span>
+                </div>
+                <div class="ML_reporte_icono ML_reporte_icono_rojo"><span class="ML_icon ML_icon_close" aria-hidden="true"></span></div>
+            </div>
+
+            <div class="ML_reporte_card">
+                <div>
+                    <p>Citas Atendidas</p>
+                    <h2 th:text="${ML_citasAtendidas}">0</h2>
+                    <span>Atenciones finalizadas</span>
+                </div>
+                <div class="ML_reporte_icono ML_reporte_icono_morado"><span class="ML_icon ML_icon_star" aria-hidden="true"></span></div>
+            </div>
+
+            <div class="ML_reporte_card">
+                <div>
+                    <p>Ingresos Totales</p>
+                    <h2 th:text="${ML_ingresosTotales}">S/ 0.00</h2>
+                    <span>Pagos registrados como pagados</span>
+                </div>
+                <div class="ML_reporte_icono ML_reporte_icono_celeste">S/</div>
+            </div>
+
+        </section>
+
+        <section class="ML_reportes_grid">
+
+            <div class="ML_reporte_panel">
+                <div class="ML_reporte_panel_header">
+                    <h3>Citas por Estado</h3>
+                    <p>Distribución general de citas según su estado actual.</p>
+                </div>
+
+                <div class="ML_reporte_barras">
+
+                    <div th:if="${#lists.isEmpty(ML_citasPorEstado)}" class="ML_reporte_vacio">
+                        No hay datos para mostrar.
+                    </div>
+
+                    <div class="ML_reporte_barra_item" th:each="ML_estado : ${ML_citasPorEstado}" th:classappend="${#strings.equalsIgnoreCase(ML_estado.estado, 'Confirmada')} ? ' ML_barra_confirmada' : (${#strings.equalsIgnoreCase(ML_estado.estado, 'Pendiente')} ? ' ML_barra_pendiente' : (${#strings.equalsIgnoreCase(ML_estado.estado, 'Cancelada')} ? ' ML_barra_cancelada' : (${#strings.equalsIgnoreCase(ML_estado.estado, 'Atendida')} ? ' ML_barra_atendida' : ' ML_barra_general')))">
+                        <div class="ML_reporte_barra_texto">
+                            <span th:text="${ML_estado.estado}">Estado</span>
+                            <strong th:text="${ML_estado.total}">0</strong>
+                        </div>
+
+                        <div class="ML_reporte_barra_fondo">
+                            <div class="ML_reporte_barra_fill"
+                                 th:style="${'width:' + (ML_totalCitas > 0 ? ((ML_estado.total * 100) / ML_totalCitas) : 0) + '%'}">
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="ML_reporte_panel">
+                <div class="ML_reporte_panel_header">
+                    <h3>Citas por Día de Semana</h3>
+                    <p>Resumen de citas distribuidas por día.</p>
+                </div>
+
+                <div class="ML_reporte_dias">
+
+                    <div th:if="${#lists.isEmpty(ML_citasPorDiaSemana)}" class="ML_reporte_vacio">
+                        No hay datos para mostrar.
+                    </div>
+
+                    <div class="ML_reporte_dia" th:each="ML_dia : ${ML_citasPorDiaSemana}">
+                        <strong th:text="${ML_dia.total}">0</strong>
+                        <span th:text="${ML_dia.dia}">Lun</span>
+                    </div>
+
+                </div>
+            </div>
+
+        </section>
+
+        
+        <section class="ML_reporte_panel ML_reporte_panel_full">
+            <div class="ML_reporte_panel_header">
+                <div>
+                    <h3>Doctor con más atenciones</h3>
+                    <p>Ranking directo según citas marcadas como atendidas.</p>
+                </div>
+            </div>
+            <div class="ML_tabla_contenedor">
+                <table class="ML_tabla_pacientes_admin ML_tabla_reportes">
+                    <thead><tr><th>#</th><th>Doctor</th><th>Especialidad</th><th>Atenciones</th><th>Monto generado</th></tr></thead>
+                    <tbody>
+                    <tr th:if="${#lists.isEmpty(ML_doctoresMasAtenciones)}"><td colspan="5" class="ML_tabla_vacia">No hay atenciones finalizadas.</td></tr>
+                    <tr th:each="ML_doc, ML_iter : ${ML_doctoresMasAtenciones}" th:classappend="${ML_iter.index == 0} ? 'ML_ranking_fila_oro' : (${ML_iter.index == 1} ? 'ML_ranking_fila_plata' : (${ML_iter.index == 2} ? 'ML_ranking_fila_bronce' : ''))">
+                        <td><span class="ML_ranking_numero" th:text="${ML_iter.index + 1}">1</span></td>
+                        <td><strong th:text="${ML_doc.doctor}">Doctor</strong></td>
+                        <td th:text="${ML_doc.especialidad}">Especialidad</td>
+                        <td th:text="${ML_doc.total_atenciones}">0</td>
+                        <td th:text="${'S/ ' + ML_doc.monto_generado}">S/ 0.00</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+<section class="ML_reporte_panel ML_reporte_panel_full">
+
+            <div class="ML_reporte_panel_header">
+                <div>
+                    <h3>Rendimiento por Doctor</h3>
+                    <p>Indicadores de desempeño de cada doctor según citas registradas.</p>
+                </div>
+            </div>
+
+            <div class="ML_tabla_contenedor">
+                <table class="ML_tabla_pacientes_admin ML_tabla_reportes">
+                    <thead>
+                    <tr>
+                        <th>Doctor</th>
+                        <th>Especialidad</th>
+                        <th>Total Citas</th>
+                        <th>Confirmadas</th>
+                        <th>Pendientes</th>
+                        <th>Atendidas</th>
+                        <th>Canceladas</th>
+                        <th>Rendimiento</th>
+                    </tr>
+                    </thead>
+
+                    <tbody>
+
+                    <tr th:if="${#lists.isEmpty(ML_rendimientoDoctores)}">
+                        <td colspan="8" class="ML_tabla_vacia">No hay datos de doctores para mostrar</td>
+                    </tr>
+
+                    <tr th:each="ML_doctor : ${ML_rendimientoDoctores}">
+                        <td>
+                            <strong th:text="${ML_doctor.doctor}">Doctor</strong>
+                        </td>
+
+                        <td th:text="${ML_doctor.especialidad}">Especialidad</td>
+                        <td th:text="${ML_doctor.total_citas}">0</td>
+                        <td class="ML_texto_verde" th:text="${ML_doctor.confirmadas}">0</td>
+                        <td class="ML_texto_amarillo" th:text="${ML_doctor.pendientes}">0</td>
+                        <td class="ML_texto_azul" th:text="${ML_doctor.atendidas}">0</td>
+                        <td class="ML_texto_rojo" th:text="${ML_doctor.canceladas}">0</td>
+
+                        <td>
+                            <div class="ML_rendimiento_box">
+                                <div class="ML_rendimiento_fondo">
+                                    <div class="ML_rendimiento_fill"
+                                         th:style="${'width:' + ML_doctor.rendimiento + '%'}">
+                                    </div>
+                                </div>
+                                <strong th:text="${ML_doctor.rendimiento + '%'}">0%</strong>
+                            </div>
+                        </td>
+                    </tr>
+
+                    </tbody>
+                </table>
+            </div>
+
+        </section>
+
+        <section class="ML_reporte_panel ML_reporte_panel_full">
+
+            <div class="ML_reporte_panel_header">
+                <div>
+                    <h3>Rendimiento por Especialidad</h3>
+                    <p>Resumen de citas y rendimiento agrupado por especialidad médica.</p>
+                </div>
+            </div>
+
+            <div class="ML_tabla_contenedor">
+                <table class="ML_tabla_pacientes_admin ML_tabla_reportes">
+                    <thead>
+                    <tr>
+                        <th>Especialidad</th>
+                        <th>Total Citas</th>
+                        <th>Confirmadas</th>
+                        <th>Pendientes</th>
+                        <th>Atendidas</th>
+                        <th>Canceladas</th>
+                        <th>Rendimiento</th>
+                    </tr>
+                    </thead>
+
+                    <tbody>
+
+                    <tr th:if="${#lists.isEmpty(ML_rendimientoEspecialidades)}">
+                        <td colspan="7" class="ML_tabla_vacia">No hay datos de especialidades para mostrar</td>
+                    </tr>
+
+                    <tr th:each="ML_especialidad : ${ML_rendimientoEspecialidades}">
+                        <td>
+                            <strong th:text="${ML_especialidad.especialidad}">Especialidad</strong>
+                        </td>
+
+                        <td th:text="${ML_especialidad.total_citas}">0</td>
+                        <td class="ML_texto_verde" th:text="${ML_especialidad.confirmadas}">0</td>
+                        <td class="ML_texto_amarillo" th:text="${ML_especialidad.pendientes}">0</td>
+                        <td class="ML_texto_azul" th:text="${ML_especialidad.atendidas}">0</td>
+                        <td class="ML_texto_rojo" th:text="${ML_especialidad.canceladas}">0</td>
+
+                        <td>
+                            <div class="ML_rendimiento_box">
+                                <div class="ML_rendimiento_fondo">
+                                    <div class="ML_rendimiento_fill"
+                                         th:style="${'width:' + ML_especialidad.rendimiento + '%'}">
+                                    </div>
+                                </div>
+                                <strong th:text="${ML_especialidad.rendimiento + '%'}">0%</strong>
+                            </div>
+                        </td>
+                    </tr>
+
+                    </tbody>
+                </table>
+            </div>
+
+        </section>
+
+        <section class="ML_reporte_panel ML_reporte_panel_full">
+
+            <div class="ML_reporte_panel_header">
+                <div>
+                    <h3>Métodos de Pago</h3>
+                    <p>Resumen visual de pagos agrupados por método registrado.</p>
+                </div>
+            </div>
+
+            <div class="ML_tabla_contenedor">
+                <table class="ML_tabla_pacientes_admin ML_tabla_reportes">
+                    <thead>
+                    <tr>
+                        <th>Método</th>
+                        <th>Total Pagos</th>
+                        <th>Monto Total</th>
+                    </tr>
+                    </thead>
+
+                    <tbody>
+
+                    <tr th:if="${#lists.isEmpty(ML_metodosPago)}">
+                        <td colspan="3" class="ML_tabla_vacia">No hay pagos registrados para mostrar</td>
+                    </tr>
+
+                    <tr th:each="ML_pago : ${ML_metodosPago}">
+                        <td th:text="${ML_pago.metodo_pago}">Método</td>
+                        <td th:text="${ML_pago.total}">0</td>
+                        <td th:text="${'S/ ' + ML_pago.monto_total}">S/ 0.00</td>
+                    </tr>
+
+                    </tbody>
+                </table>
+            </div>
+
+        </section>
+
+        <section class="ML_reporte_panel ML_reporte_panel_full ML_reporte_export_panel" style="margin-top:20px;">
+            <div class="ML_reporte_panel_header">
+                <div>
+                    <h3>Exportar reportes</h3>
+                    <p>Descarga los reportes del sistema en formato PDF o Excel.</p>
+                </div>
+            </div>
+            <div class="ML_reporte_export_acciones">
+                <a th:href="@{/admin/reportes/exportar/pdf}" class="ML_btn_export_pdf">
+                    <span>📄</span> Exportar PDF
+                </a>
+                <a th:href="@{/admin/reportes/exportar/excel}" class="ML_btn_export_excel">
+                    <span>📊</span> Exportar Excel
+                </a>
+            </div>
+        </section>
+    </main>
+
+</div>
+
+</body>
+</html>

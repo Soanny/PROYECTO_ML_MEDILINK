@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Realizar Pago</title>
+    <link rel="stylesheet" th:href="@{/css/ML_dashboardAdmin.css}" href="/css/ML_dashboardAdmin.css">
+    <link rel="stylesheet" th:href="@{/css/ML_citasAdmin.css}" href="/css/ML_citasAdmin.css">
+    <link rel="stylesheet" th:href="@{/css/ML_paciente.css}" href="/css/ML_paciente.css">
+    <link rel="stylesheet" th:href="@{/css/ML_iconos.css}" href="/css/ML_iconos.css">
+</head>
+<body>
+<div class="ML_dashboard_layout">
+    <aside class="ML_sidebar">
+        <div class="ML_sidebar_marca"><div class="ML_marca_icono">+</div><div><h2>MediLink</h2><p>Sistema de<br>Citas Médicas</p></div></div>
+        <nav class="ML_menu">
+            <a th:href="@{/paciente/dashboard}" class="ML_menu_link"><span class="ML_menu_icono"><span class="ML_icon ML_icon_home" aria-hidden="true"></span></span><span>Principal</span></a>
+            <a th:href="@{/paciente/citas}" class="ML_menu_link"><span class="ML_menu_icono"><span class="ML_icon ML_icon_appointment" aria-hidden="true"></span></span><span>Citas asignadas</span></a>
+            <a th:href="@{/paciente/historial}" class="ML_menu_link"><span class="ML_menu_icono"><span class="ML_icon ML_icon_history" aria-hidden="true"></span></span><span>Historial</span></a>
+            <a th:href="@{/paciente/pagos}" class="ML_menu_link ML_activo"><span class="ML_menu_icono"><span class="ML_icon ML_icon_payment" aria-hidden="true"></span></span><span>Pago</span></a>
+        </nav>
+        <div class="ML_sidebar_footer"><form th:action="@{/logout}" method="post"><button type="submit" class="ML_btn_logout">Cerrar sesión</button></form></div>
+    </aside>
+
+    <main class="ML_contenido ML_paciente_contenido">
+        <section class="ML_pacientes_topbar">
+            <div class="ML_topbar_left"><span class="ML_topbar_menu"><span class="ML_icon ML_icon_menu" aria-hidden="true"></span></span><h1>Realizar pago</h1></div>
+            <div class="ML_topbar_user"><span class="ML_notificacion"><span class="ML_icon ML_icon_bell" aria-hidden="true"></span></span><div class="ML_topbar_avatar">P</div><div><strong th:text="${ML_perfilPaciente.paciente ?: 'Paciente'}">Paciente</strong><p>Paciente</p></div></div>
+        </section>
+
+        <section class="ML_paciente_header">
+            <div>
+                <h2>Realizar pago</h2>
+                <p>Selecciona una cita específica para pagar o elige pagar todo lo pendiente en una sola operación.</p>
+            </div>
+            <div class="ML_paciente_badge">
+                <span>Total pendiente</span>
+                <strong th:text="${ML_totalPendiente}">S/ 0.00</strong>
+                <small>Citas por pagar</small>
+            </div>
+        </section>
+
+        <div class="ML_alerta_error" th:if="${ML_mensajeError}" th:text="${ML_mensajeError}">Error</div>
+        <div class="ML_alerta_exito" th:if="${ML_mensajeExito}" th:text="${ML_mensajeExito}">Correcto</div>
+
+        <section class="ML_paciente_grid">
+            <div class="ML_paciente_panel">
+                <div class="ML_paciente_panel_header">
+                    <div><h3>Formulario de pago</h3><p>Completa los datos necesarios para registrar el pago.</p></div>
+                    <a th:href="@{/paciente/pagos}" class="ML_btn_paciente_secondary">Volver a pagos</a>
+                </div>
+
+                <form th:action="@{/paciente/pagos/guardar}" th:object="${ML_pagoForm}" method="post" class="ML_paciente_form">
+                    <div class="ML_form_grupo">
+                        <label>¿Qué deseas pagar?</label>
+                        <select th:field="*{ML_seleccionPago}" id="ML_seleccionPagoPaciente" required>
+                            <option value="">Selecciona una opción</option>
+                            <option th:if="${!#lists.isEmpty(ML_citasParaPago)}" value="TODAS" th:attr="data-monto=${#strings.replace(ML_totalPendiente, 'S/ ', '')}">Pagar todo lo pendiente</option>
+                            <option th:each="ML_cita : ${ML_citasParaPago}"
+                                    th:value="${ML_cita.id_cita}"
+                                    th:attr="data-monto=${ML_cita.saldo_pendiente}"
+                                    th:text="${'#C-' + ML_cita.id_cita + ' | ' + ML_cita.doctor + ' | ' + ML_cita.fecha_cita_texto + ' | Saldo: S/ ' + ML_cita.saldo_pendiente}">
+                                #C-1 | Doctor | Fecha | Saldo
+                            </option>
+                        </select>
+                    </div>
+
+                    <div class="ML_form_grupo">
+                        <label>Monto a pagar</label>
+                        <input type="text" th:field="*{ML_monto}" id="ML_montoPagoPaciente" readonly>
+                    </div>
+
+                    <div class="ML_form_grupo">
+                        <label>Método de pago</label>
+                        <select th:field="*{ML_metodoPago}" required>
+                            <option th:each="ML_metodo : ${ML_metodosPago}" th:value="${ML_metodo}" th:text="${ML_metodo}">Yape</option>
+                        </select>
+                    </div>
+
+                    <div class="ML_form_grupo">
+                        <label>Código de operación</label>
+                        <input type="text" th:field="*{ML_codigoOperacion}" placeholder="Ejemplo: YP-000123, PL-000456, TX-789">
+                        <small>Para pagar todo, el mismo código se registrará por cada cita con su número correspondiente.</small>
+                    </div>
+
+                    <div class="ML_form_acciones">
+                        <a th:href="@{/paciente/pagos}" class="ML_btn_paciente_secondary">Cancelar</a>
+                        <button type="submit" class="ML_btn_paciente_primary" th:disabled="${#lists.isEmpty(ML_citasParaPago)}">Confirmar pago</button>
+                    </div>
+                </form>
+            </div>
+
+            <div class="ML_paciente_panel">
+                <div class="ML_paciente_panel_header">
+                    <div><h3>Citas disponibles para pago</h3><p>Revisa los saldos antes de confirmar la operación.</p></div>
+                </div>
+                <div class="ML_tabla_contenedor">
+                    <table class="ML_tabla_pacientes_admin">
+                        <thead><tr><th>Cita</th><th>Doctor</th><th>Fecha</th><th>Saldo</th></tr></thead>
+                        <tbody>
+                        <tr th:if="${#lists.isEmpty(ML_citasParaPago)}"><td colspan="4" class="ML_tabla_vacia">No tienes citas pendientes de pago.</td></tr>
+                        <tr th:each="ML_cita : ${ML_citasParaPago}">
+                            <td th:text="${'#C-' + ML_cita.id_cita}">#C-1</td>
+                            <td><strong th:text="${ML_cita.doctor}">Doctor</strong><span class="ML_texto_muted" th:text="${ML_cita.especialidad}">Especialidad</span></td>
+                            <td><span th:text="${ML_cita.fecha_cita_texto}">Fecha</span><span class="ML_texto_muted" th:text="${ML_cita.hora_inicio_texto + ' - ' + ML_cita.hora_fin_texto}">Hora</span></td>
+                            <td><strong th:text="${'S/ ' + ML_cita.saldo_pendiente}">S/ 0.00</strong></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+    </main>
+</div>
+<script>
+const ML_selectPagoPaciente = document.getElementById('ML_seleccionPagoPaciente');
+const ML_montoPagoPaciente = document.getElementById('ML_montoPagoPaciente');
+if (ML_selectPagoPaciente && ML_montoPagoPaciente) {
+    const ML_actualizarMonto = () => {
+        const opcion = ML_selectPagoPaciente.options[ML_selectPagoPaciente.selectedIndex];
+        const monto = opcion ? opcion.getAttribute('data-monto') : '';
+        ML_montoPagoPaciente.value = monto || '';
+    };
+    ML_selectPagoPaciente.addEventListener('change', ML_actualizarMonto);
+    ML_actualizarMonto();
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Especialidades Medicas</title>
+    <link rel="stylesheet" th:href="@{/css/ML_dashboardAdmin.css}" href="/css/ML_dashboardAdmin.css">
+    <link rel="stylesheet" th:href="@{/css/ML_iconos.css}" href="/css/ML_iconos.css">
+</head>
+<body>
+<div class="ML_dashboard_layout">
+    <aside class="ML_sidebar">
+        <div class="ML_sidebar_marca">
+            <div class="ML_marca_icono">+</div>
+            <div><h2>MediLink</h2><p>Sistema de<br>Citas Medicas</p></div>
+        </div>
+        <nav class="ML_menu">
+            <a th:href="@{/admin/dashboard}" class="ML_menu_link"><span class="ML_menu_icono"><span class="ML_icon ML_icon_home" aria-hidden="true"></span></span><span>Principal</span></a>
+            <a th:href="@{/admin/usuarios}" class="ML_menu_link">
+                <span class="ML_menu_icono"><span class="ML_icon ML_icon_users" aria-hidden="true"></span></span>
+                <span>Usuarios</span>
+            </a>
+            <a th:href="@{/admin/citas}" class="ML_menu_link"><span class="ML_menu_icono"><span class="ML_icon ML_icon_appointment" aria-hidden="true"></span></span><span>Citas</span></a>
+            <a th:href="@{/admin/horarios}" class="ML_menu_link"><span class="ML_menu_icono"><span class="ML_icon ML_icon_calendar" aria-hidden="true"></span></span><span>Calendario</span></a>
+            
+            <a th:href="@{/admin/disponibilidad}" class="ML_menu_link">
+                <span class="ML_menu_icono"><span class="ML_icon ML_icon_clock" aria-hidden="true"></span></span>
+                <span>Disponibilidad</span>
+            </a>
+            <a th:href="@{/admin/horarios-doctores}" class="ML_menu_link">
+                <span class="ML_menu_icono"><span class="ML_icon ML_icon_clock" aria-hidden="true"></span></span>
+                <span>Horarios doctores</span>
+            </a>
+
+            <a th:href="@{/admin/consultorios}" class="ML_menu_link">
+                <span class="ML_menu_icono"><span class="ML_icon ML_icon_clipboard" aria-hidden="true"></span></span>
+                <span>Consultorios</span>
+            </a>
+
+            <a th:href="@{/admin/pagos}" class="ML_menu_link">
+                <span class="ML_menu_icono"><span class="ML_icon ML_icon_payment" aria-hidden="true"></span></span>
+                <span>Pagos</span>
+            </a>
+            <a th:href="@{/admin/correos}" class="ML_menu_link">
+                <span class="ML_menu_icono"><span class="ML_icon ML_icon_report" aria-hidden="true"></span></span>
+                <span>Notificaciones</span>
+            </a>
+<a th:href="@{/admin/reportes}" class="ML_menu_link"><span class="ML_menu_icono"><span class="ML_icon ML_icon_report" aria-hidden="true"></span></span><span>Reportes</span></a>
+            <a th:href="@{/admin/especialidades}" class="ML_menu_link ML_activo"><span class="ML_menu_icono"><span class="ML_icon ML_icon_add" aria-hidden="true"></span></span><span>Especialidades</span></a>
+            <a th:href="@{/admin/ranking-doctores}" class="ML_menu_link"><span class="ML_menu_icono"><span class="ML_icon ML_icon_ranking" aria-hidden="true"></span></span><span>Ranking Doctores</span></a>
+            <a th:href="@{/admin/historial}" class="ML_menu_link"><span class="ML_menu_icono"><span class="ML_icon ML_icon_history" aria-hidden="true"></span></span><span>Historial Clinico</span></a>
+        </nav>
+        <div class="ML_sidebar_footer">
+            <form th:action="@{/logout}" method="post"><button type="submit" class="ML_btn_logout">Cerrar sesion</button></form>
+        </div>
+    </aside>
+    <main class="ML_contenido ML_pacientes_contenido">
+        <section class="ML_pacientes_topbar">
+            <div class="ML_topbar_left"><span class="ML_topbar_menu"><span class="ML_icon ML_icon_menu" aria-hidden="true"></span></span><h1>Especialidades</h1></div>
+            <div class="ML_topbar_user">
+                <span class="ML_notificacion"><span class="ML_icon ML_icon_bell" aria-hidden="true"></span></span>
+                <div class="ML_topbar_avatar">A</div>
+                <div><strong>Admin</strong><p>Administrador</p></div>
+            </div>
+        </section>
+        <section class="ML_pacientes_header">
+            <div><h2>Gestion de Especialidades</h2><p>Administra las especialidades medicas del sistema.</p></div>
+        </section>
+        <div th:if="${ML_mensajeExito}" class="ML_admin_alerta ML_admin_alerta_exito"><span th:text="${ML_mensajeExito}">Correcto</span></div>
+        <div th:if="${ML_mensajeError}" class="ML_admin_alerta ML_admin_alerta_error"><span th:text="${ML_mensajeError}">Error</span></div>
+        <section class="ML_paneles ML_pacientes_resumen">
+            <div class="ML_panel">
+                <div><p>Total Especialidades</p><h2 th:text="${#lists.size(ML_especialidades)}">0</h2><span class="ML_badge ML_badge_azul">Registradas</span></div>
+                <div class="ML_panel_icono ML_icono_morado"><span class="ML_icon ML_icon_add" aria-hidden="true"></span></div>
+            </div>
+        </section>
+        <section class="ML_pacientes_panel">
+            <div class="ML_pacientes_header" style="border:none;padding:0;margin-bottom:20px;">
+                <div><h3>Agregar nueva especialidad</h3></div>
+            </div>
+            <form th:action="@{/admin/especialidades/guardar}" method="post" style="display:flex;gap:10px;margin-bottom:30px;">
+                <input type="text" name="ML_nombre" placeholder="Nombre de la especialidad..." required style="flex:1;padding:12px;border:2px solid #ddd;border-radius:8px;font-size:14px;">
+                <button type="submit" class="ML_btn_nuevo_paciente"><span>+</span> Registrar</button>
+            </form>
+            <div class="ML_tabla_contenedor">
+                <table class="ML_tabla_pacientes_admin">
+                    <thead>
+                        <tr><th>ID</th><th>Nombre</th><th>Estado</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr th:if="${#lists.isEmpty(ML_especialidades)}">
+                            <td colspan="3" class="ML_tabla_vacia">No hay especialidades registradas</td>
+                        </tr>
+                        <tr th:each="ML_esp : ${ML_especialidades}">
+                            <td th:text="${ML_esp.ML_id}">1</td>
+                            <td><strong th:text="${ML_esp.ML_nombre}">Especialidad</strong></td>
+                            <td><span class="ML_estado_tabla ML_estado_activo">Activo</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </main>
+</div>
+</body>
+</html>

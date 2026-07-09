@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro de Cita</title>
+    <link rel="stylesheet" th:href="@{/css/ML_dashboardAdmin.css}" href="/css/ML_dashboardAdmin.css">
+    <link rel="stylesheet" th:href="@{/css/ML_citasAdmin.css}" href="/css/ML_citasAdmin.css">
+    <link rel="stylesheet" th:href="@{/css/ML_secretaria.css}" href="/css/ML_secretaria.css">
+    <link rel="stylesheet" th:href="@{/css/ML_iconos.css}" href="/css/ML_iconos.css">
+</head>
+<body>
+<div class="ML_dashboard_layout">
+    <aside class="ML_sidebar">
+        <div class="ML_sidebar_marca"><div class="ML_marca_icono">+</div><div><h2>MediLink</h2><p>Sistema de<br>Citas Médicas</p></div></div>
+        <nav class="ML_menu">
+            <a th:href="@{/secretaria/dashboard}" class="ML_menu_link"><span class="ML_menu_icono"><span class="ML_icon ML_icon_home" aria-hidden="true"></span></span><span>Principal</span></a>
+            <a th:href="@{/secretaria/citas/registro-presencial}" class="ML_menu_link ML_activo"><span class="ML_menu_icono"><span class="ML_icon ML_icon_add" aria-hidden="true"></span></span><span>Registro presencial</span></a>
+            <a th:href="@{/secretaria/citas}" class="ML_menu_link"><span class="ML_menu_icono"><span class="ML_icon ML_icon_appointment" aria-hidden="true"></span></span><span>Gestionar citas</span></a>
+            <a th:href="@{/secretaria/calendario}" class="ML_menu_link"><span class="ML_menu_icono"><span class="ML_icon ML_icon_calendar" aria-hidden="true"></span></span><span>Calendario</span></a>
+            <a th:href="@{/secretaria/disponibilidad}" class="ML_menu_link "><span class="ML_menu_icono"><span class="ML_icon ML_icon_clock" aria-hidden="true"></span></span><span>Horarios doctores</span></a>
+            <a th:href="@{/secretaria/pagos}" class="ML_menu_link"><span class="ML_menu_icono"><span class="ML_icon ML_icon_payment" aria-hidden="true"></span></span><span>Pagos</span></a>
+            <a th:href="@{/secretaria/reportes}" class="ML_menu_link"><span class="ML_menu_icono"><span class="ML_icon ML_icon_report" aria-hidden="true"></span></span><span>Reportes</span></a>
+        </nav>
+        <div class="ML_sidebar_footer"><form th:action="@{/logout}" method="post"><button type="submit" class="ML_btn_logout">Cerrar sesión</button></form></div>
+    </aside>
+
+    <main class="ML_contenido ML_secretaria_contenido">
+        <section class="ML_pacientes_topbar">
+            <div class="ML_topbar_left"><span class="ML_topbar_menu"><span class="ML_icon ML_icon_menu" aria-hidden="true"></span></span><h1>Registro de cita</h1></div>
+            <div class="ML_topbar_user"><span class="ML_notificacion"><span class="ML_icon ML_icon_bell" aria-hidden="true"></span></span><div class="ML_topbar_avatar">S</div><div><strong th:text="${ML_perfilSecretaria.secretaria ?: 'Secretaria'}">Secretaria</strong><p>Secretaria</p></div></div>
+        </section>
+
+        <section class="ML_secretaria_header ML_secretaria_header_flex">
+            <div>
+                <h2>Registro miembro u otro invitado</h2>
+                <p>Para un miembro del sistema selecciona al paciente de la tabla. Para otro invitado, registra sus datos personales y el sistema lo afiliará como paciente.</p>
+            </div>
+        </section>
+
+        <div th:if="${ML_mensajeError}" class="ML_admin_alerta ML_admin_alerta_error"><span th:text="${ML_mensajeError}">Error</span></div>
+
+        <section class="ML_form_admin_panel ML_registro_tipo_panel">
+            <form th:action="@{/secretaria/citas/registro-presencial/guardar}" th:object="${ML_citaForm}" method="post" class="ML_form_admin" id="ML_formRegistroCitaSecretaria">
+                <input type="hidden" th:field="*{ML_tipoRegistro}" id="ML_tipoRegistroInput">
+                <input type="hidden" th:field="*{ML_idPaciente}" id="ML_idPacienteHidden">
+
+                <div class="ML_tipo_registro_tabs">
+                    <button type="button" class="ML_tipo_tab ML_tipo_tab_activo" data-tipo="Miembro">Registro miembro</button>
+                    <button type="button" class="ML_tipo_tab" data-tipo="Invitado">Otro invitado</button>
+                </div>
+
+                <div class="ML_tipo_info" id="ML_infoMiembro">
+                    <strong>Miembro del sistema</strong>
+                    <span>Busca al paciente, selecciónalo de la tabla y registra únicamente los datos de la cita. Los datos personales del usuario no se modifican.</span>
+                </div>
+
+                <section class="ML_bloque_tipo_registro" id="ML_bloqueMiembro">
+                    <div class="ML_form_section_header"><div class="ML_form_section_icon"><span class="ML_icon ML_icon_users" aria-hidden="true"></span></div><div><h3>Paciente miembro</h3><p>Selecciona un paciente afiliado al sistema.</p></div></div>
+
+                    <div class="ML_buscador ML_buscador_registro"><span><span class="ML_icon ML_icon_search" aria-hidden="true"></span></span><input type="text" id="ML_buscarPacienteMiembro" placeholder="Buscar por nombre, DNI, celular o correo..."></div>
+
+                    <div class="ML_paciente_seleccionado" id="ML_pacienteSeleccionadoBox">
+                        <strong>Paciente seleccionado:</strong>
+                        <span id="ML_pacienteSeleccionadoTexto">Ninguno. Selecciona un paciente de la tabla.</span>
+                    </div>
+
+                    <div class="ML_tabla_contenedor ML_tabla_miembros_wrap">
+                        <table class="ML_tabla_pacientes_admin" id="ML_tablaPacientesMiembro">
+                            <thead><tr><th>Paciente</th><th>DNI</th><th>Celular</th><th>Correo</th><th>Género</th><th>Alergias</th><th>Acción</th></tr></thead>
+                            <tbody>
+                            <tr th:if="${#lists.isEmpty(ML_pacientesTabla)}"><td colspan="7" class="ML_tabla_vacia">No hay pacientes miembros activos.</td></tr>
+                            <tr th:each="ML_paciente : ${ML_pacientesTabla}" th:attr="data-id=${ML_paciente.id_paciente},data-nombre=${ML_paciente.paciente},data-dni=${ML_paciente.dni}">
+                                <td><strong th:text="${ML_paciente.paciente}">Paciente</strong><span class="ML_texto_muted" th:text="${'F. nac.: ' + (ML_paciente.fecha_nacimiento_texto ?: '-')}">Fecha</span></td>
+                                <td th:text="${ML_paciente.dni}">DNI</td>
+                                <td th:text="${ML_paciente.celular}">Celular</td>
+                                <td th:text="${ML_paciente.correo}">Correo</td>
+                                <td th:text="${ML_paciente.genero}">Género</td>
+                                <td th:text="${ML_paciente.alergias}">Alergias</td>
+                                <td><button type="button" class="ML_btn_seleccionar_miembro">Seleccionar</button></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <section class="ML_bloque_tipo_registro ML_bloque_oculto" id="ML_bloqueInvitado">
+                    <div class="ML_form_section_header"><div class="ML_form_section_icon"><span class="ML_icon ML_icon_user" aria-hidden="true"></span></div><div><h3>Datos personales del invitado</h3><p>El invitado no está afiliado. Se creará como paciente del sistema antes de registrar la cita.</p></div></div>
+                    <div class="ML_form_admin_grid">
+                        <div class="ML_form_admin_input"><label>Nombres <span>*</span></label><input type="text" th:field="*{ML_nombresInvitado}" class="ML_invitado_requerido"></div>
+                        <div class="ML_form_admin_input"><label>Apellidos <span>*</span></label><input type="text" th:field="*{ML_apellidosInvitado}" class="ML_invitado_requerido"></div>
+                        <div class="ML_form_admin_input"><label>DNI <span>*</span></label><input type="text" th:field="*{ML_dniInvitado}" class="ML_invitado_requerido" maxlength="12"></div>
+                        <div class="ML_form_admin_input"><label>Celular <span>*</span></label><input type="text" th:field="*{ML_celularInvitado}" class="ML_invitado_requerido"></div>
+                        <div class="ML_form_admin_input"><label>Correo</label><input type="email" th:field="*{ML_correoInvitado}" placeholder="opcional@correo.com"></div>
+                        <div class="ML_form_admin_input"><label>Dirección</label><input type="text" th:field="*{ML_direccionInvitado}"></div>
+                        <div class="ML_form_admin_input"><label>Fecha nacimiento <span>*</span></label><input type="date" th:field="*{ML_fechaNacimientoInvitado}" class="ML_invitado_requerido"></div>
+                        <div class="ML_form_admin_input"><label>Género <span>*</span></label><select th:field="*{ML_generoInvitado}" class="ML_invitado_requerido"><option value="Masculino">Masculino</option><option value="Femenino">Femenino</option><option value="Otro">Otro</option></select></div>
+                        <div class="ML_form_admin_input"><label>Grupo sanguíneo</label><input type="text" th:field="*{ML_grupoSanguineoInvitado}" placeholder="O+, A+, B-, etc."></div>
+                        <div class="ML_form_admin_input"><label>Alergias</label><input type="text" th:field="*{ML_alergiasInvitado}" placeholder="No registradas"></div>
+                        <div class="ML_form_admin_input"><label>Contacto emergencia</label><input type="text" th:field="*{ML_contactoEmergenciaInvitado}"></div>
+                        <div class="ML_form_admin_input"><label>Celular emergencia</label><input type="text" th:field="*{ML_celularEmergenciaInvitado}"></div>
+                    </div>
+                </section>
+
+                <section class="ML_bloque_tipo_registro">
+                    <div class="ML_form_section_header"><div class="ML_form_section_icon"><span class="ML_icon ML_icon_appointment" aria-hidden="true"></span></div><div><h3>Datos de la cita</h3><p>Estos son los únicos datos modificables para el registro de miembro; en invitado se guardan junto con su afiliación.</p></div></div>
+                    <div class="ML_form_admin_grid">
+                        <div class="ML_form_admin_input ML_form_admin_full"><label>Doctor / Especialidad / Consultorio <span>*</span></label><select th:field="*{ML_idDoctor}" required><option value="">Seleccione doctor</option><option th:each="ML_doctor : ${ML_doctores}" th:value="${ML_doctor.ML_id}" th:text="${ML_doctor.ML_nombre}">Doctor</option></select></div>
+                        <div class="ML_form_admin_input"><label>Fecha <span>*</span></label><input type="date" th:field="*{ML_fechaCita}" required></div>
+                        <div class="ML_form_admin_input"><label>Hora inicio <span>*</span></label><input type="time" th:field="*{ML_horaInicio}" required></div>
+                        <div class="ML_form_admin_input"><label>Hora fin</label><input type="time" th:field="*{ML_horaFin}"><span class="ML_texto_muted">Si se deja vacío, se asignan 30 minutos.</span></div>
+                        <div class="ML_form_admin_input"><label>Estado inicial <span>*</span></label><select th:field="*{ML_estado}" required><option value="Pendiente">Pendiente</option><option value="Confirmada">Confirmada</option></select></div>
+                        <div class="ML_form_admin_input ML_form_admin_full"><label>Motivo de la cita</label><textarea th:field="*{ML_motivo}" placeholder="Ejemplo: dolor de cabeza, chequeo general, control médico..."></textarea></div>
+                    </div>
+                </section>
+
+                <div class="ML_form_admin_acciones"><a th:href="@{/secretaria/citas}" class="ML_btn_cancelar_admin">Cancelar</a><button type="submit" class="ML_btn_guardar_admin">Guardar cita</button></div>
+            </form>
+        </section>
+    </main>
+</div>
+<script>
+const ML_tipoRegistroInput = document.getElementById('ML_tipoRegistroInput');
+const ML_idPacienteHidden = document.getElementById('ML_idPacienteHidden');
+const ML_bloqueMiembro = document.getElementById('ML_bloqueMiembro');
+const ML_bloqueInvitado = document.getElementById('ML_bloqueInvitado');
+const ML_infoMiembro = document.getElementById('ML_infoMiembro');
+const ML_pacienteSeleccionadoTexto = document.getElementById('ML_pacienteSeleccionadoTexto');
+const ML_tabs = document.querySelectorAll('.ML_tipo_tab');
+const ML_invitadoRequeridos = document.querySelectorAll('.ML_invitado_requerido');
+
+function ML_setTipoRegistro(tipo) {
+    ML_tipoRegistroInput.value = tipo;
+    ML_tabs.forEach(tab => tab.classList.toggle('ML_tipo_tab_activo', tab.dataset.tipo === tipo));
+    const esInvitado = tipo === 'Invitado';
+    ML_bloqueMiembro.classList.toggle('ML_bloque_oculto', esInvitado);
+    ML_bloqueInvitado.classList.toggle('ML_bloque_oculto', !esInvitado);
+    ML_infoMiembro.innerHTML = esInvitado
+        ? '<strong>Otro invitado</strong><span>Completa sus datos personales. El sistema lo registrará como paciente y luego guardará la cita.</span>'
+        : '<strong>Miembro del sistema</strong><span>Busca al paciente, selecciónalo de la tabla y registra únicamente los datos de la cita. Los datos personales del usuario no se modifican.</span>';
+    ML_invitadoRequeridos.forEach(input => input.required = esInvitado);
+    if (esInvitado) {
+        ML_idPacienteHidden.value = '';
+        ML_pacienteSeleccionadoTexto.textContent = 'No aplica para invitado. Se creará un paciente nuevo.';
+    }
+}
+
+ML_tabs.forEach(tab => tab.addEventListener('click', () => ML_setTipoRegistro(tab.dataset.tipo)));
+ML_setTipoRegistro(ML_tipoRegistroInput.value === 'Invitado' ? 'Invitado' : 'Miembro');
+
+document.querySelectorAll('.ML_btn_seleccionar_miembro').forEach(btn => {
+    btn.addEventListener('click', () => {
+        const fila = btn.closest('tr');
+        document.querySelectorAll('#ML_tablaPacientesMiembro tbody tr').forEach(tr => tr.classList.remove('ML_fila_miembro_activa'));
+        fila.classList.add('ML_fila_miembro_activa');
+        ML_idPacienteHidden.value = fila.dataset.id;
+        ML_pacienteSeleccionadoTexto.textContent = `${fila.dataset.nombre} | DNI: ${fila.dataset.dni}`;
+    });
+});
+
+const ML_buscarPacienteMiembro = document.getElementById('ML_buscarPacienteMiembro');
+const ML_tablaPacientesMiembro = document.getElementById('ML_tablaPacientesMiembro');
+if (ML_buscarPacienteMiembro && ML_tablaPacientesMiembro) {
+    ML_buscarPacienteMiembro.addEventListener('keyup', () => {
+        const texto = ML_buscarPacienteMiembro.value.toLowerCase();
+        ML_tablaPacientesMiembro.querySelectorAll('tbody tr').forEach(fila => {
+            fila.style.display = fila.textContent.toLowerCase().includes(texto) ? '' : 'none';
+        });
+    });
+}
+</script>
+</body>
+</html>

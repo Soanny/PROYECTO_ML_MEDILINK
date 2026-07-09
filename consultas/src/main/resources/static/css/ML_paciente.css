@@ -1,0 +1,361 @@
+.ML_paciente_contenido {
+    background: #f6f8fb;
+}
+
+.ML_paciente_header {
+    background: linear-gradient(135deg, #ffffff, #eff6ff);
+    border-radius: 24px;
+    padding: 26px;
+    margin-bottom: 22px;
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    align-items: center;
+    box-shadow: 0 16px 38px rgba(15, 23, 42, 0.08);
+    border: 1px solid rgba(59, 130, 246, 0.12);
+}
+
+.ML_paciente_header h2 {
+    margin: 0 0 8px;
+    font-size: 28px;
+    color: #0f172a;
+}
+
+.ML_paciente_header p {
+    margin: 0;
+    color: #64748b;
+    max-width: 760px;
+    line-height: 1.6;
+}
+
+.ML_paciente_badge {
+    min-width: 210px;
+    background: #ffffff;
+    border-radius: 20px;
+    padding: 18px;
+    border: 1px solid #dbeafe;
+    box-shadow: 0 12px 28px rgba(37, 99, 235, 0.10);
+}
+
+.ML_paciente_badge span,
+.ML_paciente_badge small {
+    display: block;
+    color: #64748b;
+    font-size: 13px;
+}
+
+.ML_paciente_badge strong {
+    display: block;
+    color: #1d4ed8;
+    margin: 6px 0;
+    font-size: 18px;
+}
+
+.ML_paciente_resumen {
+    margin-bottom: 22px;
+}
+
+.ML_paciente_grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 22px;
+    margin-bottom: 22px;
+}
+
+.ML_paciente_panel {
+    background: #ffffff;
+    border-radius: 22px;
+    padding: 22px;
+    margin-bottom: 22px;
+    box-shadow: 0 14px 36px rgba(15, 23, 42, 0.08);
+    border: 1px solid #e5e7eb;
+}
+
+.ML_paciente_panel_header {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    align-items: center;
+    margin-bottom: 18px;
+}
+
+.ML_paciente_panel_header h3 {
+    margin: 0 0 5px;
+    color: #0f172a;
+    font-size: 20px;
+}
+
+.ML_paciente_panel_header p {
+    margin: 0;
+    color: #64748b;
+    line-height: 1.5;
+}
+
+.ML_btn_paciente_primary,
+.ML_btn_paciente_secondary,
+.ML_btn_paciente_table {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 12px;
+    text-decoration: none;
+    border: none;
+    font-weight: 700;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+.ML_btn_paciente_primary {
+    background: #2563eb;
+    color: #ffffff;
+    padding: 12px 18px;
+    box-shadow: 0 10px 22px rgba(37, 99, 235, 0.18);
+}
+
+.ML_btn_paciente_primary:hover {
+    background: #1d4ed8;
+}
+
+.ML_btn_paciente_secondary {
+    background: #eff6ff;
+    color: #1d4ed8;
+    padding: 12px 18px;
+    border: 1px solid #bfdbfe;
+}
+
+.ML_btn_paciente_secondary:hover {
+    background: #dbeafe;
+}
+
+.ML_btn_paciente_table {
+    background: #10b981;
+    color: #ffffff;
+    padding: 8px 13px;
+    font-size: 13px;
+}
+
+.ML_btn_paciente_table:hover {
+    background: #059669;
+}
+
+.ML_texto_muted {
+    display: block;
+    color: #64748b;
+    font-size: 12px;
+    margin-top: 4px;
+}
+
+.ML_alerta_exito,
+.ML_alerta_error {
+    padding: 13px 16px;
+    border-radius: 14px;
+    margin-bottom: 18px;
+    font-weight: 700;
+}
+
+.ML_alerta_exito {
+    background: #dcfce7;
+    color: #166534;
+    border: 1px solid #bbf7d0;
+}
+
+.ML_alerta_error {
+    background: #fee2e2;
+    color: #991b1b;
+    border: 1px solid #fecaca;
+}
+
+.ML_paciente_cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 18px;
+}
+
+.ML_paciente_card {
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 20px;
+    padding: 18px;
+}
+
+.ML_paciente_card_seguimiento {
+    background: linear-gradient(180deg, #f8fafc, #eef2ff);
+}
+
+.ML_paciente_card_header {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    align-items: flex-start;
+    margin-bottom: 12px;
+}
+
+.ML_paciente_card_header h3 {
+    margin: 0 0 5px;
+    color: #0f172a;
+    font-size: 18px;
+}
+
+.ML_paciente_card_header p,
+.ML_paciente_meta {
+    margin: 0;
+    color: #64748b;
+    font-size: 13px;
+}
+
+.ML_paciente_meta {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-bottom: 14px;
+}
+
+.ML_paciente_meta span {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 999px;
+    padding: 6px 10px;
+}
+
+.ML_paciente_detalle_grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+    gap: 12px;
+}
+
+.ML_paciente_detalle_grid div {
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 14px;
+    padding: 13px;
+}
+
+.ML_paciente_detalle_grid h4 {
+    margin: 0 0 6px;
+    color: #1e293b;
+    font-size: 14px;
+}
+
+.ML_paciente_detalle_grid p {
+    margin: 0;
+    color: #475569;
+    line-height: 1.5;
+    white-space: pre-line;
+}
+
+.ML_paciente_detalle_destacado {
+    border-color: #bfdbfe !important;
+    background: #eff6ff !important;
+}
+
+.ML_paciente_vacio {
+    text-align: center;
+    background: #f8fafc;
+    color: #64748b;
+    padding: 28px;
+    border-radius: 16px;
+    border: 1px dashed #cbd5e1;
+}
+
+.ML_buscador {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 14px;
+    padding: 9px 12px;
+    min-width: 320px;
+}
+
+.ML_buscador input {
+    border: none;
+    outline: none;
+    background: transparent;
+    width: 100%;
+    color: #334155;
+}
+
+.ML_paciente_pago_detalle {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 12px;
+}
+
+.ML_paciente_pago_detalle div {
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 14px;
+    padding: 14px;
+}
+
+.ML_paciente_pago_detalle span {
+    display: block;
+    color: #64748b;
+    font-size: 12px;
+    margin-bottom: 6px;
+}
+
+.ML_paciente_pago_detalle strong {
+    color: #0f172a;
+}
+
+.ML_paciente_form {
+    display: grid;
+    gap: 15px;
+}
+
+.ML_form_grupo {
+    display: grid;
+    gap: 7px;
+}
+
+.ML_form_grupo label {
+    color: #334155;
+    font-weight: 700;
+}
+
+.ML_form_grupo input,
+.ML_form_grupo select {
+    border: 1px solid #cbd5e1;
+    border-radius: 12px;
+    padding: 12px 13px;
+    outline: none;
+    color: #334155;
+    background: #ffffff;
+}
+
+.ML_form_grupo input:focus,
+.ML_form_grupo select:focus {
+    border-color: #2563eb;
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
+}
+
+.ML_form_grupo small {
+    color: #64748b;
+}
+
+.ML_form_acciones {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+    margin-top: 8px;
+}
+
+@media (max-width: 980px) {
+    .ML_paciente_header,
+    .ML_paciente_panel_header,
+    .ML_paciente_grid {
+        display: block;
+    }
+
+    .ML_paciente_grid {
+        grid-template-columns: 1fr;
+    }
+
+    .ML_paciente_badge,
+    .ML_buscador {
+        margin-top: 14px;
+        min-width: 100%;
+    }
+}

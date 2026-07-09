@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ranking de Doctores</title>
+    <link rel="stylesheet" th:href="@{/css/ML_dashboardAdmin.css}" href="/css/ML_dashboardAdmin.css">
+    <link rel="stylesheet" th:href="@{/css/ML_iconos.css}" href="/css/ML_iconos.css">
+</head>
+<body>
+
+<div class="ML_dashboard_layout">
+
+    <aside class="ML_sidebar">
+
+        <div class="ML_sidebar_marca">
+            <div class="ML_marca_icono">+</div>
+            <div>
+                <h2>MediLink</h2>
+                <p>Sistema de<br>Citas Médicas</p>
+            </div>
+        </div>
+
+        <nav class="ML_menu">
+
+            <a th:href="@{/admin/dashboard}" class="ML_menu_link">
+                <span class="ML_menu_icono"><span class="ML_icon ML_icon_home" aria-hidden="true"></span></span>
+                <span>Principal</span>
+            </a>
+            <a th:href="@{/admin/usuarios}" class="ML_menu_link">
+                <span class="ML_menu_icono"><span class="ML_icon ML_icon_users" aria-hidden="true"></span></span>
+                <span>Usuarios</span>
+            </a>
+
+            <a th:href="@{/admin/citas}" class="ML_menu_link">
+                <span class="ML_menu_icono"><span class="ML_icon ML_icon_appointment" aria-hidden="true"></span></span>
+                <span>Citas</span>
+            </a>
+
+            <a th:href="@{/admin/horarios}" class="ML_menu_link">
+                <span class="ML_menu_icono"><span class="ML_icon ML_icon_calendar" aria-hidden="true"></span></span>
+                <span>Calendario</span>
+            </a>
+
+            
+            <a th:href="@{/admin/disponibilidad}" class="ML_menu_link">
+                <span class="ML_menu_icono"><span class="ML_icon ML_icon_clock" aria-hidden="true"></span></span>
+                <span>Disponibilidad</span>
+            </a>
+            <a th:href="@{/admin/horarios-doctores}" class="ML_menu_link">
+                <span class="ML_menu_icono"><span class="ML_icon ML_icon_clock" aria-hidden="true"></span></span>
+                <span>Horarios doctores</span>
+            </a>
+
+            <a th:href="@{/admin/consultorios}" class="ML_menu_link">
+                <span class="ML_menu_icono"><span class="ML_icon ML_icon_clipboard" aria-hidden="true"></span></span>
+                <span>Consultorios</span>
+            </a>
+
+            <a th:href="@{/admin/pagos}" class="ML_menu_link">
+                <span class="ML_menu_icono"><span class="ML_icon ML_icon_payment" aria-hidden="true"></span></span>
+                <span>Pagos</span>
+            </a>
+            <a th:href="@{/admin/correos}" class="ML_menu_link">
+                <span class="ML_menu_icono"><span class="ML_icon ML_icon_report" aria-hidden="true"></span></span>
+                <span>Notificaciones</span>
+            </a>
+<a th:href="@{/admin/reportes}" class="ML_menu_link">
+                <span class="ML_menu_icono"><span class="ML_icon ML_icon_report" aria-hidden="true"></span></span>
+                <span>Reportes</span>
+            </a>
+
+            <a th:href="@{/admin/especialidades}" class="ML_menu_link">
+                <span class="ML_menu_icono"><span class="ML_icon ML_icon_add" aria-hidden="true"></span></span>
+                <span>Especialidades</span>
+            </a>
+
+            <a th:href="@{/admin/ranking-doctores}" class="ML_menu_link ML_activo">
+                <span class="ML_menu_icono"><span class="ML_icon ML_icon_ranking" aria-hidden="true"></span></span>
+                <span>Ranking Doctores</span>
+            </a>
+
+            <a th:href="@{/admin/historial}" class="ML_menu_link">
+                <span class="ML_menu_icono"><span class="ML_icon ML_icon_history" aria-hidden="true"></span></span>
+                <span>Historial Clínico</span>
+            </a>
+
+        </nav>
+
+        <div class="ML_sidebar_footer">
+            <form th:action="@{/logout}" method="post">
+                <button type="submit" class="ML_btn_logout">Cerrar sesión</button>
+            </form>
+        </div>
+
+    </aside>
+
+    <main class="ML_contenido">
+
+        <section class="ML_header">
+            <div>
+                <h1 th:text="${ML_tituloPagina}">Ranking de Doctores</h1>
+                <p>Consulta exclusiva del rendimiento y horas trabajadas por cada doctor.</p>
+            </div>
+
+            <div class="ML_usuario_panel">
+                <div class="ML_usuario_texto">
+                    <strong>Administrador</strong>
+                    <span>Ranking doctores</span>
+                </div>
+                <div class="ML_avatar">A</div>
+            </div>
+        </section>
+
+        <section class="ML_panel ML_ranking_doctores_panel ML_ranking_pagina_panel">
+            <div class="ML_ranking_encabezado_superior">
+                <div>
+                    <h3>Ranking de doctores por horas trabajadas</h3>
+                    <p>Control de carga laboral según duración de citas no canceladas, atenciones y estados.</p>
+                </div>
+
+                <div class="ML_acciones_panel">
+                    <a th:href="@{/admin/dashboard}" class="ML_btn_panel ML_btn_panel_secundario">Volver al principal</a>
+                    <a th:href="@{/admin/doctores}" class="ML_btn_panel">Ver doctores</a>
+                </div>
+            </div>
+
+            <div class="ML_tabla_contenedor ML_ranking_tabla_contenedor">
+                <table class="ML_tabla ML_ranking_tabla">
+                    <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Doctor</th>
+                        <th>Especialidad</th>
+                        <th>Horas trabajadas</th>
+                        <th>Total citas</th>
+                        <th>Atendidas</th>
+                        <th>Confirmadas</th>
+                        <th>Pendientes</th>
+                        <th>Canceladas</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:if="${#lists.isEmpty(ML_rankingDoctoresHoras)}">
+                        <td colspan="9" class="ML_tabla_vacia">No hay información de doctores para el ranking.</td>
+                    </tr>
+                    <tr th:each="ML_doc, ML_iter : ${ML_rankingDoctoresHoras}"
+                        th:classappend="${ML_iter.index == 0} ? 'ML_ranking_fila_oro' : (${ML_iter.index == 1} ? 'ML_ranking_fila_plata' : (${ML_iter.index == 2} ? 'ML_ranking_fila_bronce' : ''))">
+                        <td><span class="ML_ranking_numero" th:text="${ML_iter.index + 1}">1</span></td>
+                        <td class="ML_ranking_doctor" th:text="${ML_doc.doctor}">Doctor</td>
+                        <td th:text="${ML_doc.especialidad}">Especialidad</td>
+                        <td><strong th:text="${ML_doc.horas_trabajadas}">0 h 0 min</strong></td>
+                        <td th:text="${ML_doc.total_citas}">0</td>
+                        <td th:text="${ML_doc.citas_atendidas}">0</td>
+                        <td th:text="${ML_doc.citas_confirmadas}">0</td>
+                        <td th:text="${ML_doc.citas_pendientes}">0</td>
+                        <td th:text="${ML_doc.citas_canceladas}">0</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+    </main>
+
+</div>
+
+</body>
+</html>

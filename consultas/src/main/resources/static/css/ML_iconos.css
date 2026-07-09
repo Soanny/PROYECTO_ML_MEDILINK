@@ -1,0 +1,88 @@
+/* Iconos personalizados sin emojis - MediLink */
+.ML_icon {
+    display: inline-block;
+    width: 1.15em;
+    height: 1.15em;
+    flex: 0 0 auto;
+    vertical-align: -0.18em;
+    background: currentColor;
+    -webkit-mask: var(--ml-icon) center / contain no-repeat;
+    mask: var(--ml-icon) center / contain no-repeat;
+}
+
+.ML_menu_icono,
+.ML_topbar_menu,
+.ML_notificacion,
+.ML_panel_icono {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.ML_menu_icono .ML_icon {
+    width: 20px;
+    height: 20px;
+}
+
+.ML_topbar_menu .ML_icon,
+.ML_notificacion .ML_icon {
+    width: 21px;
+    height: 21px;
+}
+
+.ML_panel_icono .ML_icon {
+    width: 30px;
+    height: 30px;
+}
+
+button .ML_icon,
+a .ML_icon,
+.ML_buscador .ML_icon {
+    width: 18px;
+    height: 18px;
+}
+
+.ML_icon_only {
+    font-size: 0;
+}
+
+.ML_icon_only .ML_icon {
+    font-size: 16px;
+}
+
+.ML_icon_home { --ml-icon: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%3E%3Cpath%20d%3D%22M3%2011.5%2012%204l9%207.5v8A1.5%201.5%200%200%201%2019.5%2021h-4.2v-6.2H8.7V21H4.5A1.5%201.5%200%200%201%203%2019.5z%22%2F%3E%3C%2Fsvg%3E"); }
+.ML_icon_users { --ml-icon: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%3E%3Cpath%20d%3D%22M9%2012a4%204%200%201%200%200-8%204%204%200%200%200%200%208Zm0%202c-3.4%200-6%201.8-6%204.1V20h12v-1.9C15%2015.8%2012.4%2014%209%2014Zm7.5-1.2a3.2%203.2%200%201%200%200-6.4%203.2%203.2%200%200%200%200%206.4Zm.4%201.7c1.9.6%203.1%201.8%203.1%203.4V20h-3.5v-1.9c0-1.3-.5-2.4-1.4-3.3.6-.2%201.2-.3%201.8-.3Z%22%2F%3E%3C%2Fsvg%3E"); }
+.ML_icon_user { --ml-icon: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%3E%3Cpath%20d%3D%22M12%2012.5a4.5%204.5%200%201%200%200-9%204.5%204.5%200%200%200%200%209Zm0%202c-4%200-7%202.1-7%204.8V21h14v-1.7c0-2.7-3-4.8-7-4.8Z%22%2F%3E%3C%2Fsvg%3E"); }
+.ML_icon_doctor { --ml-icon: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%3E%3Cpath%20d%3D%22M9%203h6v4h4v6h-4v8H9v-8H5V7h4z%22%2F%3E%3C%2Fsvg%3E"); }
+.ML_icon_secretary { --ml-icon: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%3E%3Cpath%20d%3D%22M9%204h6a2%202%200%200%201%202%202v2h3a2%202%200%200%201%202%202v8a2%202%200%200%201-2%202H4a2%202%200%200%201-2-2v-8a2%202%200%200%201%202-2h3V6a2%202%200%200%201%202-2Zm0%204h6V6H9v2Zm-5%204v2h16v-2H4Z%22%2F%3E%3C%2Fsvg%3E"); }
+.ML_icon_appointment { --ml-icon: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%3E%3Cpath%20d%3D%22M7%202h2v3h6V2h2v3h3a2%202%200%200%201%202%202v13a2%202%200%200%201-2%202H4a2%202%200%200%201-2-2V7a2%202%200%200%201%202-2h3V2Zm-3%209v9h16v-9H4Zm11.8%202.2%201.4%201.4-5.5%205.2L8.8%2017l1.4-1.4%201.5%201.4%204.1-3.8Z%22%2F%3E%3C%2Fsvg%3E"); }
+.ML_icon_calendar { --ml-icon: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%3E%3Cpath%20d%3D%22M7%202h2v3h6V2h2v3h2a2%202%200%200%201%202%202v13a2%202%200%200%201-2%202H5a2%202%200%200%201-2-2V7a2%202%200%200%201%202-2h2V2Zm-2%209v9h14v-9H5Zm2%202h3v3H7v-3Zm5%200h3v3h-3v-3Z%22%2F%3E%3C%2Fsvg%3E"); }
+.ML_icon_ranking { --ml-icon: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%3E%3Cpath%20d%3D%22M4%2020h16v2H4v-2Zm2-9h3v7H6v-7Zm5-5h3v12h-3V6Zm5%203h3v9h-3V9ZM12%202l1.4%202.8%203.1.5-2.2%202.1.5%203-2.8-1.4-2.8%201.4.5-3-2.2-2.1%203.1-.5L12%202Z%22%2F%3E%3C%2Fsvg%3E"); }
+.ML_icon_report { --ml-icon: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%3E%3Cpath%20d%3D%22M5%203h14a2%202%200%200%201%202%202v14a2%202%200%200%201-2%202H5a2%202%200%200%201-2-2V5a2%202%200%200%201%202-2Zm3%2014h2V9H8v8Zm4%200h2V6h-2v11Zm4%200h2v-5h-2v5Z%22%2F%3E%3C%2Fsvg%3E"); }
+.ML_icon_history { --ml-icon: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%3E%3Cpath%20d%3D%22M6%202h9l5%205v15H6a2%202%200%200%201-2-2V4a2%202%200%200%201%202-2Zm8%201.8V8h4.2L14%203.8ZM8%2011h8v2H8v-2Zm0%204h8v2H8v-2Z%22%2F%3E%3C%2Fsvg%3E"); }
+.ML_icon_menu { --ml-icon: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%3E%3Cpath%20d%3D%22M4%206h16v2H4V6Zm0%205h16v2H4v-2Zm0%205h16v2H4v-2Z%22%2F%3E%3C%2Fsvg%3E"); }
+.ML_icon_bell { --ml-icon: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%3E%3Cpath%20d%3D%22M12%2022a2.6%202.6%200%200%200%202.5-2h-5a2.6%202.6%200%200%200%202.5%202Zm7-6V11a7%207%200%200%200-5-6.7V3a2%202%200%201%200-4%200v1.3A7%207%200%200%200%205%2011v5l-2%202v1h18v-1l-2-2Z%22%2F%3E%3C%2Fsvg%3E"); }
+.ML_icon_search { --ml-icon: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%3E%3Cpath%20d%3D%22M10.5%204a6.5%206.5%200%200%201%205.1%2010.5l4%204-1.6%201.6-4-4A6.5%206.5%200%201%201%2010.5%204Zm0%202a4.5%204.5%200%201%200%200%209%204.5%204.5%200%200%200%200-9Z%22%2F%3E%3C%2Fsvg%3E"); }
+.ML_icon_pin { --ml-icon: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%3E%3Cpath%20d%3D%22M14%202%2022%2010l-2%202-2-2-4%204v4l-2%202-3.5-3.5L4%2021l-1-1%204.5-4.5L4%2012l2-2h4l4-4-2-2%202-2Z%22%2F%3E%3C%2Fsvg%3E"); }
+.ML_icon_check { --ml-icon: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%3E%3Cpath%20d%3D%22M9.2%2016.8%204.8%2012.4%203.4%2013.8l5.8%205.8L21%207.8%2019.6%206.4z%22%2F%3E%3C%2Fsvg%3E"); }
+.ML_icon_check-circle { --ml-icon: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%3E%3Cpath%20d%3D%22M12%202a10%2010%200%201%200%200%2020%2010%2010%200%200%200%200-20Zm-1.2%2014.2-4-4%201.4-1.4%202.6%202.6%205.4-5.6%201.4%201.4-6.8%207Z%22%2F%3E%3C%2Fsvg%3E"); }
+.ML_icon_clock { --ml-icon: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%3E%3Cpath%20d%3D%22M12%202a10%2010%200%201%200%200%2020%2010%2010%200%200%200%200-20Zm1%205v5.2l4%202.4-1%201.7-5-3V7h2Z%22%2F%3E%3C%2Fsvg%3E"); }
+.ML_icon_hourglass { --ml-icon: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%3E%3Cpath%20d%3D%22M6%202h12v6a6%206%200%200%201-3%205.2A6%206%200%200%201%2018%2018v4H6v-4a6%206%200%200%201%203-4.8A6%206%200%200%201%206%208V2Zm2%202v4c0%202.2%201.8%204%204%204s4-1.8%204-4V4H8Zm4%2010c-2.2%200-4%201.8-4%204v2h8v-2c0-2.2-1.8-4-4-4Z%22%2F%3E%3C%2Fsvg%3E"); }
+.ML_icon_add { --ml-icon: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%3E%3Cpath%20d%3D%22M11%205h2v6h6v2h-6v6h-2v-6H5v-2h6V5Z%22%2F%3E%3C%2Fsvg%3E"); }
+.ML_icon_eye { --ml-icon: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%3E%3Cpath%20d%3D%22M12%205c5%200%208.5%204.5%2010%207-1.5%202.5-5%207-10%207S3.5%2014.5%202%2012c1.5-2.5%205-7%2010-7Zm0%203.2a3.8%203.8%200%201%200%200%207.6%203.8%203.8%200%200%200%200-7.6Zm0%202a1.8%201.8%200%201%201%200%203.6%201.8%201.8%200%200%201%200-3.6Z%22%2F%3E%3C%2Fsvg%3E"); }
+.ML_icon_pill { --ml-icon: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%3E%3Cpath%20d%3D%22M4.2%2013.8%2013.8%204.2a5%205%200%201%201%207.1%207.1l-9.6%209.6a5%205%200%201%201-7.1-7.1Zm1.4%201.4a3%203%200%200%200%204.3%204.3l4.1-4.1-4.3-4.3-4.1%204.1Zm5.5-5.5%204.3%204.3%204.1-4.1a3%203%200%200%200-4.3-4.3l-4.1%204.1Z%22%2F%3E%3C%2Fsvg%3E"); }
+.ML_icon_payment { --ml-icon: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%3E%3Cpath%20d%3D%22M12%202a10%2010%200%201%200%200%2020%2010%2010%200%200%200%200-20Zm3%206h-2V6h-2v2a3%203%200%200%200%200%206h2a1%201%200%201%201%200%202H8v2h3v2h2v-2a3%203%200%200%200%200-6h-2a1%201%200%201%201%200-2h4V8Z%22%2F%3E%3C%2Fsvg%3E"); }
+.ML_icon_clipboard { --ml-icon: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%3E%3Cpath%20d%3D%22M9%202h6a2%202%200%200%201%202%202h2a2%202%200%200%201%202%202v14a2%202%200%200%201-2%202H5a2%202%200%200%201-2-2V6a2%202%200%200%201%202-2h2a2%202%200%200%201%202-2Zm0%202v2h6V4H9Zm-2%207h10v2H7v-2Zm0%204h10v2H7v-2Z%22%2F%3E%3C%2Fsvg%3E"); }
+.ML_icon_arrow-left { --ml-icon: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%3E%3Cpath%20d%3D%22M10.8%205.2%204%2012l6.8%206.8%201.4-1.4L7.8%2013H20v-2H7.8l4.4-4.4-1.4-1.4Z%22%2F%3E%3C%2Fsvg%3E"); }
+.ML_icon_warning { --ml-icon: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%3E%3Cpath%20d%3D%22M12%202%201%2022h22L12%202Zm1%2015h-2v2h2v-2Zm0-8h-2v6h2V9Z%22%2F%3E%3C%2Fsvg%3E"); }
+.ML_icon_mail { --ml-icon: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%3E%3Cpath%20d%3D%22M3%205h18a2%202%200%200%201%202%202v10a2%202%200%200%201-2%202H3a2%202%200%200%201-2-2V7a2%202%200%200%201%202-2Zm0%203.2%209%205.6%209-5.6V7l-9%205.6L3%207v1.2Z%22%2F%3E%3C%2Fsvg%3E"); }
+.ML_icon_location { --ml-icon: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%3E%3Cpath%20d%3D%22M12%202a7%207%200%200%200-7%207c0%205.3%207%2013%207%2013s7-7.7%207-13a7%207%200%200%200-7-7Zm0%204.5a2.5%202.5%200%201%201%200%205%202.5%202.5%200%200%201%200-5Z%22%2F%3E%3C%2Fsvg%3E"); }
+.ML_icon_phone { --ml-icon: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%3E%3Cpath%20d%3D%22M6.6%202h4l1%205-2.4%201.6a13%2013%200%200%200%206.2%206.2L17%2012.4l5%201v4a3%203%200%200%201-3%203C9.6%2020.4%203.6%2014.4%203.6%205a3%203%200%200%201%203-3Z%22%2F%3E%3C%2Fsvg%3E"); }
+.ML_icon_blood { --ml-icon: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%3E%3Cpath%20d%3D%22M12%202s7%207.2%207%2012a7%207%200%200%201-14%200c0-4.8%207-12%207-12Zm-3%2012a3%203%200%200%200%203%203v-2a1%201%200%200%201-1-1H9Z%22%2F%3E%3C%2Fsvg%3E"); }
+.ML_icon_edit { --ml-icon: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%3E%3Cpath%20d%3D%22M4%2017.3V21h3.7L18.8%209.9l-3.7-3.7L4%2017.3ZM21%207.7a1%201%200%200%200%200-1.4L18.7%204a1%201%200%200%200-1.4%200l-1%201%203.7%203.7%201-1Z%22%2F%3E%3C%2Fsvg%3E"); }
+.ML_icon_gear { --ml-icon: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%3E%3Cpath%20d%3D%22M19.4%2013.5c.1-.5.1-1%20.1-1.5s0-1-.1-1.5l2.1-1.6-2-3.5-2.5%201a8%208%200%200%200-2.6-1.5L14%202h-4l-.4%202.9A8%208%200%200%200%207%206.4l-2.5-1-2%203.5%202.1%201.6c-.1.5-.1%201-.1%201.5s0%201%20.1%201.5l-2.1%201.6%202%203.5%202.5-1a8%208%200%200%200%202.6%201.5L10%2022h4l.4-2.9a8%208%200%200%200%202.6-1.5l2.5%201%202-3.5-2.1-1.6ZM12%208a4%204%200%201%201%200%208%204%204%200%200%201%200-8Z%22%2F%3E%3C%2Fsvg%3E"); }
+.ML_icon_star { --ml-icon: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%3E%3Cpath%20d%3D%22m12%202%203%206%206.6%201-4.8%204.7%201.1%206.6L12%2017.2l-5.9%203.1%201.1-6.6L2.4%209%209%208l3-6Z%22%2F%3E%3C%2Fsvg%3E"); }
+.ML_icon_sun { --ml-icon: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%3E%3Cpath%20d%3D%22M11%201h2v4h-2V1Zm0%2018h2v4h-2v-4ZM4.2%202.8%207%205.6%205.6%207%202.8%204.2l1.4-1.4Zm14.2%2014.2%202.8%202.8-1.4%201.4-2.8-2.8%201.4-1.4ZM1%2011h4v2H1v-2Zm18%200h4v2h-4v-2ZM2.8%2019.8%205.6%2017%207%2018.4l-2.8%202.8-1.4-1.4ZM17%205.6l2.8-2.8%201.4%201.4L18.4%207%2017%205.6ZM12%207a5%205%200%201%200%200%2010%205%205%200%200%200%200-10Z%22%2F%3E%3C%2Fsvg%3E"); }
+.ML_icon_male { --ml-icon: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%3E%3Cpath%20d%3D%22M15%203h6v6h-2V6.4l-4.2%204.2a6.5%206.5%200%201%201-1.4-1.4L17.6%205H15V3ZM9%2011a4.5%204.5%200%201%200%200%209%204.5%204.5%200%200%200%200-9Z%22%2F%3E%3C%2Fsvg%3E"); }
+.ML_icon_female { --ml-icon: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%3E%3Cpath%20d%3D%22M12%202a6.5%206.5%200%200%200-1%2012.9V17H8v2h3v3h2v-3h3v-2h-3v-2.1A6.5%206.5%200%200%200%2012%202Zm0%202a4.5%204.5%200%201%201%200%209%204.5%204.5%200%200%201%200-9Z%22%2F%3E%3C%2Fsvg%3E"); }
+.ML_icon_close { --ml-icon: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%3E%3Cpath%20d%3D%22m6.4%205%2012.6%2012.6-1.4%201.4L5%206.4%206.4%205Zm11.2%200L19%206.4%206.4%2019%205%2017.6%2017.6%205Z%22%2F%3E%3C%2Fsvg%3E"); }

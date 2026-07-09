@@ -1,0 +1,514 @@
+/*
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/Other/CascadeStyleSheet.css to edit this template
+*/
+/* 
+    Created on : 2 jun. 2026, 03:35:15
+    Author     : Windows
+*/
+/* ============================= */
+/* HISTORIAL CLÍNICO ADMIN */
+/* ============================= */
+
+.ML_historial_contenido {
+    padding: 0;
+    background: #f5f7fb;
+    min-height: 100vh;
+}
+
+.ML_historial_header {
+    padding: 34px 42px 24px;
+}
+
+.ML_historial_header h2 {
+    font-size: 28px;
+    color: #0f172a;
+    font-weight: 900;
+    margin-bottom: 8px;
+}
+
+.ML_historial_header p {
+    color: #64748b;
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.ML_historial_panel {
+    margin: 0 42px 42px;
+}
+
+.ML_btn_ver_historial {
+    background: #0b63e5;
+    color: #ffffff;
+    padding: 9px 14px;
+    border-radius: 9px;
+    font-size: 13px;
+    font-weight: 900;
+    text-decoration: none;
+    display: inline-flex;
+}
+
+.ML_btn_ver_historial:hover {
+    background: #084fc0;
+}
+
+/* ============================= */
+/* DETALLE */
+/* ============================= */
+
+.ML_historial_breadcrumb {
+    margin-top: 6px;
+    color: #64748b;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.ML_historial_breadcrumb span {
+    color: #0b63e5;
+    font-weight: 900;
+}
+
+.ML_historial_detalle_wrap {
+    padding: 24px 42px 42px;
+}
+
+.ML_historial_perfil_card {
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 16px;
+    box-shadow: 0 8px 25px rgba(15, 23, 42, 0.06);
+    padding: 24px;
+}
+
+.ML_historial_perfil_top {
+    margin-bottom: 22px;
+}
+
+.ML_btn_volver_historial {
+    display: inline-flex;
+    align-items: center;
+    height: 42px;
+    padding: 0 16px;
+    background: #ffffff;
+    border: 1px solid #dbe3ee;
+    border-radius: 9px;
+    color: #334155;
+    font-weight: 900;
+    text-decoration: none;
+}
+
+.ML_btn_volver_historial:hover {
+    background: #f1f5f9;
+    color: #0b63e5;
+}
+
+.ML_historial_perfil_body {
+    display: grid;
+    grid-template-columns: 120px 1.2fr 1fr;
+    gap: 28px;
+    align-items: center;
+}
+
+.ML_historial_avatar {
+    width: 110px;
+    height: 110px;
+    border-radius: 50%;
+    background: #dbeafe;
+    color: #0b63e5;
+    font-size: 42px;
+    font-weight: 900;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.ML_historial_nombre_estado {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 10px;
+}
+
+.ML_historial_nombre_estado h2 {
+    color: #0f172a;
+    font-size: 26px;
+    font-weight: 900;
+}
+
+.ML_historial_datos_principales p {
+    color: #334155;
+    font-weight: 700;
+    margin-bottom: 16px;
+}
+
+.ML_historial_datos_principales p span {
+    color: #94a3b8;
+    margin: 0 8px;
+}
+
+.ML_historial_contacto {
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+    color: #334155;
+    font-size: 14px;
+}
+
+.ML_historial_panel {
+    scroll-margin-top: 18px;
+}
+
+.ML_historial_contacto strong {
+    font-weight: 800;
+}
+
+.ML_historial_info_lateral {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 18px;
+}
+
+.ML_historial_info_item {
+    background: #f8fafc;
+    border-radius: 14px;
+    padding: 16px;
+    border: 1px solid #e5e7eb;
+}
+
+.ML_historial_info_item span {
+    display: block;
+    color: #64748b;
+    font-size: 13px;
+    font-weight: 800;
+    margin-bottom: 8px;
+}
+
+.ML_historial_info_item strong {
+    display: block;
+    color: #0f172a;
+    font-size: 15px;
+    font-weight: 900;
+}
+
+.ML_historial_info_item small {
+    display: block;
+    color: #334155;
+    margin-top: 6px;
+    font-weight: 700;
+}
+
+/* ============================= */
+/* TABS */
+/* ============================= */
+
+.ML_historial_tabs {
+    display: flex;
+    align-items: center;
+    gap: 28px;
+    border-bottom: 1px solid #e5e7eb;
+    margin: 18px 0;
+    padding: 0 4px;
+}
+
+.ML_historial_tabs span,
+.ML_historial_tabs a {
+    padding: 15px 0;
+    color: #64748b;
+    font-weight: 900;
+    font-size: 14px;
+    text-decoration: none;
+}
+
+.ML_historial_tabs .ML_tab_activa {
+    color: #0b63e5;
+    border-bottom: 3px solid #0b63e5;
+}
+
+/* ============================= */
+/* GRID PRINCIPAL */
+/* ============================= */
+
+.ML_historial_grid_principal {
+    display: grid;
+    grid-template-columns: minmax(0, 2fr) 360px;
+    gap: 20px;
+}
+
+.ML_historial_columna_izquierda,
+.ML_historial_columna_derecha {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.ML_historial_columna_izquierda .ML_historial_panel,
+.ML_historial_columna_derecha .ML_historial_panel {
+    margin: 0;
+}
+
+.ML_historial_panel {
+    background: #ffffff;
+    border-radius: 16px;
+    border: 1px solid #e5e7eb;
+    box-shadow: 0 8px 25px rgba(15, 23, 42, 0.06);
+    padding: 22px;
+}
+
+.ML_historial_panel h3 {
+    color: #0f172a;
+    font-size: 18px;
+    font-weight: 900;
+    margin-bottom: 18px;
+}
+
+/* ============================= */
+/* RESUMEN CLÍNICO */
+/* ============================= */
+
+.ML_resumen_cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+}
+
+.ML_resumen_card {
+    border-radius: 14px;
+    padding: 16px;
+    display: flex;
+    gap: 13px;
+    align-items: flex-start;
+}
+
+.ML_resumen_card span {
+    width: 38px;
+    height: 38px;
+    min-width: 38px;
+    border-radius: 10px;
+    background: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.ML_resumen_card p {
+    color: #334155;
+    font-size: 13px;
+    font-weight: 800;
+    margin-bottom: 5px;
+}
+
+.ML_resumen_card h4 {
+    color: #0f172a;
+    font-size: 24px;
+    font-weight: 900;
+    margin-bottom: 4px;
+}
+
+.ML_resumen_card small {
+    color: #64748b;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.ML_resumen_azul {
+    background: #eff6ff;
+}
+
+.ML_resumen_verde {
+    background: #ecfdf5;
+}
+
+.ML_resumen_amarillo {
+    background: #fffbeb;
+}
+
+/* ============================= */
+/* NOTAS */
+/* ============================= */
+
+.ML_notas_lista {
+    display: grid;
+    grid-template-columns: 110px minmax(0, 1fr) 150px;
+    gap: 16px;
+    padding: 16px 0;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.ML_notas_lista:last-child {
+    border-bottom: none;
+}
+
+.ML_nota_fecha strong {
+    display: block;
+    color: #0f172a;
+    font-size: 13px;
+    font-weight: 900;
+}
+
+.ML_nota_fecha span {
+    display: block;
+    color: #64748b;
+    font-size: 12px;
+    font-weight: 700;
+    margin-top: 4px;
+}
+
+.ML_nota_contenido strong {
+    color: #0f172a;
+    font-size: 14px;
+    font-weight: 900;
+}
+
+.ML_nota_contenido p {
+    color: #475569;
+    font-size: 13px;
+    margin-top: 6px;
+    line-height: 1.4;
+}
+
+.ML_nota_doctor {
+    color: #475569;
+    font-size: 13px;
+    font-weight: 800;
+    text-align: right;
+}
+
+/* ============================= */
+/* COLUMNA DERECHA */
+/* ============================= */
+
+.ML_proxima_cita_info {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+}
+
+.ML_proxima_cita_info div {
+    background: #f8fafc;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    padding: 12px;
+}
+
+.ML_proxima_cita_info span {
+    color: #64748b;
+    font-size: 12px;
+    font-weight: 800;
+    display: block;
+    margin-bottom: 6px;
+}
+
+.ML_proxima_cita_info strong {
+    color: #0f172a;
+    font-size: 14px;
+    font-weight: 900;
+}
+
+.ML_btn_detalle_cita {
+    grid-column: span 2;
+    background: #0b63e5;
+    color: #ffffff;
+    border-radius: 10px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 900;
+    text-decoration: none;
+}
+
+.ML_btn_detalle_cita:hover {
+    background: #084fc0;
+}
+
+.ML_resumen_admin_item {
+    display: flex;
+    justify-content: space-between;
+    padding: 14px 0;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.ML_resumen_admin_item:last-child {
+    border-bottom: none;
+}
+
+.ML_resumen_admin_item span {
+    color: #64748b;
+    font-weight: 800;
+}
+
+.ML_resumen_admin_item strong {
+    color: #0f172a;
+    font-weight: 900;
+}
+
+/* ============================= */
+/* VACÍOS */
+/* ============================= */
+
+.ML_historial_vacio {
+    background: #f8fafc;
+    border: 1px dashed #cbd5e1;
+    color: #64748b;
+    padding: 18px;
+    border-radius: 12px;
+    font-weight: 800;
+    text-align: center;
+}
+
+/* ============================= */
+/* RESPONSIVE */
+/* ============================= */
+
+@media (max-width: 1150px) {
+    .ML_historial_perfil_body {
+        grid-template-columns: 100px 1fr;
+    }
+
+    .ML_historial_info_lateral {
+        grid-column: span 2;
+    }
+
+    .ML_historial_grid_principal {
+        grid-template-columns: 1fr;
+    }
+
+    .ML_resumen_cards {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 750px) {
+    .ML_historial_header,
+    .ML_historial_detalle_wrap {
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+
+    .ML_historial_panel {
+        margin-left: 20px;
+        margin-right: 20px;
+    }
+
+    .ML_historial_perfil_body {
+        grid-template-columns: 1fr;
+    }
+
+    .ML_historial_info_lateral {
+        grid-column: span 1;
+        grid-template-columns: 1fr;
+    }
+
+    .ML_notas_lista {
+        grid-template-columns: 1fr;
+    }
+
+    .ML_nota_doctor {
+        text-align: left;
+    }
+
+    .ML_historial_tabs {
+        overflow-x: auto;
+        gap: 20px;
+    }
+}

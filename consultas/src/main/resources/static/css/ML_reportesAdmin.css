@@ -1,0 +1,740 @@
+/*
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/Other/CascadeStyleSheet.css to edit this template
+*/
+/* 
+    Created on : 2 jun. 2026, 03:27:07
+    Author     : Windows
+*/
+/* ============================= */
+/* REPORTES ADMIN */
+/* SOLO VISUALIZACIÓN */
+/* ============================= */
+
+.ML_reportes_contenido {
+    padding: 0;
+    background: #f5f7fb;
+    min-height: 100vh;
+}
+
+.ML_reportes_header {
+    padding: 34px 42px 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.ML_reportes_header h2 {
+    font-size: 28px;
+    color: #0f172a;
+    font-weight: 900;
+    margin-bottom: 8px;
+}
+
+.ML_reportes_header p {
+    color: #64748b;
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.ML_reporte_modo_lectura {
+    background: #dbeafe;
+    color: #0b63e5;
+    border: 1px solid #bfdbfe;
+    padding: 11px 16px;
+    border-radius: 999px;
+    font-weight: 900;
+    font-size: 13px;
+}
+
+/* ============================= */
+/* PANELES */
+/* ============================= */
+
+.ML_reportes_paneles {
+    margin: 0 42px 24px;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 18px;
+}
+
+.ML_reporte_card {
+    background: #ffffff;
+    border-radius: 16px;
+    padding: 24px;
+    border: 1px solid #e5e7eb;
+    box-shadow: 0 8px 25px rgba(15, 23, 42, 0.06);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.ML_reporte_card p {
+    color: #64748b;
+    font-size: 14px;
+    font-weight: 800;
+    margin-bottom: 9px;
+}
+
+.ML_reporte_card h2 {
+    color: #0f172a;
+    font-size: 30px;
+    font-weight: 900;
+    margin-bottom: 8px;
+}
+
+.ML_reporte_card span {
+    color: #64748b;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.ML_reporte_icono {
+    width: 52px;
+    height: 52px;
+    min-width: 52px;
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 900;
+    font-size: 22px;
+}
+
+.ML_reporte_icono_azul {
+    background: #dbeafe;
+    color: #0b63e5;
+}
+
+.ML_reporte_icono_verde {
+    background: #dcfce7;
+    color: #15803d;
+}
+
+.ML_reporte_icono_amarillo {
+    background: #fef3c7;
+    color: #d97706;
+}
+
+.ML_reporte_icono_rojo {
+    background: #fee2e2;
+    color: #dc2626;
+}
+
+.ML_reporte_icono_morado {
+    background: #ede9fe;
+    color: #7c3aed;
+}
+
+.ML_reporte_icono_celeste {
+    background: #e0f2fe;
+    color: #0284c7;
+}
+
+/* ============================= */
+/* PANELES */
+/* ============================= */
+
+.ML_reportes_grid {
+    margin: 0 42px 24px;
+    display: grid;
+    grid-template-columns: 1.2fr 0.8fr;
+    gap: 18px;
+}
+
+.ML_reporte_panel {
+    background: #ffffff;
+    border-radius: 16px;
+    border: 1px solid #e5e7eb;
+    box-shadow: 0 8px 25px rgba(15, 23, 42, 0.06);
+    padding: 24px;
+}
+
+.ML_reporte_panel_full {
+    margin: 0 42px 24px;
+}
+
+.ML_reporte_panel_header {
+    margin-bottom: 20px;
+}
+
+.ML_reporte_panel_header h3 {
+    color: #0f172a;
+    font-size: 20px;
+    font-weight: 900;
+    margin-bottom: 6px;
+}
+
+.ML_reporte_panel_header p {
+    color: #64748b;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+/* ============================= */
+/* BARRAS */
+/* ============================= */
+
+.ML_reporte_barras {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.ML_reporte_barra_item {
+    width: 100%;
+}
+
+.ML_reporte_barra_texto {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 7px;
+}
+
+.ML_reporte_barra_texto span {
+    color: #334155;
+    font-weight: 800;
+    font-size: 14px;
+}
+
+.ML_reporte_barra_texto strong {
+    color: #0f172a;
+    font-weight: 900;
+}
+
+.ML_reporte_barra_fondo {
+    height: 10px;
+    background: #e5e7eb;
+    border-radius: 999px;
+    overflow: hidden;
+}
+
+.ML_reporte_barra_fill {
+    height: 100%;
+    background: #0b63e5;
+    border-radius: 999px;
+}
+
+/* ============================= */
+/* DÍAS */
+/* ============================= */
+
+.ML_reporte_dias {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 14px;
+}
+
+.ML_reporte_dia {
+    background: #f8fafc;
+    border: 1px solid #e5e7eb;
+    border-radius: 14px;
+    padding: 18px 12px;
+    text-align: center;
+}
+
+.ML_reporte_dia strong {
+    display: block;
+    color: #0b63e5;
+    font-size: 24px;
+    font-weight: 900;
+    margin-bottom: 6px;
+}
+
+.ML_reporte_dia span {
+    color: #64748b;
+    font-weight: 800;
+}
+
+/* ============================= */
+/* TABLAS */
+/* ============================= */
+
+.ML_tabla_reportes th,
+.ML_tabla_reportes td {
+    white-space: nowrap;
+}
+
+.ML_texto_verde {
+    color: #15803d;
+    font-weight: 900;
+}
+
+.ML_texto_amarillo {
+    color: #d97706;
+    font-weight: 900;
+}
+
+.ML_texto_rojo {
+    color: #dc2626;
+    font-weight: 900;
+}
+
+.ML_texto_azul {
+    color: #0b63e5;
+    font-weight: 900;
+}
+
+/* ============================= */
+/* RENDIMIENTO */
+/* ============================= */
+
+.ML_rendimiento_box {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    min-width: 150px;
+}
+
+.ML_rendimiento_fondo {
+    flex: 1;
+    height: 9px;
+    background: #e5e7eb;
+    border-radius: 999px;
+    overflow: hidden;
+}
+
+.ML_rendimiento_fill {
+    height: 100%;
+    background: #0b63e5;
+    border-radius: 999px;
+}
+
+.ML_rendimiento_box strong {
+    color: #334155;
+    font-size: 13px;
+    font-weight: 900;
+    min-width: 42px;
+}
+
+/* ============================= */
+/* VACÍO */
+/* ============================= */
+
+.ML_reporte_vacio {
+    padding: 22px;
+    border-radius: 12px;
+    background: #f8fafc;
+    color: #64748b;
+    font-weight: 800;
+    text-align: center;
+}
+
+/* ============================= */
+/* RESPONSIVE */
+/* ============================= */
+
+@media (max-width: 1150px) {
+    .ML_reportes_paneles {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .ML_reportes_grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 750px) {
+    .ML_reportes_header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 14px;
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+
+    .ML_reportes_paneles,
+    .ML_reportes_grid,
+    .ML_reporte_panel_full {
+        margin-left: 20px;
+        margin-right: 20px;
+    }
+
+    .ML_reportes_paneles {
+        grid-template-columns: 1fr;
+    }
+
+    .ML_reporte_dias {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+/* ============================= */
+/* MEJORA VISUAL REPORTES FINAL  */
+/* ============================= */
+.ML_reportes_header,
+.ML_secretaria_header:has(+ .ML_reportes_paneles) {
+    background: linear-gradient(135deg, #0b63e5 0%, #12b5cb 100%);
+    margin: 24px 42px 26px;
+    border-radius: 24px;
+    color: #ffffff;
+    padding: 30px 34px;
+    box-shadow: 0 18px 40px rgba(11, 99, 229, 0.22);
+}
+
+.ML_reportes_header h2,
+.ML_reportes_header p,
+.ML_secretaria_header:has(+ .ML_reportes_paneles) h2,
+.ML_secretaria_header:has(+ .ML_reportes_paneles) p {
+    color: #ffffff;
+}
+
+.ML_reportes_header h2,
+.ML_secretaria_header:has(+ .ML_reportes_paneles) h2 {
+    font-size: 30px;
+    letter-spacing: -0.4px;
+}
+
+.ML_reporte_modo_lectura {
+    background: rgba(255, 255, 255, 0.18);
+    color: #ffffff;
+    border-color: rgba(255, 255, 255, 0.35);
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.08);
+}
+
+.ML_reporte_card {
+    position: relative;
+    overflow: hidden;
+}
+
+.ML_reporte_card::after {
+    content: "";
+    position: absolute;
+    right: -36px;
+    top: -36px;
+    width: 96px;
+    height: 96px;
+    border-radius: 50%;
+    background: rgba(11, 99, 229, 0.08);
+}
+
+.ML_reporte_card:hover,
+.ML_reporte_panel:hover {
+    transform: translateY(-2px);
+    transition: 0.2s ease;
+    box-shadow: 0 14px 32px rgba(15, 23, 42, 0.10);
+}
+
+.ML_reporte_panel_header {
+    border-bottom: 1px solid #eef2f7;
+    padding-bottom: 14px;
+}
+
+.ML_tabla_reportes thead th {
+    background: #eff6ff !important;
+    color: #1e40af !important;
+    border-bottom: 1px solid #dbeafe;
+}
+
+.ML_tabla_reportes tbody tr:hover {
+    background: #f8fafc;
+}
+
+.ML_ranking_numero {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    height: 30px;
+    border-radius: 10px;
+    background: #dbeafe;
+    color: #1d4ed8;
+    font-weight: 900;
+}
+
+.ML_ranking_fila_oro { background: #fffbeb; }
+.ML_ranking_fila_plata { background: #f8fafc; }
+.ML_ranking_fila_bronce { background: #fff7ed; }
+
+.ML_reporte_export_panel {
+    background: linear-gradient(135deg, #ffffff, #f8fbff);
+    border: 1px solid #dbeafe;
+}
+
+.ML_reporte_export_acciones {
+    display: flex;
+    gap: 16px;
+    padding: 20px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.ML_btn_export_pdf,
+.ML_btn_export_excel {
+    min-width: 170px;
+    height: 46px;
+    border-radius: 14px;
+    border: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    color: #ffffff !important;
+    font-weight: 900;
+    text-decoration: none;
+    box-shadow: 0 12px 22px rgba(15, 23, 42, 0.12);
+}
+
+.ML_btn_export_pdf { background: linear-gradient(135deg, #ef4444, #b91c1c); }
+.ML_btn_export_excel { background: linear-gradient(135deg, #22c55e, #15803d); }
+
+.ML_reporte_barra_fill,
+.ML_rendimiento_fill {
+    background: linear-gradient(90deg, #0b63e5, #12b5cb);
+}
+
+/* Presentación final: reportes más legibles */
+.ML_reportes_contenido {
+    background: linear-gradient(180deg, #f8fbff 0%, #eef4fb 100%);
+}
+
+.ML_reportes_header,
+.ML_secretaria_header {
+    gap: 18px;
+}
+
+.ML_reportes_header h2,
+.ML_secretaria_header h2 {
+    line-height: 1.15;
+    letter-spacing: -0.4px;
+}
+
+.ML_reportes_header p,
+.ML_secretaria_header p,
+.ML_reporte_panel_header p {
+    line-height: 1.55;
+    max-width: 780px;
+}
+
+.ML_reportes_paneles {
+    align-items: stretch;
+}
+
+.ML_reporte_card {
+    min-height: 122px;
+    gap: 18px;
+    position: relative;
+    overflow: hidden;
+}
+
+.ML_reporte_card::after {
+    content: "";
+    position: absolute;
+    right: -28px;
+    bottom: -28px;
+    width: 92px;
+    height: 92px;
+    border-radius: 50%;
+    background: rgba(11, 99, 229, .06);
+}
+
+.ML_reporte_card > div:first-child {
+    min-width: 0;
+    position: relative;
+    z-index: 1;
+}
+
+.ML_reporte_card p,
+.ML_reporte_card h2,
+.ML_reporte_card span {
+    line-height: 1.25;
+}
+
+.ML_reporte_card h2 {
+    overflow-wrap: anywhere;
+}
+
+.ML_reporte_panel {
+    border-radius: 22px;
+    box-shadow: 0 14px 32px rgba(15, 23, 42, 0.07);
+}
+
+.ML_reporte_panel_header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 16px;
+    padding-bottom: 14px;
+    border-bottom: 1px solid #eef2f7;
+}
+
+.ML_reporte_panel_header h3 {
+    line-height: 1.25;
+}
+
+.ML_reporte_simple_grid {
+    margin: 0 42px 24px;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 18px;
+}
+
+.ML_tabla_contenedor {
+    border-radius: 18px;
+    border: 1px solid #eef2f7;
+    background: #fff;
+    overflow: auto;
+}
+
+.ML_tabla_reportes {
+    min-width: 760px;
+    border-collapse: separate !important;
+    border-spacing: 0;
+}
+
+.ML_tabla_reportes th {
+    white-space: nowrap;
+    background: #f8fafc;
+    color: #334155;
+    font-weight: 950;
+    padding: 14px 16px !important;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.ML_tabla_reportes td {
+    padding: 15px 16px !important;
+    line-height: 1.45;
+    vertical-align: middle;
+}
+
+.ML_tabla_reportes td strong,
+.ML_tabla_pacientes_admin td strong {
+    display: block;
+    margin-bottom: 3px;
+    line-height: 1.35;
+}
+
+.ML_reporte_export_acciones {
+    display: flex;
+    gap: 14px;
+    flex-wrap: wrap;
+    padding-top: 4px;
+}
+
+.ML_btn_export_pdf,
+.ML_btn_export_excel {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 9px;
+    min-height: 46px;
+    padding: 0 18px;
+    border-radius: 14px;
+    text-decoration: none;
+    font-weight: 950;
+}
+
+.ML_btn_export_pdf {
+    background: linear-gradient(135deg, #dc2626, #f97316);
+    color: #fff;
+}
+
+.ML_btn_export_excel {
+    background: linear-gradient(135deg, #15803d, #22c55e);
+    color: #fff;
+}
+
+@media (max-width: 1180px) {
+    .ML_reportes_paneles,
+    .ML_reportes_grid,
+    .ML_reporte_simple_grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 760px) {
+    .ML_reportes_header,
+    .ML_reportes_paneles,
+    .ML_reportes_grid,
+    .ML_reporte_panel_full,
+    .ML_reporte_simple_grid {
+        margin-left: 20px;
+        margin-right: 20px;
+    }
+}
+
+
+/* Ajustes finales de reportes: relaciones, separación y legibilidad */
+.ML_reportes_paneles {
+    grid-template-columns: repeat(3, minmax(220px, 1fr));
+    gap: 20px;
+}
+.ML_reporte_card {
+    border-left: 6px solid #dbeafe;
+    padding: 22px 24px;
+}
+.ML_reporte_card p {
+    text-transform: uppercase;
+    letter-spacing: .04em;
+}
+.ML_reporte_card span {
+    display: block;
+    max-width: 210px;
+    line-height: 1.45;
+}
+.ML_reporte_barras {
+    gap: 18px;
+}
+.ML_reporte_barra_item {
+    border: 1px solid #edf2f7;
+    border-radius: 16px;
+    padding: 14px;
+    background: #fbfdff;
+}
+.ML_reporte_barra_texto {
+    margin-bottom: 11px;
+}
+.ML_reporte_barra_texto span {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+.ML_reporte_barra_texto span::before {
+    content: "";
+    width: 11px;
+    height: 11px;
+    border-radius: 999px;
+    background: #0b63e5;
+}
+.ML_barra_confirmada .ML_reporte_barra_texto span::before { background: #16a34a; }
+.ML_barra_pendiente .ML_reporte_barra_texto span::before { background: #f59e0b; }
+.ML_barra_cancelada .ML_reporte_barra_texto span::before { background: #dc2626; }
+.ML_barra_atendida .ML_reporte_barra_texto span::before { background: #7c3aed; }
+.ML_barra_confirmada .ML_reporte_barra_fill { background: linear-gradient(90deg, #16a34a, #22c55e); }
+.ML_barra_pendiente .ML_reporte_barra_fill { background: linear-gradient(90deg, #f59e0b, #fbbf24); }
+.ML_barra_cancelada .ML_reporte_barra_fill { background: linear-gradient(90deg, #dc2626, #fb7185); }
+.ML_barra_atendida .ML_reporte_barra_fill { background: linear-gradient(90deg, #7c3aed, #a78bfa); }
+.ML_reporte_barra_fondo {
+    height: 13px;
+    background: #e9eef6;
+}
+.ML_reporte_dias {
+    grid-template-columns: repeat(7, minmax(72px, 1fr));
+}
+.ML_reporte_dia {
+    min-height: 96px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.ML_reporte_panel,
+.ML_reporte_panel_full {
+    margin-bottom: 26px;
+}
+.ML_tabla_reportes th,
+.ML_tabla_reportes td,
+.ML_tabla_pacientes_admin th,
+.ML_tabla_pacientes_admin td {
+    line-height: 1.45;
+}
+.ML_reporte_simple_grid .ML_reporte_panel {
+    min-height: 360px;
+}
+@media (max-width: 1200px) {
+    .ML_reportes_paneles { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .ML_reporte_dias { grid-template-columns: repeat(4, minmax(72px, 1fr)); }
+}
+@media (max-width: 760px) {
+    .ML_reportes_paneles { grid-template-columns: 1fr; }
+    .ML_reporte_dias { grid-template-columns: repeat(2, minmax(72px, 1fr)); }
+}

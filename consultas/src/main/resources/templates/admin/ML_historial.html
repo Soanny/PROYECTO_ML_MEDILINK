@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Historial Clínico</title>
+
+    <link rel="stylesheet" th:href="@{/css/ML_dashboardAdmin.css}" href="/css/ML_dashboardAdmin.css">
+    <link rel="stylesheet" th:href="@{/css/ML_historialAdmin.css}" href="/css/ML_historialAdmin.css">
+    <link rel="stylesheet" th:href="@{/css/ML_iconos.css}" href="/css/ML_iconos.css">
+</head>
+
+<body>
+
+<div class="ML_dashboard_layout">
+
+    <aside class="ML_sidebar">
+
+        <div class="ML_sidebar_marca">
+            <div class="ML_marca_icono">+</div>
+            <div>
+                <h2>MediLink</h2>
+                <p>Sistema de<br>Citas Médicas</p>
+            </div>
+        </div>
+
+        <nav class="ML_menu">
+
+            <a th:href="@{/admin/dashboard}" class="ML_menu_link">
+                <span class="ML_menu_icono"><span class="ML_icon ML_icon_home" aria-hidden="true"></span></span>
+                <span>Principal</span>
+            </a>
+            <a th:href="@{/admin/usuarios}" class="ML_menu_link">
+                <span class="ML_menu_icono"><span class="ML_icon ML_icon_users" aria-hidden="true"></span></span>
+                <span>Usuarios</span>
+            </a>
+
+            <a th:href="@{/admin/citas}" class="ML_menu_link">
+                <span class="ML_menu_icono"><span class="ML_icon ML_icon_appointment" aria-hidden="true"></span></span>
+                <span>Citas</span>
+            </a>
+
+            <a th:href="@{/admin/horarios}" class="ML_menu_link">
+                <span class="ML_menu_icono"><span class="ML_icon ML_icon_calendar" aria-hidden="true"></span></span>
+                <span>Calendario</span>
+            </a>
+
+            
+            <a th:href="@{/admin/disponibilidad}" class="ML_menu_link">
+                <span class="ML_menu_icono"><span class="ML_icon ML_icon_clock" aria-hidden="true"></span></span>
+                <span>Disponibilidad</span>
+            </a>
+            <a th:href="@{/admin/horarios-doctores}" class="ML_menu_link">
+                <span class="ML_menu_icono"><span class="ML_icon ML_icon_clock" aria-hidden="true"></span></span>
+                <span>Horarios doctores</span>
+            </a>
+
+            <a th:href="@{/admin/consultorios}" class="ML_menu_link">
+                <span class="ML_menu_icono"><span class="ML_icon ML_icon_clipboard" aria-hidden="true"></span></span>
+                <span>Consultorios</span>
+            </a>
+
+            <a th:href="@{/admin/pagos}" class="ML_menu_link">
+                <span class="ML_menu_icono"><span class="ML_icon ML_icon_payment" aria-hidden="true"></span></span>
+                <span>Pagos</span>
+            </a>
+            <a th:href="@{/admin/correos}" class="ML_menu_link">
+                <span class="ML_menu_icono"><span class="ML_icon ML_icon_report" aria-hidden="true"></span></span>
+                <span>Notificaciones</span>
+            </a>
+<a th:href="@{/admin/reportes}" class="ML_menu_link">
+                <span class="ML_menu_icono"><span class="ML_icon ML_icon_report" aria-hidden="true"></span></span>
+                <span>Reportes</span>
+            </a>
+
+            <a th:href="@{/admin/especialidades}" class="ML_menu_link">
+                <span class="ML_menu_icono"><span class="ML_icon ML_icon_add" aria-hidden="true"></span></span>
+                <span>Especialidades</span>
+            </a>
+
+            <a th:href="@{/admin/ranking-doctores}" class="ML_menu_link">
+                <span class="ML_menu_icono"><span class="ML_icon ML_icon_ranking" aria-hidden="true"></span></span>
+                <span>Ranking Doctores</span>
+            </a>
+
+            <a th:href="@{/admin/historial}" class="ML_menu_link ML_activo">
+                <span class="ML_menu_icono"><span class="ML_icon ML_icon_history" aria-hidden="true"></span></span>
+                <span>Historial Clínico</span>
+            </a>
+
+        </nav>
+
+        <div class="ML_sidebar_footer">
+            <form th:action="@{/logout}" method="post">
+                <button type="submit" class="ML_btn_logout">Cerrar sesión</button>
+            </form>
+        </div>
+
+    </aside>
+
+    <main class="ML_contenido ML_historial_contenido">
+
+        <section class="ML_pacientes_topbar">
+            <div class="ML_topbar_left">
+                <span class="ML_topbar_menu"><span class="ML_icon ML_icon_menu" aria-hidden="true"></span></span>
+                <h1>Historial Clínico</h1>
+            </div>
+
+            <div class="ML_topbar_user">
+                <span class="ML_notificacion"><span class="ML_icon ML_icon_bell" aria-hidden="true"></span></span>
+                <div class="ML_topbar_avatar">A</div>
+                <div>
+                    <strong>Admin</strong>
+                    <p>Administrador</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="ML_historial_header">
+            <div>
+                <h2>Pacientes con Historial Clínico</h2>
+                <p>Selecciona un paciente para visualizar su historial clínico y sus atenciones registradas.</p>
+            </div>
+        </section>
+
+        <section class="ML_pacientes_panel ML_historial_panel">
+
+            <div class="ML_pacientes_filtros">
+                <div class="ML_buscador">
+                    <span><span class="ML_icon ML_icon_search" aria-hidden="true"></span></span>
+                    <input type="text" id="ML_buscarHistorial" placeholder="Buscar paciente por nombre, DNI o correo...">
+                </div>
+            </div>
+
+            <div class="ML_tabla_contenedor">
+                <table class="ML_tabla_pacientes_admin" id="ML_tablaHistorial">
+                    <thead>
+                    <tr>
+                        <th>Paciente</th>
+                        <th>DNI</th>
+                        <th>Edad</th>
+                        <th>Género</th>
+                        <th>Celular</th>
+                        <th>Correo</th>
+                        <th>Total Citas</th>
+                        <th>Estado</th>
+                        <th>Historial</th>
+                    </tr>
+                    </thead>
+
+                    <tbody>
+
+                    <tr th:if="${#lists.isEmpty(ML_pacientesHistorial)}">
+                        <td colspan="9" class="ML_tabla_vacia">No hay pacientes registrados.</td>
+                    </tr>
+
+                    <tr th:each="ML_paciente : ${ML_pacientesHistorial}">
+                        <td>
+                            <div class="ML_paciente_info">
+                                <div class="ML_paciente_foto"
+                                     th:text="${#strings.substring(ML_paciente.paciente, 0, 1)}">
+                                    P
+                                </div>
+                                <div>
+                                    <strong th:text="${ML_paciente.paciente}">Paciente</strong>
+                                    <span th:text="${ML_paciente.direccion}">Dirección</span>
+                                </div>
+                            </div>
+                        </td>
+
+                        <td th:text="${ML_paciente.dni}">00000000</td>
+                        <td th:text="${ML_paciente.edad + ' años'}">0 años</td>
+                        <td th:text="${ML_paciente.genero}">Masculino</td>
+                        <td th:text="${ML_paciente.celular}">999999999</td>
+                        <td th:text="${ML_paciente.correo}">correo@gmail.com</td>
+                        <td th:text="${ML_paciente.total_citas}">0</td>
+
+                        <td>
+                            <span class="ML_estado_tabla"
+                                  th:text="${ML_paciente.estado}"
+                                  th:classappend="${#strings.equalsIgnoreCase(ML_paciente.estado, 'Activo')} ? ' ML_estado_activo' : ' ML_estado_inactivo'">
+                                Activo
+                            </span>
+                        </td>
+
+                        <td>
+                            <a th:href="@{/admin/historial/{id}(id=${ML_paciente.id_paciente})}"
+                               class="ML_btn_ver_historial">
+                                Ver historial
+                            </a>
+                        </td>
+                    </tr>
+
+                    </tbody>
+                </table>
+            </div>
+
+        </section>
+
+    </main>
+
+</div>
+
+<script>
+    const ML_buscarHistorial = document.getElementById("ML_buscarHistorial");
+    const ML_tablaHistorial = document.getElementById("ML_tablaHistorial");
+
+    function ML_filtrarHistorial() {
+        const texto = ML_buscarHistorial.value.toLowerCase();
+        const filas = ML_tablaHistorial.querySelectorAll("tbody tr");
+
+        filas.forEach(fila => {
+            const contenido = fila.textContent.toLowerCase();
+            fila.style.display = contenido.includes(texto) ? "" : "none";
+        });
+    }
+
+    ML_buscarHistorial.addEventListener("keyup", ML_filtrarHistorial);
+</script>
+
+</body>
+</html>

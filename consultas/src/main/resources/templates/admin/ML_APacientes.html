@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de Pacientes</title>
+    <link rel="stylesheet" th:href="@{/css/ML_dashboardAdmin.css}" href="/css/ML_dashboardAdmin.css">
+    <link rel="stylesheet" th:href="@{/css/ML_iconos.css}" href="/css/ML_iconos.css">
+</head>
+<body>
+
+<div class="ML_dashboard_layout">
+
+    <!-- SIDEBAR -->
+    <aside class="ML_sidebar">
+
+        <div class="ML_sidebar_marca">
+            <div class="ML_marca_icono">+</div>
+            <div>
+                <h2>MediLink</h2>
+                <p>Sistema de<br>Citas Médicas</p>
+            </div>
+        </div>
+
+        <nav class="ML_menu">
+
+            <a th:href="@{/admin/dashboard}" class="ML_menu_link">
+                <span class="ML_menu_icono"><span class="ML_icon ML_icon_home" aria-hidden="true"></span></span>
+                <span>Principal</span>
+            </a>
+            <a th:href="@{/admin/usuarios}" class="ML_menu_link ML_activo">
+                <span class="ML_menu_icono"><span class="ML_icon ML_icon_users" aria-hidden="true"></span></span>
+                <span>Usuarios</span>
+            </a>
+
+            <a th:href="@{/admin/citas}" class="ML_menu_link">
+                <span class="ML_menu_icono"><span class="ML_icon ML_icon_appointment" aria-hidden="true"></span></span>
+                <span>Citas</span>
+            </a>
+
+            <a th:href="@{/admin/horarios}" class="ML_menu_link">
+                <span class="ML_menu_icono"><span class="ML_icon ML_icon_calendar" aria-hidden="true"></span></span>
+                <span>Calendario</span>
+            </a>
+
+            
+            <a th:href="@{/admin/disponibilidad}" class="ML_menu_link">
+                <span class="ML_menu_icono"><span class="ML_icon ML_icon_clock" aria-hidden="true"></span></span>
+                <span>Disponibilidad</span>
+            </a>
+            <a th:href="@{/admin/horarios-doctores}" class="ML_menu_link">
+                <span class="ML_menu_icono"><span class="ML_icon ML_icon_clock" aria-hidden="true"></span></span>
+                <span>Horarios doctores</span>
+            </a>
+
+            <a th:href="@{/admin/consultorios}" class="ML_menu_link">
+                <span class="ML_menu_icono"><span class="ML_icon ML_icon_clipboard" aria-hidden="true"></span></span>
+                <span>Consultorios</span>
+            </a>
+
+            <a th:href="@{/admin/pagos}" class="ML_menu_link">
+                <span class="ML_menu_icono"><span class="ML_icon ML_icon_payment" aria-hidden="true"></span></span>
+                <span>Pagos</span>
+            </a>
+            <a th:href="@{/admin/correos}" class="ML_menu_link">
+                <span class="ML_menu_icono"><span class="ML_icon ML_icon_report" aria-hidden="true"></span></span>
+                <span>Notificaciones</span>
+            </a>
+<a th:href="@{/admin/reportes}" class="ML_menu_link">
+                <span class="ML_menu_icono"><span class="ML_icon ML_icon_report" aria-hidden="true"></span></span>
+                <span>Reportes</span>
+            </a>
+
+            <a th:href="@{/admin/especialidades}" class="ML_menu_link">
+                <span class="ML_menu_icono"><span class="ML_icon ML_icon_add" aria-hidden="true"></span></span>
+                <span>Especialidades</span>
+            </a>
+
+            <a th:href="@{/admin/ranking-doctores}" class="ML_menu_link">
+                <span class="ML_menu_icono"><span class="ML_icon ML_icon_ranking" aria-hidden="true"></span></span>
+                <span>Ranking Doctores</span>
+            </a>
+
+            <a th:href="@{/admin/historial}" class="ML_menu_link">
+                <span class="ML_menu_icono"><span class="ML_icon ML_icon_history" aria-hidden="true"></span></span>
+                <span>Historial Clínico</span>
+            </a>
+
+        </nav>
+
+        <div class="ML_sidebar_footer">
+            <form th:action="@{/logout}" method="post">
+                <button type="submit" class="ML_btn_logout">Cerrar sesión</button>
+            </form>
+        </div>
+
+    </aside>
+
+    <!-- CONTENIDO -->
+    <main class="ML_contenido ML_pacientes_contenido">
+
+        <!-- BARRA SUPERIOR -->
+        <section class="ML_pacientes_topbar">
+            <div class="ML_topbar_left">
+                <span class="ML_topbar_menu"><span class="ML_icon ML_icon_menu" aria-hidden="true"></span></span>
+                <h1>Pacientes</h1>
+            </div>
+
+            <div class="ML_topbar_user">
+                <span class="ML_notificacion"><span class="ML_icon ML_icon_bell" aria-hidden="true"></span></span>
+                <div class="ML_topbar_avatar">A</div>
+                <div>
+                    <strong>Admin</strong>
+                    <p>Administrador</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ENCABEZADO -->
+        <section class="ML_pacientes_header">
+            <div>
+                <h2>Gestión de Pacientes</h2>
+                <p>Lista de pacientes registrados en el sistema.</p>
+            </div>
+        </section>
+
+        <!-- RESUMEN -->
+        <section class="ML_paneles ML_pacientes_resumen">
+
+            <div class="ML_panel">
+                <div>
+                    <p>Total Pacientes</p>
+                    <h2 th:text="${ML_totalPacientes}">0</h2>
+                    <span class="ML_badge ML_badge_azul">Registrados</span>
+                </div>
+                <div class="ML_panel_icono ML_icono_azul"><span class="ML_icon ML_icon_users" aria-hidden="true"></span></div>
+            </div>
+
+            <div class="ML_panel">
+                <div>
+                    <p>Masculinos</p>
+                    <h2 th:text="${ML_pacientesMasculinos}">0</h2>
+                    <span class="ML_badge ML_badge_verde">Pacientes</span>
+                </div>
+                <div class="ML_panel_icono ML_icono_verde"><span class="ML_icon ML_icon_male" aria-hidden="true"></span></div>
+            </div>
+
+            <div class="ML_panel">
+                <div>
+                    <p>Femeninos</p>
+                    <h2 th:text="${ML_pacientesFemeninos}">0</h2>
+                    <span class="ML_badge ML_badge_morado">Pacientes</span>
+                </div>
+                <div class="ML_panel_icono ML_icono_morado"><span class="ML_icon ML_icon_female" aria-hidden="true"></span></div>
+            </div>
+
+        </section>
+
+        <!-- PANEL DE TABLA -->
+        <section class="ML_pacientes_panel">
+
+            <div class="ML_pacientes_filtros">
+                <div class="ML_buscador">
+                    <span><span class="ML_icon ML_icon_search" aria-hidden="true"></span></span>
+                    <input type="text" id="ML_buscarPaciente" placeholder="Buscar paciente...">
+                </div>
+
+                <div class="ML_select_estado">
+                    <span><span class="ML_icon ML_icon_blood" aria-hidden="true"></span></span>
+                    <select id="ML_filtrarEstado">
+                        <option value="">Todos los estados</option>
+                        <option value="Activo">Activo</option>
+                        <option value="Inactivo">Inactivo</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="ML_tabla_contenedor">
+                <table class="ML_tabla_pacientes_admin" id="ML_tablaPacientes">
+                    <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nombre Completo</th>
+                        <th>DNI</th>
+                        <th>Fecha de Nacimiento</th>
+                        <th>Teléfono</th>
+                        <th>Correo Electrónico</th>
+                        <th>Estado</th>
+                        <th>Vista</th>
+                    </tr>
+                    </thead>
+
+                    <tbody>
+
+                    <tr th:if="${#lists.isEmpty(ML_pacientes)}">
+                        <td colspan="8" class="ML_tabla_vacia">No hay pacientes registrados</td>
+                    </tr>
+
+                    <tr th:each="ML_paciente : ${ML_pacientes}">
+                        <td th:text="${ML_paciente.ML_idPaciente}">1</td>
+
+                        <td>
+                            <div class="ML_paciente_info">
+                                <div class="ML_paciente_foto"
+                                     th:text="${#strings.substring(ML_paciente.ML_nombres, 0, 1)}">P</div>
+
+                                <div>
+                                    <strong th:text="${ML_paciente.ML_nombreCompleto}">Nombre Paciente</strong>
+                                    <span th:text="${ML_paciente.ML_genero}">Género</span>
+                                </div>
+                            </div>
+                        </td>
+
+                        <td th:text="${ML_paciente.ML_dni}">00000000</td>
+                        <td th:text="${ML_paciente.ML_fechaNacimiento}">2000-01-01</td>
+                        <td th:text="${ML_paciente.ML_celular}">999999999</td>
+                        <td th:text="${ML_paciente.ML_correo}">correo@gmail.com</td>
+
+                        <td>
+                            <form th:action="@{/admin/pacientes/{id}/estado(id=${ML_paciente.ML_idUsuario})}"
+                                  method="post" class="ML_estado_click_form">
+                                <input type="hidden" name="ML_estado"
+                                       th:value="${#strings.equalsIgnoreCase(ML_paciente.ML_estado, 'Activo')} ? 'Inactivo' : 'Activo'">
+                                <button type="submit"
+                                        class="ML_estado_tabla ML_estado_clickable"
+                                        th:text="${ML_paciente.ML_estado}"
+                                        th:classappend="${#strings.equalsIgnoreCase(ML_paciente.ML_estado, 'Activo')} ? ' ML_estado_activo' : ' ML_estado_inactivo'"
+                                        title="Clic para cambiar el estado del paciente">
+                                    Activo
+                                </button>
+                            </form>
+                        </td>
+
+                        <td>
+                            <button type="button"
+                                    class="ML_btn_vista"
+                                    title="Ver resumen del paciente"
+                                    th:attr="
+                                        data-id-paciente=${ML_paciente.ML_idPaciente},
+                                        data-id-usuario=${ML_paciente.ML_idUsuario},
+                                        data-nombre=${ML_paciente.ML_nombreCompleto},
+                                        data-dni=${ML_paciente.ML_dni},
+                                        data-celular=${ML_paciente.ML_celular},
+                                        data-correo=${ML_paciente.ML_correo},
+                                        data-direccion=${ML_paciente.ML_direccion},
+                                        data-fecha-nacimiento=${ML_paciente.ML_fechaNacimiento},
+                                        data-genero=${ML_paciente.ML_genero},
+                                        data-grupo-sanguineo=${ML_paciente.ML_grupoSanguineo},
+                                        data-alergias=${ML_paciente.ML_alergias},
+                                        data-contacto-emergencia=${ML_paciente.ML_contactoEmergencia},
+                                        data-celular-emergencia=${ML_paciente.ML_celularEmergencia},
+                                        data-estado=${ML_paciente.ML_estado}">
+                                <span class="ML_icon ML_icon_eye" aria-hidden="true"></span>
+                            </button>
+                        </td>
+                    </tr>
+
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="ML_paginacion_pacientes">
+                <p>Mostrando pacientes registrados</p>
+
+                <div class="ML_paginacion_botones">
+                    <button class="ML_pagina_activa">1</button>
+                </div>
+            </div>
+
+        </section>
+
+    </main>
+
+</div>
+
+<!-- MODAL RESUMEN PACIENTE -->
+<div class="ML_modal_paciente" id="ML_modalPaciente">
+    <div class="ML_modal_contenido">
+
+        <div class="ML_modal_header">
+            <div>
+                <h2>Resumen del Paciente</h2>
+                <p>Información completa del paciente seleccionado.</p>
+            </div>
+
+            <button type="button" class="ML_modal_cerrar" id="ML_cerrarModalPaciente"><span class="ML_icon ML_icon_close" aria-hidden="true"></span></button>
+        </div>
+
+        <div class="ML_modal_perfil">
+            <div class="ML_modal_avatar" id="ML_modalInicial">P</div>
+            <div>
+                <h3 id="ML_modalNombre">Nombre Paciente</h3>
+                <span id="ML_modalEstado" class="ML_estado_tabla ML_estado_activo">Activo</span>
+            </div>
+        </div>
+
+        <div class="ML_modal_grid">
+
+            <div class="ML_modal_item">
+                <span>ID Paciente</span>
+                <strong id="ML_modalIdPaciente">-</strong>
+            </div>
+
+            <div class="ML_modal_item">
+                <span>ID Usuario</span>
+                <strong id="ML_modalIdUsuario">-</strong>
+            </div>
+
+            <div class="ML_modal_item">
+                <span>DNI</span>
+                <strong id="ML_modalDni">-</strong>
+            </div>
+
+            <div class="ML_modal_item">
+                <span>Celular</span>
+                <strong id="ML_modalCelular">-</strong>
+            </div>
+
+            <div class="ML_modal_item">
+                <span>Correo electrónico</span>
+                <strong id="ML_modalCorreo">-</strong>
+            </div>
+
+            <div class="ML_modal_item">
+                <span>Dirección</span>
+                <strong id="ML_modalDireccion">-</strong>
+            </div>
+
+            <div class="ML_modal_item">
+                <span>Fecha de nacimiento</span>
+                <strong id="ML_modalFechaNacimiento">-</strong>
+            </div>
+
+            <div class="ML_modal_item">
+                <span>Género</span>
+                <strong id="ML_modalGenero">-</strong>
+            </div>
+
+            <div class="ML_modal_item">
+                <span>Grupo sanguíneo</span>
+                <strong id="ML_modalGrupoSanguineo">-</strong>
+            </div>
+
+            <div class="ML_modal_item">
+                <span>Alergias</span>
+                <strong id="ML_modalAlergias">-</strong>
+            </div>
+
+            <div class="ML_modal_item">
+                <span>Contacto de emergencia</span>
+                <strong id="ML_modalContactoEmergencia">-</strong>
+            </div>
+
+            <div class="ML_modal_item">
+                <span>Celular de emergencia</span>
+                <strong id="ML_modalCelularEmergencia">-</strong>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+<script>
+    const ML_buscarPaciente = document.getElementById("ML_buscarPaciente");
+    const ML_filtrarEstado = document.getElementById("ML_filtrarEstado");
+    const ML_tablaPacientes = document.getElementById("ML_tablaPacientes");
+
+    function ML_filtrarPacientes() {
+        const texto = ML_buscarPaciente.value.toLowerCase();
+        const estado = ML_filtrarEstado.value.toLowerCase();
+        const filas = ML_tablaPacientes.querySelectorAll("tbody tr");
+
+        filas.forEach(fila => {
+            const contenido = fila.textContent.toLowerCase();
+            const estadoElemento = fila.querySelector(".ML_estado_tabla");
+            const estadoFila = estadoElemento ? estadoElemento.textContent.toLowerCase().trim() : "";
+
+            const coincideTexto = contenido.includes(texto);
+            const coincideEstado = estado === "" || estadoFila === estado;
+
+            fila.style.display = coincideTexto && coincideEstado ? "" : "none";
+        });
+    }
+
+    ML_buscarPaciente.addEventListener("keyup", ML_filtrarPacientes);
+    ML_filtrarEstado.addEventListener("change", ML_filtrarPacientes);
+
+    const ML_modalPaciente = document.getElementById("ML_modalPaciente");
+    const ML_cerrarModalPaciente = document.getElementById("ML_cerrarModalPaciente");
+    const ML_botonesVista = document.querySelectorAll(".ML_btn_vista");
+
+    function ML_valor(valor) {
+        return valor && valor.trim() !== "" ? valor : "-";
+    }
+
+    ML_botonesVista.forEach(boton => {
+        boton.addEventListener("click", () => {
+            const datos = boton.dataset;
+
+            document.getElementById("ML_modalInicial").textContent = ML_valor(datos.nombre).charAt(0).toUpperCase();
+            document.getElementById("ML_modalNombre").textContent = ML_valor(datos.nombre);
+            document.getElementById("ML_modalIdPaciente").textContent = ML_valor(datos.idPaciente);
+            document.getElementById("ML_modalIdUsuario").textContent = ML_valor(datos.idUsuario);
+            document.getElementById("ML_modalDni").textContent = ML_valor(datos.dni);
+            document.getElementById("ML_modalCelular").textContent = ML_valor(datos.celular);
+            document.getElementById("ML_modalCorreo").textContent = ML_valor(datos.correo);
+            document.getElementById("ML_modalDireccion").textContent = ML_valor(datos.direccion);
+            document.getElementById("ML_modalFechaNacimiento").textContent = ML_valor(datos.fechaNacimiento);
+            document.getElementById("ML_modalGenero").textContent = ML_valor(datos.genero);
+            document.getElementById("ML_modalGrupoSanguineo").textContent = ML_valor(datos.grupoSanguineo);
+            document.getElementById("ML_modalAlergias").textContent = ML_valor(datos.alergias);
+            document.getElementById("ML_modalContactoEmergencia").textContent = ML_valor(datos.contactoEmergencia);
+            document.getElementById("ML_modalCelularEmergencia").textContent = ML_valor(datos.celularEmergencia);
+
+            const estado = document.getElementById("ML_modalEstado");
+            estado.textContent = ML_valor(datos.estado);
+            estado.className = "ML_estado_tabla";
+
+            if (datos.estado && datos.estado.toLowerCase() === "activo") {
+                estado.classList.add("ML_estado_activo");
+            } else {
+                estado.classList.add("ML_estado_inactivo");
+            }
+
+            ML_modalPaciente.classList.add("ML_modal_activo");
+        });
+    });
+
+    ML_cerrarModalPaciente.addEventListener("click", () => {
+        ML_modalPaciente.classList.remove("ML_modal_activo");
+    });
+
+    ML_modalPaciente.addEventListener("click", (event) => {
+        if (event.target === ML_modalPaciente) {
+            ML_modalPaciente.classList.remove("ML_modal_activo");
+        }
+    });
+</script>
+
+</body>
+</html>

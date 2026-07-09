@@ -1,0 +1,984 @@
+/* ============================= */
+/* PANEL DOCTOR - MEDILINK       */
+/* ============================= */
+
+.ML_doctor_contenido {
+    padding: 0;
+    background: #f5f7fb;
+    min-height: 100vh;
+}
+
+.ML_doctor_bienvenida,
+.ML_doctor_header {
+    padding: 34px 42px 24px;
+}
+
+.ML_doctor_bienvenida {
+    display: flex;
+    justify-content: space-between;
+    gap: 24px;
+    align-items: stretch;
+}
+
+.ML_doctor_bienvenida h2,
+.ML_doctor_header h2 {
+    font-size: 28px;
+    color: #0f172a;
+    font-weight: 900;
+    margin-bottom: 8px;
+}
+
+.ML_doctor_bienvenida p,
+.ML_doctor_header p {
+    color: #64748b;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 1.5;
+}
+
+.ML_doctor_header_flex {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+}
+
+.ML_doctor_info_box {
+    min-width: 260px;
+    background: linear-gradient(135deg, #0b63e5, #12b5cb);
+    color: #ffffff;
+    border-radius: 18px;
+    padding: 20px;
+    box-shadow: 0 10px 24px rgba(11, 99, 229, 0.20);
+}
+
+.ML_doctor_info_box span,
+.ML_doctor_info_box small {
+    display: block;
+    color: #dbeafe;
+    font-weight: 800;
+}
+
+.ML_doctor_info_box strong {
+    display: block;
+    margin: 8px 0;
+    font-size: 21px;
+    font-weight: 900;
+}
+
+.ML_doctor_resumen {
+    padding: 0 42px;
+    margin-bottom: 24px;
+}
+
+.ML_doctor_resumen_3 {
+    grid-template-columns: repeat(3, 1fr);
+}
+
+.ML_doctor_resumen_2 {
+    grid-template-columns: repeat(2, 1fr);
+}
+
+.ML_titulo_mediano {
+    font-size: 20px !important;
+    line-height: 1.2;
+}
+
+.ML_doctor_grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 360px;
+    gap: 22px;
+    padding: 0 42px 42px;
+}
+
+.ML_doctor_panel {
+    background: #ffffff;
+    border-radius: 16px;
+    border: 1px solid #e5e7eb;
+    box-shadow: 0 8px 25px rgba(15, 23, 42, 0.06);
+    padding: 22px;
+}
+
+.ML_doctor_panel_tabla {
+    margin: 0 42px 42px;
+}
+
+.ML_doctor_panel_header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 18px;
+    margin-bottom: 18px;
+}
+
+.ML_doctor_panel h3,
+.ML_doctor_panel_header h3 {
+    color: #0f172a;
+    font-size: 19px;
+    font-weight: 900;
+    margin-bottom: 6px;
+}
+
+.ML_doctor_panel_header p {
+    color: #64748b;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.ML_btn_doctor_primary,
+.ML_btn_doctor_secondary,
+.ML_btn_doctor_table {
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 900;
+    border-radius: 10px;
+    transition: 0.2s ease;
+}
+
+.ML_btn_doctor_primary {
+    min-height: 42px;
+    padding: 0 18px;
+    background: #0b63e5;
+    color: #ffffff;
+    box-shadow: 0 8px 18px rgba(11, 99, 229, 0.18);
+}
+
+.ML_btn_doctor_primary:hover {
+    background: #084fc0;
+}
+
+.ML_btn_doctor_secondary {
+    min-height: 42px;
+    padding: 0 16px;
+    background: #ffffff;
+    color: #334155;
+    border: 1px solid #dbe3ee;
+}
+
+.ML_btn_doctor_secondary:hover {
+    background: #f1f5f9;
+    color: #0b63e5;
+}
+
+.ML_btn_doctor_table {
+    height: 36px;
+    padding: 0 13px;
+    background: #eff6ff;
+    color: #2563eb;
+    border: 1px solid #bfdbfe;
+    font-size: 13px;
+}
+
+.ML_btn_doctor_table:hover {
+    background: #2563eb;
+    color: #ffffff;
+}
+
+.ML_tabla_doctor td {
+    vertical-align: middle;
+}
+
+.ML_td_texto {
+    max-width: 260px;
+    white-space: normal !important;
+    line-height: 1.4;
+}
+
+.ML_texto_secundario {
+    display: block;
+    color: #64748b;
+    font-size: 12px;
+    font-weight: 700;
+    margin-top: 4px;
+}
+
+.ML_form_estado_doctor {
+    margin: 0;
+}
+
+.ML_estado_select_doctor {
+    height: 38px;
+    border: 1px solid #cbd5e1;
+    border-radius: 9px;
+    background: #ffffff;
+    color: #334155;
+    font-weight: 800;
+    padding: 0 10px;
+    outline: none;
+}
+
+.ML_estado_select_doctor:focus {
+    border-color: #0b63e5;
+    box-shadow: 0 0 0 3px rgba(11, 99, 229, 0.12);
+}
+
+.ML_doctor_perfil {
+    text-align: center;
+}
+
+.ML_doctor_perfil_avatar,
+.ML_paciente_detalle_avatar {
+    width: 96px;
+    height: 96px;
+    margin: 8px auto 14px;
+    border-radius: 50%;
+    background: #dbeafe;
+    color: #0b63e5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 36px;
+    font-weight: 900;
+}
+
+.ML_doctor_perfil h4,
+.ML_paciente_detalle_card h3 {
+    color: #0f172a;
+    font-size: 21px;
+    font-weight: 900;
+    margin-bottom: 4px;
+}
+
+.ML_doctor_perfil p,
+.ML_paciente_detalle_card p {
+    color: #64748b;
+    font-weight: 700;
+    margin-bottom: 18px;
+}
+
+.ML_doctor_perfil_lista {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    text-align: left;
+}
+
+.ML_doctor_perfil_lista div,
+.ML_cita_resumen_lista div {
+    background: #f8fafc;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    padding: 13px;
+}
+
+.ML_doctor_perfil_lista span,
+.ML_cita_resumen_lista span {
+    display: block;
+    color: #64748b;
+    font-size: 12px;
+    font-weight: 900;
+    margin-bottom: 6px;
+}
+
+.ML_doctor_perfil_lista strong,
+.ML_cita_resumen_lista strong {
+    display: block;
+    color: #0f172a;
+    font-size: 14px;
+    font-weight: 900;
+    word-break: break-word;
+}
+
+.ML_alerta_exito,
+.ML_alerta_error {
+    margin: 0 42px 20px;
+    border-radius: 12px;
+    padding: 14px 18px;
+    font-weight: 900;
+    border: 1px solid transparent;
+}
+
+.ML_alerta_exito {
+    background: #ecfdf5;
+    color: #15803d;
+    border-color: #bbf7d0;
+}
+
+.ML_alerta_error {
+    background: #fef2f2;
+    color: #b91c1c;
+    border-color: #fecaca;
+}
+
+/* ============================= */
+/* FORMULARIO ATENCIÓN           */
+/* ============================= */
+
+.ML_atencion_grid {
+    display: grid;
+    grid-template-columns: 390px minmax(0, 1fr);
+    gap: 22px;
+    padding: 0 42px 42px;
+}
+
+.ML_atencion_paciente {
+    padding: 16px;
+    background: #f8fafc;
+    border-radius: 14px;
+    border: 1px solid #e5e7eb;
+    margin-bottom: 16px;
+}
+
+.ML_cita_resumen_lista {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+}
+
+.ML_form_historial_panel h3 {
+    margin-bottom: 18px;
+}
+
+.ML_form_historial {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.ML_form_grupo label {
+    display: block;
+    color: #334155;
+    font-weight: 900;
+    margin-bottom: 8px;
+}
+
+.ML_form_grupo label span {
+    color: #dc2626;
+}
+
+.ML_form_grupo textarea {
+    width: 100%;
+    border: 1px solid #d1d5db;
+    border-radius: 12px;
+    padding: 14px;
+    resize: vertical;
+    outline: none;
+    color: #0f172a;
+    font-size: 14px;
+    font-family: Arial, Helvetica, sans-serif;
+    line-height: 1.45;
+}
+
+.ML_form_grupo textarea:focus {
+    border-color: #0b63e5;
+    box-shadow: 0 0 0 3px rgba(11, 99, 229, 0.12);
+}
+
+.ML_form_acciones {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+    padding-top: 6px;
+}
+
+/* ============================= */
+/* DETALLE HISTORIAL             */
+/* ============================= */
+
+.ML_historial_paciente_grid {
+    display: grid;
+    grid-template-columns: 360px minmax(0, 1fr);
+    gap: 22px;
+    padding: 0 42px 42px;
+}
+
+.ML_paciente_detalle_card {
+    text-align: center;
+    align-self: start;
+}
+
+.ML_historial_linea_panel h3 {
+    margin-bottom: 18px;
+}
+
+.ML_historial_linea_item {
+    display: grid;
+    grid-template-columns: 120px minmax(0, 1fr);
+    gap: 18px;
+    padding: 18px 0;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.ML_historial_linea_item:last-child {
+    border-bottom: none;
+}
+
+.ML_historial_linea_fecha strong {
+    display: block;
+    color: #0f172a;
+    font-size: 14px;
+    font-weight: 900;
+}
+
+.ML_historial_linea_fecha span {
+    display: block;
+    color: #64748b;
+    font-size: 13px;
+    font-weight: 700;
+    margin-top: 5px;
+}
+
+.ML_historial_linea_top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 10px;
+}
+
+.ML_historial_linea_top h4 {
+    color: #0f172a;
+    font-size: 17px;
+    font-weight: 900;
+}
+
+.ML_historial_linea_contenido p {
+    color: #475569;
+    font-size: 14px;
+    line-height: 1.5;
+    margin-bottom: 8px;
+}
+
+.ML_historial_linea_contenido p strong {
+    color: #0f172a;
+}
+
+.ML_historial_linea_acciones {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 14px;
+    margin-top: 12px;
+}
+
+.ML_historial_linea_acciones span {
+    color: #64748b;
+    font-size: 12px;
+    font-weight: 800;
+}
+
+.ML_historial_linea_vacio,
+.ML_seguimiento_vacio {
+    background: #f8fafc;
+    border: 1px dashed #cbd5e1;
+    color: #64748b;
+    padding: 18px;
+    border-radius: 12px;
+    font-weight: 800;
+    text-align: center;
+}
+
+/* ============================= */
+/* SEGUIMIENTO                   */
+/* ============================= */
+
+.ML_seguimiento_panel {
+    margin: 0 42px 42px;
+}
+
+.ML_seguimiento_grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 18px;
+}
+
+.ML_seguimiento_card {
+    border: 1px solid #e5e7eb;
+    border-radius: 16px;
+    background: #ffffff;
+    padding: 18px;
+    box-shadow: 0 6px 16px rgba(15, 23, 42, 0.04);
+}
+
+.ML_seguimiento_card_header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 14px;
+    margin-bottom: 12px;
+}
+
+.ML_seguimiento_fecha {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    color: #64748b;
+    font-size: 12px;
+    font-weight: 800;
+    background: #f8fafc;
+    border-radius: 12px;
+    padding: 10px 12px;
+    margin-bottom: 14px;
+}
+
+.ML_seguimiento_bloque {
+    margin-bottom: 13px;
+}
+
+.ML_seguimiento_bloque h4 {
+    color: #0f172a;
+    font-size: 14px;
+    font-weight: 900;
+    margin-bottom: 5px;
+}
+
+.ML_seguimiento_bloque p {
+    color: #475569;
+    font-size: 13px;
+    line-height: 1.5;
+}
+
+.ML_seguimiento_acciones {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 16px;
+}
+
+@media (max-width: 1180px) {
+    .ML_doctor_grid,
+    .ML_atencion_grid,
+    .ML_historial_paciente_grid {
+        grid-template-columns: 1fr;
+    }
+
+    .ML_seguimiento_grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 780px) {
+    .ML_doctor_bienvenida,
+    .ML_doctor_header,
+    .ML_atencion_grid,
+    .ML_doctor_grid,
+    .ML_historial_paciente_grid {
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+
+    .ML_doctor_bienvenida,
+    .ML_doctor_header_flex,
+    .ML_doctor_panel_header,
+    .ML_historial_linea_top,
+    .ML_historial_linea_acciones,
+    .ML_seguimiento_card_header,
+    .ML_seguimiento_acciones {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .ML_doctor_panel_tabla,
+    .ML_seguimiento_panel,
+    .ML_alerta_exito,
+    .ML_alerta_error {
+        margin-left: 20px;
+        margin-right: 20px;
+    }
+
+    .ML_doctor_resumen,
+    .ML_doctor_resumen_2,
+    .ML_doctor_resumen_3 {
+        padding-left: 20px;
+        padding-right: 20px;
+        grid-template-columns: 1fr;
+    }
+
+    .ML_cita_resumen_lista {
+        grid-template-columns: 1fr;
+    }
+
+    .ML_historial_linea_item {
+        grid-template-columns: 1fr;
+    }
+}
+
+.ML_badge_solo_visualizar {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 9px 12px;
+    border-radius: 999px;
+    background: #f1f5f9;
+    color: #475569;
+    font-weight: 800;
+    font-size: 12px;
+}
+
+/* ============================= */
+/* REGISTROS ANTES DEL FORMULARIO */
+/* ============================= */
+
+.ML_registros_cita_panel {
+    margin: 0 42px 24px;
+}
+
+.ML_doctor_panel_header_columna {
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.ML_registro_cita_resumen {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 14px;
+}
+
+.ML_registro_cita_resumen div {
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 14px;
+    padding: 14px;
+}
+
+.ML_registro_cita_resumen span {
+    display: block;
+    color: #64748b;
+    font-size: 12px;
+    font-weight: 900;
+    margin-bottom: 7px;
+}
+
+.ML_registro_cita_resumen strong {
+    display: block;
+    color: #0f172a;
+    font-size: 14px;
+    font-weight: 900;
+    line-height: 1.4;
+}
+
+.ML_registros_cita_grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.ML_registros_cita_accion_final {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 18px;
+    margin-bottom: 42px;
+}
+
+.ML_registros_cita_accion_final h3 {
+    color: #0f172a;
+    font-size: 20px;
+    font-weight: 900;
+    margin-bottom: 6px;
+}
+
+.ML_registros_cita_accion_final p {
+    color: #64748b;
+    font-size: 14px;
+    font-weight: 700;
+}
+
+@media (max-width: 1180px) {
+    .ML_registro_cita_resumen {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .ML_registros_cita_grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 780px) {
+    .ML_registros_cita_panel {
+        margin-left: 20px;
+        margin-right: 20px;
+    }
+
+    .ML_registro_cita_resumen {
+        grid-template-columns: 1fr;
+    }
+
+    .ML_registros_cita_accion_final {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}
+
+
+/* ===================================================== */
+/* AJUSTES DOCTOR: CONSULTORIO HORIZONTAL Y SEGUIMIENTO  */
+/* ===================================================== */
+
+.ML_doctor_bienvenida {
+    flex-direction: column;
+}
+
+.ML_doctor_bienvenida > div:first-child {
+    width: 100%;
+}
+
+.ML_doctor_info_box {
+    width: 100%;
+    min-width: 0;
+    display: grid;
+    grid-template-columns: 1fr 1.2fr 1fr;
+    align-items: center;
+    column-gap: 24px;
+}
+
+.ML_doctor_info_box span,
+.ML_doctor_info_box strong,
+.ML_doctor_info_box small {
+    margin: 0;
+}
+
+.ML_doctor_info_box strong {
+    font-size: 26px;
+}
+
+.ML_doctor_contenido .ML_doctor_header + .ML_alerta_exito,
+.ML_doctor_contenido .ML_doctor_header + .ML_alerta_error {
+    margin-top: 0;
+}
+
+@media (max-width: 780px) {
+    .ML_doctor_info_box {
+        grid-template-columns: 1fr;
+        row-gap: 8px;
+    }
+}
+
+
+.ML_doctor_contenido > .ML_doctor_panel {
+    margin: 0 42px 42px;
+}
+
+@media (max-width: 780px) {
+    .ML_doctor_contenido > .ML_doctor_panel {
+        margin-left: 20px;
+        margin-right: 20px;
+    }
+}
+
+
+/* ============================= */
+/* SEGUIMIENTO - CITAS CON BOTON LATERAL */
+/* ============================= */
+
+.ML_seguimiento_citas_lista {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.ML_seguimiento_cita_item {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 14px;
+    align-items: stretch;
+}
+
+.ML_seguimiento_cita_tabla {
+    overflow-x: auto;
+    border: 1px solid #e2e8f0;
+    border-radius: 14px;
+    background: #ffffff;
+}
+
+.ML_seguimiento_cita_head,
+.ML_seguimiento_cita_body {
+    min-width: 900px;
+    display: grid;
+    grid-template-columns: 1.7fr 0.9fr 1fr 1.25fr 0.9fr 0.9fr;
+    align-items: center;
+}
+
+.ML_seguimiento_cita_head {
+    background: #f1f5f9;
+}
+
+.ML_seguimiento_cita_head span {
+    padding: 14px 16px;
+    color: #334155;
+    font-size: 14px;
+    font-weight: 900;
+}
+
+.ML_seguimiento_cita_body > span,
+.ML_seguimiento_cita_body > strong,
+.ML_seguimiento_cita_body > .ML_paciente_info {
+    padding: 16px;
+    color: #334155;
+    font-size: 14px;
+}
+
+.ML_seguimiento_cita_body > strong {
+    color: #0f172a;
+    font-weight: 900;
+}
+
+.ML_seguimiento_cita_accion {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.ML_btn_seguimiento_lateral {
+    min-width: 155px;
+    height: 42px;
+    white-space: nowrap;
+}
+
+@media (max-width: 980px) {
+    .ML_seguimiento_cita_item {
+        grid-template-columns: 1fr;
+    }
+
+    .ML_seguimiento_cita_accion {
+        justify-content: flex-start;
+    }
+}
+
+/* Ajuste visual para botones de Seguimiento */
+.ML_seguimiento_tabs {
+    margin: 0 42px 18px;
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.ML_seguimiento_tab {
+    border: 1px solid #dbeafe;
+    background: #ffffff;
+    color: #2563eb;
+    border-radius: 999px;
+    padding: 12px 18px;
+    font-weight: 950;
+    cursor: pointer;
+    box-shadow: 0 8px 16px rgba(15, 23, 42, .06);
+}
+
+.ML_seguimiento_tab.ML_activo {
+    background: linear-gradient(135deg, #0b63e5, #12b5cb);
+    color: #ffffff;
+    border-color: transparent;
+}
+
+.ML_seguimiento_cita_accion {
+    align-items: stretch;
+}
+
+.ML_btn_seguimiento_lateral,
+.ML_seguimiento_cita_accion .ML_estado_tabla {
+    min-width: 170px;
+    min-height: 48px;
+    border-radius: 15px;
+    padding: 0 16px;
+    font-weight: 950;
+    text-align: center;
+}
+
+.ML_btn_seguimiento_lateral {
+    background: linear-gradient(135deg, #0b63e5, #12b5cb);
+    color: #fff;
+    border: none;
+    box-shadow: 0 12px 20px rgba(11, 99, 229, .22);
+}
+
+.ML_btn_seguimiento_lateral:hover {
+    transform: translateY(-1px);
+    background: linear-gradient(135deg, #084fc0, #0891b2);
+}
+
+.ML_historial_item .ML_btn_doctor_table,
+.ML_doctor_panel_header .ML_btn_doctor_secondary {
+    border-radius: 14px;
+    min-height: 42px;
+    padding: 0 16px;
+}
+
+.ML_doctor_panel_header .ML_btn_doctor_secondary {
+    background: #f8fafc;
+    border: 1px solid #cfe1ff;
+    color: #0b63e5;
+}
+
+.ML_doctor_panel_header .ML_btn_doctor_secondary:hover {
+    background: #0b63e5;
+    color: #ffffff;
+}
+
+@media (max-width: 760px) {
+    .ML_seguimiento_tabs {
+        margin-left: 20px;
+        margin-right: 20px;
+    }
+}
+
+
+/* Ajuste final de botones del apartado Seguimiento */
+.ML_seguimiento_tabs {
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 18px;
+    padding: 10px;
+    box-shadow: 0 10px 22px rgba(15, 23, 42, .06);
+}
+.ML_seguimiento_tab {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    min-height: 44px;
+    border-radius: 14px;
+    border: 1px solid transparent;
+}
+.ML_seguimiento_tab span,
+.ML_btn_seguimiento_lateral span,
+.ML_btn_doctor_secondary span,
+.ML_historial_item .ML_btn_doctor_table span {
+    font-weight: 950;
+}
+.ML_seguimiento_cita_accion {
+    min-width: 190px;
+}
+.ML_btn_seguimiento_lateral {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    min-width: 180px;
+    min-height: 48px;
+}
+.ML_doctor_panel_header .ML_btn_doctor_secondary,
+.ML_historial_item .ML_btn_doctor_table {
+    display: inline-flex;
+    gap: 8px;
+}
+.ML_seguimiento_cita_accion .ML_estado_tabla {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1.25;
+}
+
+/* Corrección funcional de pestañas del apartado Seguimiento */
+.ML_seguimiento_panel {
+    display: none;
+}
+
+.ML_seguimiento_panel.ML_activo {
+    display: block;
+    animation: ML_aparecerSeguimiento .18s ease-out;
+}
+
+.ML_seguimiento_tab {
+    user-select: none;
+}
+
+.ML_seguimiento_tab:focus-visible {
+    outline: 3px solid rgba(11, 99, 229, .24);
+    outline-offset: 3px;
+}
+
+@keyframes ML_aparecerSeguimiento {
+    from { opacity: 0; transform: translateY(6px); }
+    to { opacity: 1; transform: translateY(0); }
+}

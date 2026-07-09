@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" th:href="@{/css/ML_dashboardAdmin.css}" href="/css/ML_dashboardAdmin.css">
+    <link rel="stylesheet" th:href="@{/css/ML_citasAdmin.css}" href="/css/ML_citasAdmin.css">
+    <link rel="stylesheet" th:href="@{/css/ML_reportesAdmin.css}" href="/css/ML_reportesAdmin.css">
+    <link rel="stylesheet" th:href="@{/css/ML_iconos.css}" href="/css/ML_iconos.css">
+    <title>Pagos por Consulta</title>
+</head>
+<body>
+<div class="ML_dashboard_layout">
+    <aside class="ML_sidebar">
+        <div class="ML_sidebar_marca">
+            <div class="ML_marca_icono">+</div>
+            <div><h2>MediLink</h2><p>Sistema de<br>Citas Médicas</p></div>
+        </div>
+        <nav class="ML_menu">
+            <a th:href="@{/admin/dashboard}" class="ML_menu_link">
+                <span class="ML_menu_icono"><span class="ML_icon ML_icon_home" aria-hidden="true"></span></span>
+                <span>Principal</span>
+            </a>
+            <a th:href="@{/admin/usuarios}" class="ML_menu_link">
+                <span class="ML_menu_icono"><span class="ML_icon ML_icon_users" aria-hidden="true"></span></span>
+                <span>Usuarios</span>
+            </a>
+            <a th:href="@{/admin/citas}" class="ML_menu_link">
+                <span class="ML_menu_icono"><span class="ML_icon ML_icon_appointment" aria-hidden="true"></span></span>
+                <span>Citas</span>
+            </a>
+            <a th:href="@{/admin/horarios}" class="ML_menu_link">
+                <span class="ML_menu_icono"><span class="ML_icon ML_icon_calendar" aria-hidden="true"></span></span>
+                <span>Calendario</span>
+            </a>
+            <a th:href="@{/admin/disponibilidad}" class="ML_menu_link">
+                <span class="ML_menu_icono"><span class="ML_icon ML_icon_clock" aria-hidden="true"></span></span>
+                <span>Disponibilidad</span>
+            </a>
+            <a th:href="@{/admin/horarios-doctores}" class="ML_menu_link">
+                <span class="ML_menu_icono"><span class="ML_icon ML_icon_clock" aria-hidden="true"></span></span>
+                <span>Horarios doctores</span>
+            </a>
+            <a th:href="@{/admin/consultorios}" class="ML_menu_link">
+                <span class="ML_menu_icono"><span class="ML_icon ML_icon_clipboard" aria-hidden="true"></span></span>
+                <span>Consultorios</span>
+            </a>
+            <a th:href="@{/admin/pagos}" class="ML_menu_link ML_activo">
+                <span class="ML_menu_icono"><span class="ML_icon ML_icon_payment" aria-hidden="true"></span></span>
+                <span>Pagos</span>
+            </a>
+            <a th:href="@{/admin/reportes}" class="ML_menu_link">
+                <span class="ML_menu_icono"><span class="ML_icon ML_icon_report" aria-hidden="true"></span></span>
+                <span>Reportes</span>
+            </a>
+            <a th:href="@{/admin/especialidades}" class="ML_menu_link">
+                <span class="ML_menu_icono"><span class="ML_icon ML_icon_add" aria-hidden="true"></span></span>
+                <span>Especialidades</span>
+            </a>
+            <a th:href="@{/admin/ranking-doctores}" class="ML_menu_link">
+                <span class="ML_menu_icono"><span class="ML_icon ML_icon_ranking" aria-hidden="true"></span></span>
+                <span>Ranking Doctores</span>
+            </a>
+            <a th:href="@{/admin/historial}" class="ML_menu_link">
+                <span class="ML_menu_icono"><span class="ML_icon ML_icon_history" aria-hidden="true"></span></span>
+                <span>Historial Clínico</span>
+            </a>
+        </nav>
+        <div class="ML_sidebar_footer">
+            <form th:action="@{/logout}" method="post"><button type="submit" class="ML_btn_logout">Cerrar sesión</button></form>
+        </div>
+    </aside>
+    <main class="ML_contenido">
+        <section class="ML_header">
+            <div>
+                <h1>Pagos por Consulta</h1>
+                <p>Consulta todos los pagos, revisa reportes diarios y anula operaciones registradas por error.</p>
+            </div>
+            <div class="ML_usuario_panel"><div class="ML_usuario_texto"><strong>Administrador</strong><span>Pagos</span></div><div class="ML_avatar">A</div></div>
+        </section>
+
+        <div th:if="${ML_mensajeExito}" class="ML_admin_alerta ML_admin_alerta_exito"><span th:text="${ML_mensajeExito}">Correcto</span></div>
+        <div th:if="${ML_mensajeError}" class="ML_admin_alerta ML_admin_alerta_error"><span th:text="${ML_mensajeError}">Error</span></div>
+
+        <section class="ML_paneles">
+            <div class="ML_panel"><div><p>Pagos de hoy</p><h2 th:text="${ML_pagosHoy}">0</h2><span class="ML_badge ML_badge_verde">Confirmados</span></div><div class="ML_panel_icono ML_icono_verde"><span class="ML_icon ML_icon_payment" aria-hidden="true"></span></div></div>
+            <div class="ML_panel"><div><p>Monto de hoy</p><h2 th:text="${ML_montoPagosHoy}">S/ 0.00</h2><span class="ML_badge ML_badge_azul">Reporte diario</span></div><div class="ML_panel_icono ML_icono_azul">S/</div></div>
+            <div class="ML_panel"><div><p>Pagos anulados</p><h2 th:text="${ML_pagosAnulados}">0</h2><span class="ML_badge ML_badge_rojo">Control admin</span></div><div class="ML_panel_icono ML_icono_rojo"><span class="ML_icon ML_icon_warning" aria-hidden="true"></span></div></div>
+        </section>
+
+        <section class="ML_panel ML_panel_tabla_vertical ML_panel_ordenado">
+            <div class="ML_panel_header_vertical">
+                <div>
+                    <h3>Reporte de pagos diarios</h3>
+                    <p>Total de operaciones confirmadas y anuladas por día.</p>
+                </div>
+            </div>
+            <div class="ML_tabla_contenedor">
+                <table class="ML_tabla_pacientes_admin">
+                    <thead>
+                    <tr><th>Fecha</th><th>Operaciones</th><th>Pagados</th><th>Anulados</th><th>Monto pagado</th></tr>
+                    </thead>
+                    <tbody>
+                    <tr th:if="${#lists.isEmpty(ML_reportePagosDiarios)}"><td colspan="5" class="ML_tabla_vacia">No hay pagos diarios para mostrar.</td></tr>
+                    <tr th:each="ML_dia : ${ML_reportePagosDiarios}">
+                        <td th:text="${ML_dia.fecha_pago}">00/00/0000</td>
+                        <td th:text="${ML_dia.total_operaciones}">0</td>
+                        <td th:text="${ML_dia.pagos_confirmados}">0</td>
+                        <td th:text="${ML_dia.pagos_anulados}">0</td>
+                        <td><strong th:text="${'S/ ' + ML_dia.monto_total}">S/ 0.00</strong></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <section class="ML_panel ML_panel_tabla_vertical ML_panel_ordenado">
+            <div class="ML_panel_header_vertical">
+                <div>
+                    <h3>Historial de pagos</h3>
+                    <p>Solo se aceptan pagos manuales por efectivo, Yape o Plin. El Administrador puede anular un pago si hubo error.</p>
+                </div>
+            </div>
+            <div class="ML_tabla_contenedor">
+                <table class="ML_tabla_pacientes_admin">
+                    <thead>
+                    <tr><th>Pago</th><th>Cita</th><th>Paciente</th><th>Doctor</th><th>Monto</th><th>Método</th><th>Estado</th><th>Operación</th><th>Observación</th><th>Comprobante</th><th>Fecha</th><th>PDF</th><th>Anular</th></tr>
+                    </thead>
+                    <tbody>
+                    <tr th:if="${#lists.isEmpty(ML_pagos)}"><td colspan="13" class="ML_tabla_vacia">No hay pagos registrados.</td></tr>
+                    <tr th:each="ML_pago : ${ML_pagos}">
+                        <td th:text="${'#P-' + ML_pago.id_pago}">#P-1</td>
+                        <td th:text="${'#C-' + ML_pago.id_cita}">#C-1</td>
+                        <td th:text="${ML_pago.paciente}">Paciente</td>
+                        <td th:text="${ML_pago.doctor}">Doctor</td>
+                        <td><strong th:text="${'S/ ' + ML_pago.monto}">S/ 0.00</strong></td>
+                        <td th:text="${ML_pago.metodo_pago}">Método</td>
+                        <td>
+                            <span class="ML_estado_tabla ML_estado_activo" th:if="${ML_pago.estado_pago == 'Pagado'}">Pagado</span>
+                            <span class="ML_estado_tabla ML_estado_pendiente" th:if="${ML_pago.estado_pago == 'Pendiente'}">Pendiente</span>
+                            <span class="ML_estado_tabla ML_estado_inactivo" th:if="${ML_pago.estado_pago == 'Anulado'}">Anulado</span>
+                        </td>
+                        <td th:text="${ML_pago.codigo_operacion ?: '-'}">Código</td>
+                        <td th:text="${ML_pago.observacion ?: '-'}">Observación</td>
+                        <td><span th:text="${ML_pago.tipo_comprobante}">Recibo</span><span class="ML_texto_muted" th:text="${ML_pago.serie_comprobante + '-' + ML_pago.numero_comprobante}">PAGO-1</span></td>
+                        <td th:text="${ML_pago.fecha_pago_texto}">Fecha</td>
+                        <td><a class="ML_btn_panel" th:href="@{/admin/pagos/{id}/comprobante(id=${ML_pago.id_pago})}">PDF</a></td>
+                        <td>
+                            <form th:if="${ML_pago.estado_pago != 'Anulado'}" th:action="@{/admin/pagos/{id}/anular(id=${ML_pago.id_pago})}" method="post" class="ML_form_anular_pago">
+                                <input type="hidden" name="ML_observacion" value="Pago anulado por Administrador por error de registro">
+                                <button type="submit" class="ML_btn_cancelar_admin" onclick="return confirm('¿Seguro que deseas anular este pago?');">Anular</button>
+                            </form>
+                            <span th:if="${ML_pago.estado_pago == 'Anulado'}" class="ML_texto_muted">No aplica</span>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </main>
+</div>
+</body>
+</html>

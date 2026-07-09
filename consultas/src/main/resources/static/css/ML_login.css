@@ -1,0 +1,893 @@
+/*
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/Other/CascadeStyleSheet.css to edit this template
+*/
+
+/* ============================= */
+/* RESET Y BASE */
+/* ============================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    min-height: 100vh;
+    background: white;
+}
+
+a {
+    text-decoration: none;
+}
+
+/* ============================= */
+/* LOGIN GENERAL */
+/* ============================= */
+
+.page {
+    min-height: 100vh;
+    display: flex;
+}
+
+/* ============================= */
+/* LOGIN - PANEL IZQUIERDO */
+/* ============================= */
+
+.left-panel {
+    width: 34%;
+    min-height: 100vh;
+    padding: 0 45px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background-image:
+        linear-gradient(rgba(13, 64, 120, 0.84), rgba(13, 64, 120, 0.84)),
+        url('/images/ML_fondo_sesion.png');
+
+    background-size: cover;
+    background-position: center;
+    color: white;
+}
+
+.left-brand {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 24px;
+}
+
+.left-logo-box {
+    width: 76px;
+    height: 76px;
+    min-width: 76px;
+    border-radius: 18px;
+
+    background: linear-gradient(135deg, #2f7cff, #0b5fe8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    box-shadow: 0 16px 34px rgba(0, 0, 0, 0.22);
+}
+
+.left-logo-plus {
+    color: white;
+    font-size: 3rem;
+    font-weight: 900;
+    line-height: 1;
+    margin-top: -3px;
+}
+
+.left-brand-text {
+    max-width: 380px;
+}
+
+.left-brand-text h1 {
+    font-size: 4rem;
+    line-height: 1.05;
+    font-weight: 900;
+    letter-spacing: -1.5px;
+    margin-bottom: 12px;
+}
+
+.left-description {
+    max-width: 330px;
+    color: #eef6ff;
+    font-size: 1rem;
+    line-height: 1.45;
+    font-weight: 600;
+}
+
+/* ============================= */
+/* LOGIN - PANEL DERECHO */
+/* ============================= */
+
+.right-panel {
+    width: 66%;
+    min-height: 100vh;
+    background: white;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.login-content {
+    width: 100%;
+    max-width: 760px;
+    padding: 40px 30px;
+}
+
+.logo-area {
+    text-align: center;
+    margin-bottom: 28px;
+}
+
+.user-icon {
+    width: 70px;
+    height: 70px;
+    object-fit: contain;
+    margin-bottom: 24px;
+}
+
+.logo-area h2 {
+    font-size: 2rem;
+    color: #111827;
+    font-weight: 800;
+    margin-bottom: 10px;
+}
+
+.subtitulo {
+    color: #64748b;
+    font-size: 1rem;
+}
+
+/* ============================= */
+/* MENSAJES */
+/* ============================= */
+
+.mensaje-error {
+    color: #dc2626;
+    background: #fee2e2;
+    border: 1px solid #fecaca;
+    border-radius: 10px;
+    text-align: center;
+    margin-bottom: 18px;
+    padding: 12px;
+    font-weight: 800;
+}
+
+.mensaje-exito {
+    color: #15803d;
+    background: #dcfce7;
+    border: 1px solid #bbf7d0;
+    border-radius: 10px;
+    text-align: center;
+    margin-bottom: 18px;
+    padding: 12px;
+    font-weight: 800;
+}
+
+/* ============================= */
+/* FORMULARIO LOGIN */
+/* ============================= */
+
+.input-group {
+    margin-bottom: 24px;
+}
+
+label {
+    display: block;
+    color: #111827;
+    font-weight: 700;
+    margin-bottom: 10px;
+    font-size: 0.95rem;
+}
+
+.input-icon {
+    height: 62px;
+    border: 1px solid #d1d5db;
+    border-radius: 6px;
+    background: white;
+
+    display: flex;
+    align-items: center;
+    padding: 0 22px;
+}
+
+.input-icon:focus-within {
+    border-color: #0b63e5;
+    box-shadow: 0 0 0 3px rgba(11, 99, 229, 0.12);
+}
+
+.input-icon input {
+    width: 100%;
+    height: 100%;
+    border: none;
+    outline: none;
+    background: transparent;
+    font-size: 1.05rem;
+    color: #111827;
+}
+
+.input-icon input::placeholder {
+    color: #7b8494;
+}
+
+.options {
+    margin: 6px 0 34px;
+}
+
+.checkbox-label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #111827;
+    font-size: 1rem;
+    font-weight: 700;
+}
+
+.checkbox-label input {
+    width: 22px;
+    height: 22px;
+    cursor: pointer;
+}
+
+.btn-login {
+    width: 100%;
+    height: 64px;
+    border: none;
+    border-radius: 6px;
+    background: #005bea;
+    color: white;
+    font-size: 1.1rem;
+    font-weight: 800;
+    cursor: pointer;
+}
+
+.btn-login:hover {
+    background: #0049bd;
+}
+
+/* ============================= */
+/* CAPTCHA LOGIN TIPO IMAGEN */
+/* ============================= */
+
+.ML_captcha_card {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 22px;
+    padding: 18px;
+    margin-top: 8px;
+    margin-bottom: 24px;
+    border: 1px solid #d9e0ea;
+    border-radius: 16px;
+    background: #ffffff;
+    box-shadow: 0 10px 26px rgba(15, 23, 42, 0.08);
+    box-sizing: border-box;
+}
+
+.ML_captcha_imagen {
+    position: relative;
+    width: 230px;
+    height: 92px;
+    flex-shrink: 0;
+    overflow: hidden;
+    border: 1px solid #d8dee8;
+    border-radius: 12px;
+    background:
+        linear-gradient(135deg, rgba(255, 255, 255, 0.96), rgba(241, 245, 249, 0.96)),
+        repeating-linear-gradient(
+            25deg,
+            rgba(15, 23, 42, 0.06) 0,
+            rgba(15, 23, 42, 0.06) 1px,
+            transparent 1px,
+            transparent 12px
+        );
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    user-select: none;
+}
+
+.ML_captcha_imagen::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+        radial-gradient(circle at 18% 32%, rgba(15, 23, 42, 0.22) 0 1px, transparent 2px),
+        radial-gradient(circle at 42% 70%, rgba(15, 23, 42, 0.18) 0 1px, transparent 2px),
+        radial-gradient(circle at 68% 24%, rgba(15, 23, 42, 0.16) 0 1px, transparent 2px),
+        radial-gradient(circle at 86% 58%, rgba(15, 23, 42, 0.20) 0 1px, transparent 2px);
+    opacity: 0.7;
+}
+
+.ML_captcha_imagen::after {
+    content: "";
+    position: absolute;
+    width: 280px;
+    height: 80px;
+    background:
+        linear-gradient(20deg, transparent 43%, rgba(15, 23, 42, 0.24) 44%, transparent 46%),
+        linear-gradient(-18deg, transparent 52%, rgba(15, 23, 42, 0.20) 53%, transparent 55%),
+        linear-gradient(8deg, transparent 38%, rgba(15, 23, 42, 0.16) 39%, transparent 41%);
+    transform: rotate(-3deg);
+}
+
+.ML_captcha_imagen span {
+    position: relative;
+    z-index: 2;
+    color: #2f333a;
+    font-size: 3.2rem;
+    font-weight: 900;
+    letter-spacing: 8px;
+    line-height: 1;
+    text-shadow:
+        1px 1px 0 rgba(0, 0, 0, 0.12),
+        -1px 0 0 rgba(0, 0, 0, 0.08);
+    transform: rotate(-2deg) skewX(-6deg);
+}
+
+.ML_captcha_datos {
+    flex: 1;
+    min-width: 0;
+}
+
+.ML_captcha_datos label {
+    display: block;
+    margin-bottom: 10px;
+    color: #111827;
+    font-size: 1.05rem;
+    font-weight: 700;
+}
+
+.ML_captcha_datos input {
+    width: 100%;
+    height: 58px;
+    border: 1px solid #cbd5e1;
+    border-radius: 10px;
+    background: #ffffff;
+    padding: 0 18px;
+    color: #111827;
+    font-size: 1.2rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    outline: none;
+    box-sizing: border-box;
+}
+
+.ML_captcha_datos input:focus {
+    border-color: #0b63e5;
+    box-shadow: 0 0 0 3px rgba(11, 99, 229, 0.12);
+}
+
+/* ============================= */
+/* ACCESO PARA PACIENTES */
+/* ============================= */
+
+.ML_login_divider {
+    width: 100%;
+    margin: 28px 0 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+}
+
+.ML_login_divider span {
+    height: 1px;
+    flex: 1;
+    background: #e2e8f0;
+}
+
+.ML_login_divider p {
+    color: #64748b;
+    font-size: 0.82rem;
+    font-weight: 700;
+    white-space: nowrap;
+    margin: 0;
+}
+
+.ML_btn_acceso_paciente {
+    height: 48px;
+    width: 260px;
+    margin: 0 auto;
+    border: 1px solid #0b63e5;
+    border-radius: 8px;
+    background: white;
+    color: #0b63e5;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+
+    font-size: 0.95rem;
+    font-weight: 800;
+    text-decoration: none;
+    transition: 0.2s ease;
+}
+
+.ML_btn_acceso_paciente:hover {
+    background: #eff6ff;
+    box-shadow: 0 8px 20px rgba(11, 99, 229, 0.12);
+}
+
+.ML_btn_acceso_icono {
+    color: #0b63e5;
+    font-size: 1rem;
+}
+
+/* ============================= */
+/* FOOTER */
+/* ============================= */
+
+footer {
+    margin-top: 20px;
+    color: #64748b;
+    font-size: 0.95rem;
+    text-align: center;
+}
+
+/* ============================= */
+/* REGISTRO PACIENTE */
+/* ============================= */
+
+.ML_body_registro {
+    min-height: 100vh;
+    background:
+        linear-gradient(rgba(13, 64, 120, 0.84), rgba(13, 64, 120, 0.84)),
+        url('/images/ML_fondo_sesion.png');
+    background-size: cover;
+    background-position: center;
+}
+
+.ML_registro_page {
+    min-height: 100vh;
+    padding: 45px 20px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.ML_registro_card {
+    width: 100%;
+    max-width: 980px;
+    background: white;
+    border-radius: 22px;
+    padding: 34px;
+    box-shadow: 0 24px 60px rgba(15, 23, 42, 0.28);
+}
+
+.ML_registro_header {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    margin-bottom: 28px;
+    padding-bottom: 22px;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.ML_registro_logo {
+    width: 62px;
+    height: 62px;
+    min-width: 62px;
+    border-radius: 16px;
+    background: linear-gradient(135deg, #2f7cff, #0b5fe8);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 14px 28px rgba(11, 99, 229, 0.25);
+}
+
+.ML_registro_logo span {
+    font-size: 2.6rem;
+    font-weight: 900;
+    line-height: 1;
+    margin-top: -3px;
+}
+
+.ML_registro_header h1 {
+    font-size: 2rem;
+    color: #0f172a;
+    font-weight: 900;
+    margin-bottom: 6px;
+}
+
+.ML_registro_header p {
+    color: #64748b;
+    font-size: 1rem;
+    font-weight: 500;
+}
+
+.ML_form_registro {
+    width: 100%;
+}
+
+.ML_registro_seccion {
+    margin-bottom: 30px;
+}
+
+.ML_registro_seccion h2 {
+    font-size: 1.25rem;
+    color: #0f172a;
+    font-weight: 900;
+    margin-bottom: 18px;
+}
+
+.ML_registro_grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 18px;
+}
+
+.ML_registro_input {
+    display: flex;
+    flex-direction: column;
+}
+
+.ML_registro_input label {
+    color: #111827;
+    font-weight: 800;
+    margin-bottom: 9px;
+    font-size: 0.95rem;
+}
+
+.ML_registro_input input,
+.ML_registro_input select {
+    height: 54px;
+    border: 1px solid #d1d5db;
+    border-radius: 10px;
+    padding: 0 15px;
+    font-size: 1rem;
+    outline: none;
+    color: #111827;
+    background: white;
+}
+
+.ML_registro_input input::placeholder {
+    color: #94a3b8;
+}
+
+.ML_registro_input input:focus,
+.ML_registro_input select:focus {
+    border-color: #0b63e5;
+    box-shadow: 0 0 0 3px rgba(11, 99, 229, 0.12);
+}
+
+.ML_registro_full {
+    grid-column: span 2;
+}
+
+.ML_registro_acciones {
+    margin-top: 28px;
+    padding-top: 24px;
+    border-top: 1px solid #e5e7eb;
+    display: flex;
+    justify-content: flex-end;
+    gap: 14px;
+}
+
+.ML_btn_volver_login,
+.ML_btn_guardar_registro {
+    height: 54px;
+    border-radius: 10px;
+    padding: 0 24px;
+    font-size: 1rem;
+    font-weight: 900;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.ML_btn_volver_login {
+    background: #e5e7eb;
+    color: #334155;
+}
+
+.ML_btn_volver_login:hover {
+    background: #d1d5db;
+}
+
+.ML_btn_guardar_registro {
+    border: none;
+    background: #0b63e5;
+    color: white;
+}
+
+.ML_btn_guardar_registro:hover {
+    background: #0049bd;
+}
+
+/* ============================= */
+/* RESPONSIVE LOGIN */
+/* ============================= */
+
+@media (max-width: 1150px) {
+    .left-brand {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 18px;
+    }
+
+    .left-brand-text h1 {
+        font-size: 3.4rem;
+    }
+
+    .left-description {
+        max-width: 100%;
+    }
+}
+
+@media (max-width: 900px) {
+    .page {
+        flex-direction: column;
+    }
+
+    .left-panel {
+        width: 100%;
+        min-height: 320px;
+        padding: 45px 30px;
+    }
+
+    .left-brand {
+        flex-direction: row;
+        align-items: center;
+    }
+
+    .left-logo-box {
+        width: 64px;
+        height: 64px;
+        min-width: 64px;
+        border-radius: 16px;
+    }
+
+    .left-logo-plus {
+        font-size: 2.5rem;
+    }
+
+    .left-brand-text h1 {
+        font-size: 2.8rem;
+        margin-bottom: 8px;
+    }
+
+    .left-description {
+        font-size: 0.95rem;
+    }
+
+    .right-panel {
+        width: 100%;
+        padding: 30px 20px;
+    }
+
+    .login-content {
+        padding: 30px 0;
+    }
+}
+
+@media (max-width: 700px) {
+    .ML_captcha_card {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 14px;
+    }
+
+    .ML_captcha_imagen {
+        width: 100%;
+    }
+
+    .ML_captcha_imagen span {
+        font-size: 2.7rem;
+    }
+}
+
+/* ============================= */
+/* RESPONSIVE REGISTRO */
+/* ============================= */
+
+@media (max-width: 700px) {
+    .ML_registro_page {
+        padding: 25px 14px;
+    }
+
+    .ML_registro_card {
+        padding: 24px;
+        border-radius: 18px;
+    }
+
+    .ML_registro_header {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .ML_registro_header h1 {
+        font-size: 1.65rem;
+    }
+
+    .ML_registro_grid {
+        grid-template-columns: 1fr;
+    }
+
+    .ML_registro_full {
+        grid-column: span 1;
+    }
+
+    .ML_registro_acciones {
+        flex-direction: column;
+    }
+
+    .ML_btn_volver_login,
+    .ML_btn_guardar_registro {
+        width: 100%;
+    }
+}
+/* ============================= */
+/* FORMULARIOS ADMIN: DOCTOR / SECRETARIA */
+/* ============================= */
+
+.ML_admin_alerta {
+    margin: 0 42px 18px;
+    padding: 14px 18px;
+    border-radius: 10px;
+    font-weight: 800;
+    font-size: 0.95rem;
+}
+
+.ML_admin_alerta_exito {
+    color: #166534;
+    background: #dcfce7;
+    border: 1px solid #bbf7d0;
+}
+
+.ML_admin_alerta_error {
+    color: #991b1b;
+    background: #fee2e2;
+    border: 1px solid #fecaca;
+}
+
+.ML_btn_secundario_admin {
+    background: #64748b;
+}
+
+.ML_btn_secundario_admin:hover {
+    background: #475569;
+}
+
+.ML_form_admin_panel {
+    background: white;
+    margin: 0 42px 42px;
+    border-radius: 14px;
+    padding: 28px;
+    box-shadow: 0 8px 25px rgba(15, 23, 42, 0.06);
+}
+
+.ML_form_admin h3 {
+    color: #0f172a;
+    font-size: 1.25rem;
+    font-weight: 900;
+    margin-bottom: 18px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.ML_form_admin h3:not(:first-child) {
+    margin-top: 32px;
+}
+
+.ML_form_admin_grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 18px;
+}
+
+.ML_form_admin_input {
+    display: flex;
+    flex-direction: column;
+}
+
+.ML_form_admin_full {
+    grid-column: span 2;
+}
+
+.ML_form_admin_input label {
+    color: #111827;
+    font-weight: 800;
+    margin-bottom: 8px;
+    font-size: 0.95rem;
+}
+
+.ML_form_admin_input input,
+.ML_form_admin_input select {
+    height: 54px;
+    border: 1px solid #d1d5db;
+    border-radius: 10px;
+    padding: 0 15px;
+    font-size: 1rem;
+    outline: none;
+    color: #111827;
+    background: white;
+}
+
+.ML_form_admin_input input:focus,
+.ML_form_admin_input select:focus {
+    border-color: #0b63e5;
+    box-shadow: 0 0 0 3px rgba(11, 99, 229, 0.12);
+}
+
+.ML_form_admin_acciones {
+    margin-top: 30px;
+    padding-top: 24px;
+    border-top: 1px solid #e5e7eb;
+    display: flex;
+    justify-content: flex-end;
+    gap: 14px;
+}
+
+.ML_btn_cancelar_admin,
+.ML_btn_guardar_admin {
+    height: 52px;
+    border-radius: 10px;
+    padding: 0 24px;
+    font-size: 1rem;
+    font-weight: 900;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+}
+
+.ML_btn_cancelar_admin {
+    background: #e5e7eb;
+    color: #334155;
+}
+
+.ML_btn_cancelar_admin:hover {
+    background: #d1d5db;
+}
+
+.ML_btn_guardar_admin {
+    border: none;
+    background: #0b63e5;
+    color: white;
+}
+
+.ML_btn_guardar_admin:hover {
+    background: #084fc0;
+}
+
+@media (max-width: 700px) {
+    .ML_form_admin_panel,
+    .ML_admin_alerta {
+        margin-left: 20px;
+        margin-right: 20px;
+    }
+
+    .ML_form_admin_grid {
+        grid-template-columns: 1fr;
+    }
+
+    .ML_form_admin_full {
+        grid-column: span 1;
+    }
+
+    .ML_form_admin_acciones {
+        flex-direction: column;
+    }
+
+    .ML_btn_cancelar_admin,
+    .ML_btn_guardar_admin {
+        width: 100%;
+    }
+}

@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pagos</title>
+    <link rel="stylesheet" th:href="@{/css/ML_dashboardAdmin.css}" href="/css/ML_dashboardAdmin.css">
+    <link rel="stylesheet" th:href="@{/css/ML_citasAdmin.css}" href="/css/ML_citasAdmin.css">
+    <link rel="stylesheet" th:href="@{/css/ML_paciente.css}" href="/css/ML_paciente.css">
+    <link rel="stylesheet" th:href="@{/css/ML_iconos.css}" href="/css/ML_iconos.css">
+</head>
+<body>
+<div class="ML_dashboard_layout">
+    <aside class="ML_sidebar">
+        <div class="ML_sidebar_marca"><div class="ML_marca_icono">+</div><div><h2>MediLink</h2><p>Sistema de<br>Citas Médicas</p></div></div>
+        <nav class="ML_menu">
+            <a th:href="@{/paciente/dashboard}" class="ML_menu_link"><span class="ML_menu_icono"><span class="ML_icon ML_icon_home" aria-hidden="true"></span></span><span>Principal</span></a>
+            <a th:href="@{/paciente/citas}" class="ML_menu_link"><span class="ML_menu_icono"><span class="ML_icon ML_icon_appointment" aria-hidden="true"></span></span><span>Citas asignadas</span></a>
+            <a th:href="@{/paciente/historial}" class="ML_menu_link"><span class="ML_menu_icono"><span class="ML_icon ML_icon_history" aria-hidden="true"></span></span><span>Historial</span></a>
+            <a th:href="@{/paciente/pagos}" class="ML_menu_link ML_activo"><span class="ML_menu_icono"><span class="ML_icon ML_icon_payment" aria-hidden="true"></span></span><span>Pago</span></a>
+        </nav>
+        <div class="ML_sidebar_footer"><form th:action="@{/logout}" method="post"><button type="submit" class="ML_btn_logout">Cerrar sesión</button></form></div>
+    </aside>
+
+    <main class="ML_contenido ML_paciente_contenido">
+        <section class="ML_pacientes_topbar">
+            <div class="ML_topbar_left"><span class="ML_topbar_menu"><span class="ML_icon ML_icon_menu" aria-hidden="true"></span></span><h1>Pagos</h1></div>
+            <div class="ML_topbar_user"><span class="ML_notificacion"><span class="ML_icon ML_icon_bell" aria-hidden="true"></span></span><div class="ML_topbar_avatar">P</div><div><strong th:text="${ML_perfilPaciente.paciente ?: 'Paciente'}">Paciente</strong><p>Paciente</p></div></div>
+        </section>
+
+        <section class="ML_paciente_header">
+            <div>
+                <h2>Pagos</h2>
+                <p>Consulta si tus citas están pendientes o pagadas. Los pagos son confirmados por Secretaria en recepción mediante efectivo, Yape o Plin.</p>
+            </div>
+            <div style="display:flex; gap:12px; align-items:center; flex-wrap:wrap;">
+                <div class="ML_paciente_badge"><span>Total pagado</span><strong th:text="${ML_totalPagado}">S/ 0.00</strong><small>Pagos confirmados</small></div>
+                <span th:if="${!#lists.isEmpty(ML_citasParaPago)}" class="ML_btn_paciente_secondary">Pendiente de confirmar en recepción</span>
+                <span th:if="${#lists.isEmpty(ML_citasParaPago)}" class="ML_btn_paciente_secondary">Sin pagos pendientes</span>
+            </div>
+        </section>
+
+        <div class="ML_alerta_exito" th:if="${ML_mensajeExito}" th:text="${ML_mensajeExito}">Correcto</div>
+        <div class="ML_alerta_error" th:if="${ML_mensajeError}" th:text="${ML_mensajeError}">Error</div>
+
+        <section class="ML_paciente_panel">
+            <div class="ML_paciente_panel_header">
+                <div><h3>Citas pendientes de pago</h3><p>El paciente solo visualiza el estado. La Secretaria registra o confirma el pago manualmente.</p></div>
+            </div>
+            <div class="ML_tabla_contenedor">
+                <table class="ML_tabla_pacientes_admin">
+                    <thead><tr><th>Cita</th><th>Doctor</th><th>Fecha</th><th>Estado cita</th><th>Monto</th><th>Pagado</th><th>Saldo</th></tr></thead>
+                    <tbody>
+                    <tr th:if="${#lists.isEmpty(ML_citasParaPago)}"><td colspan="7" class="ML_tabla_vacia">No tienes citas pendientes de pago.</td></tr>
+                    <tr th:each="ML_cita : ${ML_citasParaPago}">
+                        <td th:text="${'#C-' + ML_cita.id_cita}">#C-1</td>
+                        <td><strong th:text="${ML_cita.doctor}">Doctor</strong><span class="ML_texto_muted" th:text="${ML_cita.especialidad}">Especialidad</span></td>
+                        <td><span th:text="${ML_cita.fecha_cita_texto}">Fecha</span><span class="ML_texto_muted" th:text="${ML_cita.hora_inicio_texto + ' - ' + ML_cita.hora_fin_texto}">Hora</span></td>
+                        <td><span class="ML_estado_cita_select" th:classappend="${ML_cita.estado == 'Confirmada' ? ' ML_estado_confirmada' : (ML_cita.estado == 'Pendiente' ? ' ML_estado_pendiente' : (ML_cita.estado == 'Atendida' ? ' ML_estado_atendida' : ' ML_estado_cancelada'))}" th:text="${ML_cita.estado}">Estado</span></td>
+                        <td th:text="${'S/ ' + ML_cita.precio_consulta}">S/ 0.00</td>
+                        <td th:text="${'S/ ' + ML_cita.monto_pagado}">S/ 0.00</td>
+                        <td><strong th:text="${'S/ ' + ML_cita.saldo_pendiente}">S/ 0.00</strong></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <section class="ML_paciente_panel">
+            <div class="ML_paciente_panel_header">
+                <div><h3>Historial de pagos confirmados</h3><p>Operaciones registradas por recepción para tus citas.</p></div>
+                <div class="ML_buscador"><span><span class="ML_icon ML_icon_search" aria-hidden="true"></span></span><input type="text" id="ML_buscarPagosPaciente" placeholder="Buscar por método, código o doctor..."></div>
+            </div>
+            <div class="ML_tabla_contenedor">
+                <table class="ML_tabla_pacientes_admin" id="ML_tablaPagosPaciente">
+                    <thead><tr><th>Pago</th><th>Cita</th><th>Doctor</th><th>Monto</th><th>Método</th><th>Estado</th><th>Código</th><th>Fecha pago</th><th>Comprobante</th></tr></thead>
+                    <tbody>
+                    <tr th:if="${#lists.isEmpty(ML_pagos)}"><td colspan="9" class="ML_tabla_vacia">Aún no tienes pagos confirmados.</td></tr>
+                    <tr th:each="ML_pago : ${ML_pagos}">
+                        <td th:text="${'#P-' + ML_pago.id_pago}">#P-1</td>
+                        <td><span th:text="${'#C-' + ML_pago.id_cita}">#C-1</span><span class="ML_texto_muted" th:text="${ML_pago.fecha_cita_texto + ' - ' + ML_pago.hora_inicio_texto}">Fecha</span></td>
+                        <td><strong th:text="${ML_pago.doctor}">Doctor</strong><span class="ML_texto_muted" th:text="${ML_pago.especialidad}">Especialidad</span></td>
+                        <td th:text="${'S/ ' + ML_pago.monto}">S/ 0.00</td>
+                        <td th:text="${ML_pago.metodo_pago}">Yape</td>
+                        <td><span class="ML_estado_cita_select" th:classappend="${ML_pago.estado_pago == 'Pagado' ? ' ML_estado_confirmada' : ' ML_estado_pendiente'}" th:text="${ML_pago.estado_pago}">Pagado</span></td>
+                        <td th:text="${ML_pago.codigo_operacion != null ? ML_pago.codigo_operacion : '-'}">Código</td>
+                        <td th:text="${ML_pago.fecha_pago_texto}">Fecha</td>
+                        <td><a class="ML_btn_paciente_table" th:href="@{/api/comprobantes/pagos/{id}/pdf(id=${ML_pago.id_pago})}">PDF</a></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </main>
+</div>
+<script>
+const ML_buscarPagosPaciente = document.getElementById('ML_buscarPagosPaciente');
+const ML_tablaPagosPaciente = document.getElementById('ML_tablaPagosPaciente');
+if (ML_buscarPagosPaciente && ML_tablaPagosPaciente) {
+    ML_buscarPagosPaciente.addEventListener('keyup', () => {
+        const texto = ML_buscarPagosPaciente.value.toLowerCase();
+        ML_tablaPagosPaciente.querySelectorAll('tbody tr').forEach(fila => {
+            fila.style.display = fila.textContent.toLowerCase().includes(texto) ? '' : 'none';
+        });
+    });
+}
+</script>
+</body>
+</html>

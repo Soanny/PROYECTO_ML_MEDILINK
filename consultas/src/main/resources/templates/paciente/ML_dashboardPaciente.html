@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel del Paciente</title>
+    <link rel="stylesheet" th:href="@{/css/ML_dashboardAdmin.css}" href="/css/ML_dashboardAdmin.css">
+    <link rel="stylesheet" th:href="@{/css/ML_citasAdmin.css}" href="/css/ML_citasAdmin.css">
+    <link rel="stylesheet" th:href="@{/css/ML_paciente.css}" href="/css/ML_paciente.css">
+    <link rel="stylesheet" th:href="@{/css/ML_iconos.css}" href="/css/ML_iconos.css">
+</head>
+<body>
+<div class="ML_dashboard_layout">
+    <aside class="ML_sidebar">
+        <div class="ML_sidebar_marca">
+            <div class="ML_marca_icono">+</div>
+            <div><h2>MediLink</h2><p>Sistema de<br>Citas Médicas</p></div>
+        </div>
+        <nav class="ML_menu">
+            <a th:href="@{/paciente/dashboard}" class="ML_menu_link ML_activo"><span class="ML_menu_icono"><span class="ML_icon ML_icon_home" aria-hidden="true"></span></span><span>Principal</span></a>
+            <a th:href="@{/paciente/citas}" class="ML_menu_link"><span class="ML_menu_icono"><span class="ML_icon ML_icon_appointment" aria-hidden="true"></span></span><span>Citas asignadas</span></a>
+            <a th:href="@{/paciente/historial}" class="ML_menu_link"><span class="ML_menu_icono"><span class="ML_icon ML_icon_history" aria-hidden="true"></span></span><span>Historial</span></a>
+            <a th:href="@{/paciente/pagos}" class="ML_menu_link"><span class="ML_menu_icono"><span class="ML_icon ML_icon_payment" aria-hidden="true"></span></span><span>Pago</span></a>
+        </nav>
+        <div class="ML_sidebar_footer">
+            <form th:action="@{/logout}" method="post"><button type="submit" class="ML_btn_logout">Cerrar sesión</button></form>
+        </div>
+    </aside>
+
+    <main class="ML_contenido ML_paciente_contenido">
+        <section class="ML_pacientes_topbar">
+            <div class="ML_topbar_left"><span class="ML_topbar_menu"><span class="ML_icon ML_icon_menu" aria-hidden="true"></span></span><h1>Panel del Paciente</h1></div>
+            <div class="ML_topbar_user">
+                <span class="ML_notificacion"><span class="ML_icon ML_icon_bell" aria-hidden="true"></span></span>
+                <div class="ML_topbar_avatar">P</div>
+                <div><strong th:text="${ML_perfilPaciente.paciente ?: 'Paciente'}">Paciente</strong><p>Paciente</p></div>
+            </div>
+        </section>
+
+        <section class="ML_paciente_header">
+            <div>
+                <h2>Bienvenido a tu espacio de atención</h2>
+                <p>Aquí puedes revisar tus citas asignadas y consultar el estado de pago de tus consultas.</p>
+            </div>
+            <div class="ML_paciente_badge">
+                <span>Paciente activo</span>
+                <strong th:text="${ML_perfilPaciente.paciente ?: 'Paciente'}">Paciente</strong>
+                <small th:text="${'DNI: ' + (ML_perfilPaciente.dni ?: '-')}">DNI</small>
+            </div>
+        </section>
+
+        <div class="ML_alerta_exito" th:if="${ML_mensajeExito}" th:text="${ML_mensajeExito}">Correcto</div>
+        <div class="ML_alerta_error" th:if="${ML_mensajeError}" th:text="${ML_mensajeError}">Error</div>
+
+        <section class="ML_paneles ML_paciente_resumen">
+            <div class="ML_panel"><div><p>Total citas</p><h2 th:text="${ML_totalCitas}">0</h2><span class="ML_badge ML_badge_azul">Asignadas</span></div><div class="ML_panel_icono ML_icono_azul"><span class="ML_icon ML_icon_appointment" aria-hidden="true"></span></div></div>
+            <div class="ML_panel"><div><p>Confirmadas</p><h2 th:text="${ML_citasConfirmadas}">0</h2><span class="ML_badge ML_badge_verde">Próximas</span></div><div class="ML_panel_icono ML_icono_verde"><span class="ML_icon ML_icon_check" aria-hidden="true"></span></div></div>
+            <div class="ML_panel"><div><p>Total pagado</p><h2 th:text="${ML_totalPagado}">S/ 0.00</h2><span class="ML_badge ML_badge_verde">Pagos</span></div><div class="ML_panel_icono ML_icono_verde">S/</div></div>
+        </section>
+
+        <section class="ML_paciente_grid">
+            <div class="ML_paciente_panel">
+                <div class="ML_paciente_panel_header">
+                    <div><h3>Próximas citas asignadas</h3><p>Consulta la información de tus próximas atenciones médicas.</p></div>
+                    <a th:href="@{/paciente/citas}" class="ML_btn_paciente_secondary">Ver todas</a>
+                </div>
+                <div class="ML_tabla_contenedor">
+                    <table class="ML_tabla_pacientes_admin">
+                        <thead><tr><th>Cita</th><th>Doctor</th><th>Fecha</th><th>Estado</th><th>Pago</th></tr></thead>
+                        <tbody>
+                        <tr th:if="${#lists.isEmpty(ML_proximasCitas)}"><td colspan="5" class="ML_tabla_vacia">No tienes próximas citas activas.</td></tr>
+                        <tr th:each="ML_cita : ${ML_proximasCitas}">
+                            <td th:text="${'#C-' + ML_cita.id_cita}">#C-1</td>
+                            <td><strong th:text="${ML_cita.doctor}">Doctor</strong><span class="ML_texto_muted" th:text="${ML_cita.especialidad}">Especialidad</span></td>
+                            <td><span th:text="${ML_cita.fecha_cita_texto}">Fecha</span><span class="ML_texto_muted" th:text="${ML_cita.hora_inicio_texto + ' - ' + ML_cita.hora_fin_texto}">Hora</span></td>
+                            <td><span class="ML_estado_cita_select" th:classappend="${ML_cita.estado == 'Confirmada' ? ' ML_estado_confirmada' : (ML_cita.estado == 'Pendiente' ? ' ML_estado_pendiente' : (ML_cita.estado == 'Atendida' ? ' ML_estado_atendida' : ' ML_estado_cancelada'))}" th:text="${ML_cita.estado}">Estado</span></td>
+                            <td><span th:text="${ML_cita.ultimo_estado_pago}">Sin pago</span></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="ML_paciente_panel">
+                <h3>Accesos rápidos</h3>
+                <p class="ML_texto_muted">Operaciones principales del paciente.</p><br>
+                <a th:href="@{/paciente/citas}" class="ML_btn_paciente_primary" style="width:100%; margin-bottom:10px;">Ver citas asignadas</a>
+                <a th:href="@{/paciente/pagos}" class="ML_btn_paciente_secondary" style="width:100%;">Ir a pagos</a>
+            </div>
+        </section>
+
+        
+    </main>
+</div>
+</body>
+</html>

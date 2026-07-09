@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seguimiento e Historial Clínico</title>
+    <link rel="stylesheet" th:href="@{/css/ML_dashboardAdmin.css}" href="/css/ML_dashboardAdmin.css">
+    <link rel="stylesheet" th:href="@{/css/ML_doctor.css}" href="/css/ML_doctor.css">
+    <link rel="stylesheet" th:href="@{/css/ML_iconos.css}" href="/css/ML_iconos.css">
+</head>
+<body>
+
+<div class="ML_dashboard_layout">
+    <aside class="ML_sidebar">
+        <div class="ML_sidebar_marca">
+            <div class="ML_marca_icono">+</div>
+            <div><h2>MediLink</h2><p>Sistema de<br>Citas Médicas</p></div>
+        </div>
+        <nav class="ML_menu">
+            <a th:href="@{/doctor/dashboard}" class="ML_menu_link"><span class="ML_menu_icono"><span class="ML_icon ML_icon_home" aria-hidden="true"></span></span><span>Principal</span></a>
+            <a th:href="@{/doctor/citas}" class="ML_menu_link"><span class="ML_menu_icono"><span class="ML_icon ML_icon_appointment" aria-hidden="true"></span></span><span>Citas asignadas</span></a>
+            <a th:href="@{/doctor/seguimiento}" class="ML_menu_link ML_activo"><span class="ML_menu_icono"><span class="ML_icon ML_icon_pill" aria-hidden="true"></span></span><span>Seguimiento</span></a>
+        </nav>
+        <div class="ML_sidebar_footer">
+            <form th:action="@{/logout}" method="post"><button type="submit" class="ML_btn_logout">Cerrar sesión</button></form>
+        </div>
+    </aside>
+
+    <main class="ML_contenido ML_doctor_contenido">
+        <section class="ML_pacientes_topbar">
+            <div class="ML_topbar_left"><span class="ML_topbar_menu"><span class="ML_icon ML_icon_menu" aria-hidden="true"></span></span><h1>Seguimiento e historial clínico</h1></div>
+            <div class="ML_topbar_user">
+                <span class="ML_notificacion"><span class="ML_icon ML_icon_bell" aria-hidden="true"></span></span>
+                <div class="ML_topbar_avatar">D</div>
+                <div><strong th:text="${ML_perfilDoctor.doctor}">Doctor</strong><p th:text="${ML_perfilDoctor.especialidad}">Especialidad</p></div>
+            </div>
+        </section>
+
+        <section class="ML_doctor_header">
+            <div>
+                <h2>Seguimiento clínico acumulativo por paciente</h2>
+                <p>Desde esta ventana puedes registrar nuevas atenciones, revisar el historial acumulado y ver el seguimiento de cada paciente.</p>
+            </div>
+            <div class="ML_doctor_panel_cards" style="display:flex;gap:15px;margin-top:15px;">
+                <div style="background:white;padding:15px 20px;border-radius:10px;text-align:center;flex:1;"><strong style="font-size:24px;" th:text="${ML_totalHistoriales}">0</strong><p style="margin:0;color:#666;">Registros</p></div>
+                <div style="background:white;padding:15px 20px;border-radius:10px;text-align:center;flex:1;"><strong style="font-size:24px;" th:text="${ML_totalPacientesHistorial}">0</strong><p style="margin:0;color:#666;">Pacientes</p></div>
+                <div style="background:white;padding:15px 20px;border-radius:10px;text-align:center;flex:1;"><strong style="font-size:24px;" th:text="${ML_totalSeguimientos}">0</strong><p style="margin:0;color:#666;">En seguimiento</p></div>
+            </div>
+        </section>
+
+        <div class="ML_alerta_exito" th:if="${ML_mensajeExito}" th:text="${ML_mensajeExito}">Correcto</div>
+        <div class="ML_alerta_error" th:if="${ML_mensajeError}" th:text="${ML_mensajeError}">Error</div>
+
+        <div class="ML_seguimiento_tabs">
+            <button type="button" class="ML_seguimiento_tab ML_activo" data-ml-tab="ML_tabNuevo"><span>＋</span> Nuevo registro</button>
+            <button type="button" class="ML_seguimiento_tab" data-ml-tab="ML_tabHistorial"><span>▦</span> Historial completo</button>
+        </div>
+
+        <!-- TAB 1: Nuevo registro -->
+        <div class="ML_seguimiento_panel ML_activo" id="ML_tabNuevo">
+            <section class="ML_doctor_panel">
+                <div class="ML_doctor_panel_header">
+                    <div>
+                        <h3>Agregar nuevo registro</h3>
+                        <p>Selecciona una cita del paciente. Primero se mostrará la lista de registros existentes y luego podrás agregar un nuevo registro.</p>
+                    </div>
+                    <a th:href="@{/doctor/citas}" class="ML_btn_doctor_secondary"><span>↗</span> Ver citas asignadas</a>
+                </div>
+
+                <div class="ML_seguimiento_citas_lista">
+                    <div th:if="${#lists.isEmpty(ML_citasParaSeguimiento)}" class="ML_tabla_vacia ML_seguimiento_vacio">
+                        No hay citas disponibles para registrar seguimiento.
+                    </div>
+
+                    <article class="ML_seguimiento_cita_item" th:each="ML_cita : ${ML_citasParaSeguimiento}">
+                        <div class="ML_seguimiento_cita_tabla">
+                            <div class="ML_seguimiento_cita_head">
+                                <span>Paciente</span>
+                                <span>Fecha</span>
+                                <span>Hora</span>
+                                <span>Motivo</span>
+                                <span>Estado</span>
+                                <span>Registros previos</span>
+                            </div>
+
+                            <div class="ML_seguimiento_cita_body">
+                                <div class="ML_paciente_info">
+                                    <div class="ML_paciente_foto" th:text="${#strings.substring(ML_cita.paciente, 0, 1)}">P</div>
+                                    <div>
+                                        <strong th:text="${ML_cita.paciente}">Paciente</strong>
+                                        <span th:text="${'DNI: ' + ML_cita.dni_paciente + ' | Alergias: ' + (ML_cita.alergias != null ? ML_cita.alergias : 'No registradas')}">DNI</span>
+                                    </div>
+                                </div>
+
+                                <span th:text="${ML_cita.fecha_cita_texto}">00/00/0000</span>
+                                <span th:text="${ML_cita.hora_inicio_texto + ' - ' + ML_cita.hora_fin_texto}">Hora</span>
+                                <span th:text="${ML_cita.motivo}">Motivo</span>
+                                <span>
+                                    <span class="ML_estado" th:text="${ML_cita.estado}"
+                                          th:classappend="${#strings.equalsIgnoreCase(ML_cita.estado, 'Confirmada')} ? ' ML_estado_confirmada' : (${#strings.equalsIgnoreCase(ML_cita.estado, 'Pendiente')} ? ' ML_estado_pendiente' : (${#strings.equalsIgnoreCase(ML_cita.estado, 'Cancelada')} ? ' ML_estado_cancelada' : ' ML_estado_atendida'))">
+                                        Pendiente
+                                    </span>
+                                </span>
+                                <strong th:text="${ML_cita.total_historiales_cita}">0</strong>
+                            </div>
+                        </div>
+
+                        <div class="ML_seguimiento_cita_accion">
+                            <a th:if="${!#strings.equalsIgnoreCase(ML_cita.estado, 'Atendida')}" th:href="@{/doctor/seguimiento/registros/{id}(id=${ML_cita.id_cita})}" class="ML_btn_doctor_table ML_btn_seguimiento_lateral"><span>＋</span> Agregar registro</a>
+                                <span th:if="${#strings.equalsIgnoreCase(ML_cita.estado, 'Atendida')}" class="ML_estado_tabla ML_estado_inactivo">Atendida bloqueada</span>
+                        </div>
+                    </article>
+                </div>
+            </section>
+        </div>
+
+
+
+        <!-- TAB 3: Historial completo -->
+        <div class="ML_seguimiento_panel" id="ML_tabHistorial">
+            <section class="ML_doctor_panel">
+                <div class="ML_doctor_panel_header">
+                    <div>
+                        <h3>Historial clínico completo</h3>
+                        <p>Todos los registros clínicos ordenados por fecha.</p>
+                    </div>
+                </div>
+
+                <div th:if="${#lists.isEmpty(ML_historialCompleto)}" class="ML_tabla_vacia ML_seguimiento_vacio">
+                    No hay registros clínicos.
+                </div>
+
+                <div class="ML_historial_item" th:each="ML_h : ${ML_historialCompleto}">
+                    <div style="display:flex;justify-content:space-between;align-items:start;">
+                        <div>
+                            <strong th:text="${ML_h.paciente}" style="font-size:16px;">Paciente</strong>
+                            <span style="color:#888;margin-left:10px;font-size:13px;" th:text="${'(' + ML_h.dni_paciente + ')'}">DNI</span>
+                        </div>
+                        <div style="text-align:right;">
+                            <span style="color:#666;font-size:13px;" th:text="${ML_h.fecha_cita_texto + ' - ' + ML_h.hora_inicio_texto}">Fecha</span>
+                            <br>
+                            <span class="ML_badge_atenciones" th:text="${ML_h.especialidad}">Esp</span>
+                        </div>
+                    </div>
+                    <div style="margin-top:10px;padding-top:10px;border-top:1px solid #eee;">
+                        <p><strong>Diagnóstico:</strong> <span th:text="${ML_h.diagnostico}">Diag</span></p>
+                        <p th:if="${ML_h.tratamiento != null}"><strong>Tratamiento:</strong> <span th:text="${ML_h.tratamiento}">Trat</span></p>
+                        <p th:if="${ML_h.receta != null}"><strong>Receta:</strong> <span th:text="${ML_h.receta}">Rec</span></p>
+                        <p th:if="${ML_h.observaciones != null}"><strong>Observaciones:</strong> <span th:text="${ML_h.observaciones}">Obs</span></p>
+                    </div>
+                    <div style="margin-top:10px;display:flex;gap:8px;justify-content:flex-end;">
+                        <a th:href="@{/doctor/seguimiento/paciente/{id}(id=${ML_h.id_paciente})}" class="ML_btn_doctor_table"><span>👁</span> Ver paciente</a>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+    </main>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const ML_tabs = document.querySelectorAll('.ML_seguimiento_tab[data-ml-tab]');
+        const ML_paneles = document.querySelectorAll('.ML_seguimiento_panel');
+
+        function ML_activarTab(ML_tabId, ML_boton) {
+            ML_paneles.forEach(function (ML_panel) {
+                ML_panel.classList.toggle('ML_activo', ML_panel.id === ML_tabId);
+            });
+            ML_tabs.forEach(function (ML_tab) {
+                ML_tab.classList.toggle('ML_activo', ML_tab === ML_boton);
+            });
+        }
+
+        ML_tabs.forEach(function (ML_tab) {
+            ML_tab.addEventListener('click', function () {
+                ML_activarTab(ML_tab.getAttribute('data-ml-tab'), ML_tab);
+            });
+        });
+
+        const ML_tabInicial = document.querySelector('.ML_seguimiento_tab.ML_activo') || ML_tabs[0];
+        if (ML_tabInicial) {
+            ML_activarTab(ML_tabInicial.getAttribute('data-ml-tab'), ML_tabInicial);
+        }
+    });
+</script>
+
+</body>
+</html>

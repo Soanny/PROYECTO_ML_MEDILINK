@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Gestión de Citas</title>
+
+    <link rel="stylesheet" th:href="@{/css/ML_dashboardAdmin.css}" href="/css/ML_dashboardAdmin.css">
+    <link rel="stylesheet" th:href="@{/css/ML_citasAdmin.css}" href="/css/ML_citasAdmin.css">
+    <link rel="stylesheet" th:href="@{/css/ML_iconos.css}" href="/css/ML_iconos.css">
+</head>
+
+<body>
+
+<div class="ML_dashboard_layout">
+
+    <aside class="ML_sidebar">
+
+        <div class="ML_sidebar_marca">
+            <div class="ML_marca_icono">+</div>
+            <div>
+                <h2>MediLink</h2>
+                <p>Sistema de<br>Citas Médicas</p>
+            </div>
+        </div>
+
+        <nav class="ML_menu">
+
+            <a th:href="@{/admin/dashboard}" class="ML_menu_link">
+                <span class="ML_menu_icono"><span class="ML_icon ML_icon_home" aria-hidden="true"></span></span>
+                <span>Principal</span>
+            </a>
+            <a th:href="@{/admin/usuarios}" class="ML_menu_link">
+                <span class="ML_menu_icono"><span class="ML_icon ML_icon_users" aria-hidden="true"></span></span>
+                <span>Usuarios</span>
+            </a>
+
+            <a th:href="@{/admin/citas}" class="ML_menu_link ML_activo">
+                <span class="ML_menu_icono"><span class="ML_icon ML_icon_appointment" aria-hidden="true"></span></span>
+                <span>Citas</span>
+            </a>
+
+            <a th:href="@{/admin/horarios}" class="ML_menu_link">
+                <span class="ML_menu_icono"><span class="ML_icon ML_icon_calendar" aria-hidden="true"></span></span>
+                <span>Calendario</span>
+            </a>
+
+            
+            <a th:href="@{/admin/disponibilidad}" class="ML_menu_link">
+                <span class="ML_menu_icono"><span class="ML_icon ML_icon_clock" aria-hidden="true"></span></span>
+                <span>Disponibilidad</span>
+            </a>
+            <a th:href="@{/admin/horarios-doctores}" class="ML_menu_link">
+                <span class="ML_menu_icono"><span class="ML_icon ML_icon_clock" aria-hidden="true"></span></span>
+                <span>Horarios doctores</span>
+            </a>
+
+            <a th:href="@{/admin/consultorios}" class="ML_menu_link">
+                <span class="ML_menu_icono"><span class="ML_icon ML_icon_clipboard" aria-hidden="true"></span></span>
+                <span>Consultorios</span>
+            </a>
+
+            <a th:href="@{/admin/pagos}" class="ML_menu_link">
+                <span class="ML_menu_icono"><span class="ML_icon ML_icon_payment" aria-hidden="true"></span></span>
+                <span>Pagos</span>
+            </a>
+            <a th:href="@{/admin/correos}" class="ML_menu_link">
+                <span class="ML_menu_icono"><span class="ML_icon ML_icon_report" aria-hidden="true"></span></span>
+                <span>Notificaciones</span>
+            </a>
+<a th:href="@{/admin/reportes}" class="ML_menu_link">
+                <span class="ML_menu_icono"><span class="ML_icon ML_icon_report" aria-hidden="true"></span></span>
+                <span>Reportes</span>
+            </a>
+
+            <a th:href="@{/admin/especialidades}" class="ML_menu_link">
+                <span class="ML_menu_icono"><span class="ML_icon ML_icon_add" aria-hidden="true"></span></span>
+                <span>Especialidades</span>
+            </a>
+
+            <a th:href="@{/admin/ranking-doctores}" class="ML_menu_link">
+                <span class="ML_menu_icono"><span class="ML_icon ML_icon_ranking" aria-hidden="true"></span></span>
+                <span>Ranking Doctores</span>
+            </a>
+
+            <a th:href="@{/admin/historial}" class="ML_menu_link">
+                <span class="ML_menu_icono"><span class="ML_icon ML_icon_history" aria-hidden="true"></span></span>
+                <span>Historial Clínico</span>
+            </a>
+
+        </nav>
+
+        <div class="ML_sidebar_footer">
+            <form th:action="@{/logout}" method="post">
+                <button type="submit" class="ML_btn_logout">Cerrar sesión</button>
+            </form>
+        </div>
+
+    </aside>
+
+    <main class="ML_contenido ML_citas_contenido">
+
+        <section class="ML_pacientes_topbar">
+            <div class="ML_topbar_left">
+                <span class="ML_topbar_menu"><span class="ML_icon ML_icon_menu" aria-hidden="true"></span></span>
+                <h1>Citas</h1>
+            </div>
+
+            <div class="ML_topbar_user">
+                <span class="ML_notificacion"><span class="ML_icon ML_icon_bell" aria-hidden="true"></span></span>
+                <div class="ML_topbar_avatar">A</div>
+                <div>
+                    <strong>Admin</strong>
+                    <p>Administrador</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="ML_pacientes_header">
+            <div>
+                <h2>Gestión de Citas</h2>
+                <p>Consulta, registra y administra las citas médicas del sistema.</p>
+            </div>
+
+            <a th:href="@{/admin/citas/nueva}" class="ML_btn_nuevo_paciente">
+                <span>+</span>
+                Nueva cita
+            </a>
+        </section>
+
+        <div th:if="${ML_mensajeExito}" class="ML_admin_alerta ML_admin_alerta_exito">
+            <span th:text="${ML_mensajeExito}">Operación realizada correctamente.</span>
+        </div>
+
+        <div th:if="${ML_mensajeError}" class="ML_admin_alerta ML_admin_alerta_error">
+            <span th:text="${ML_mensajeError}">Error al realizar la operación.</span>
+        </div>
+
+        <section class="ML_paneles ML_pacientes_resumen">
+
+            <div class="ML_panel">
+                <div>
+                    <p>Total Citas</p>
+                    <h2 th:text="${ML_totalCitas}">0</h2>
+                    <span class="ML_badge ML_badge_azul">Registradas</span>
+                </div>
+                <div class="ML_panel_icono ML_icono_azul"><span class="ML_icon ML_icon_appointment" aria-hidden="true"></span></div>
+            </div>
+
+            <div class="ML_panel">
+                <div>
+                    <p>Confirmadas</p>
+                    <h2 th:text="${ML_citasConfirmadas}">0</h2>
+                    <span class="ML_badge ML_badge_verde">Atención segura</span>
+                </div>
+                <div class="ML_panel_icono ML_icono_verde"><span class="ML_icon ML_icon_check" aria-hidden="true"></span></div>
+            </div>
+
+            <div class="ML_panel">
+                <div>
+                    <p>Pendientes</p>
+                    <h2 th:text="${ML_citasPendientes}">0</h2>
+                    <span class="ML_badge ML_badge_amarillo">Por confirmar</span>
+                </div>
+                <div class="ML_panel_icono ML_icono_amarillo"><span class="ML_icon ML_icon_clock" aria-hidden="true"></span></div>
+            </div>
+
+            <div class="ML_panel">
+                <div>
+                    <p>Canceladas</p>
+                    <h2 th:text="${ML_citasCanceladas}">0</h2>
+                    <span class="ML_badge ML_badge_rojo">No atendidas</span>
+                </div>
+                <div class="ML_panel_icono ML_icono_rojo"><span class="ML_icon ML_icon_close" aria-hidden="true"></span></div>
+            </div>
+
+        </section>
+
+        <section class="ML_pacientes_panel">
+
+            <div class="ML_pacientes_filtros">
+
+                <div class="ML_buscador">
+                    <span><span class="ML_icon ML_icon_search" aria-hidden="true"></span></span>
+                    <input type="text" id="ML_buscarCita" placeholder="Buscar por paciente, doctor, DNI o especialidad...">
+                </div>
+
+                <div class="ML_select_estado">
+                    <span><span class="ML_icon ML_icon_pin" aria-hidden="true"></span></span>
+                    <select id="ML_filtrarEstado">
+                        <option value="">Todos los estados</option>
+                        <option value="Pendiente">Pendiente</option>
+                        <option value="Confirmada">Confirmada</option>
+                        <option value="Atendida">Atendida</option>
+                        <option value="Cancelada">Cancelada</option>
+                    </select>
+                </div>
+
+            </div>
+
+            <div class="ML_tabla_contenedor">
+
+                <table class="ML_tabla_pacientes_admin" id="ML_tablaCitas">
+
+                    <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Fecha</th>
+                        <th>Hora</th>
+                        <th>Paciente</th>
+                        <th>Doctor</th>
+                        <th>Especialidad</th>
+                        <th>Consultorio</th>
+                        <th>Estado</th>
+                    </tr>
+                    </thead>
+
+                    <tbody>
+
+                    <tr th:if="${#lists.isEmpty(ML_citas)}">
+                        <td colspan="8" class="ML_tabla_vacia">No hay citas registradas</td>
+                    </tr>
+
+                    <tr th:each="ML_cita : ${ML_citas}">
+
+                        <td th:text="${'#C-' + ML_cita.ML_idCita}">#C-1</td>
+
+                        <td th:text="${ML_cita.ML_fechaCita}">01/06/2026</td>
+
+                        <td th:text="${ML_cita.ML_horaInicio}">09:00 AM</td>
+
+                        <td>
+                            <div class="ML_paciente_info">
+                                <div class="ML_paciente_foto"
+                                     th:text="${#strings.substring(ML_cita.ML_paciente, 0, 1)}">
+                                    P
+                                </div>
+                                <div>
+                                    <strong th:text="${ML_cita.ML_paciente}">Paciente</strong>
+                                    <span th:text="${'DNI: ' + ML_cita.ML_dniPaciente}">DNI</span>
+                                </div>
+                            </div>
+                        </td>
+
+                        <td th:text="${ML_cita.ML_doctor}">Doctor</td>
+                        <td th:text="${ML_cita.ML_especialidad}">Especialidad</td>
+                        <td th:text="${ML_cita.ML_consultorio}">Consultorio</td>
+
+                        <td>
+                            <form th:action="@{/admin/citas/{id}/estado(id=${ML_cita.ML_idCita})}"
+                                  method="post"
+                                  class="ML_estado_cita_form">
+
+                                <select name="ML_estado"
+                                        class="ML_estado_cita_select"
+                                        th:disabled="${#strings.equalsIgnoreCase(ML_cita.ML_estado, 'Atendida')}"
+                                        title="Las citas atendidas quedan bloqueadas"
+                                        th:classappend="
+                                            ${#strings.equalsIgnoreCase(ML_cita.ML_estado, 'Confirmada')} ? ' ML_estado_confirmada' :
+                                            (${#strings.equalsIgnoreCase(ML_cita.ML_estado, 'Pendiente')} ? ' ML_estado_pendiente' :
+                                            (${#strings.equalsIgnoreCase(ML_cita.ML_estado, 'Cancelada')} ? ' ML_estado_cancelada' : ' ML_estado_atendida'))"
+                                        onchange="this.form.submit()">
+
+                                    <option value="Pendiente"
+                                            th:selected="${#strings.equalsIgnoreCase(ML_cita.ML_estado, 'Pendiente')}">
+                                        Pendiente
+                                    </option>
+
+                                    <option value="Confirmada"
+                                            th:selected="${#strings.equalsIgnoreCase(ML_cita.ML_estado, 'Confirmada')}">
+                                        Confirmada
+                                    </option>
+
+                                    <option value="Atendida"
+                                            th:if="${#strings.equalsIgnoreCase(ML_cita.ML_estado, 'Atendida')}"
+                                            th:selected="${#strings.equalsIgnoreCase(ML_cita.ML_estado, 'Atendida')}">
+                                        Atendida
+                                    </option>
+
+                                    <option value="Cancelada"
+                                            th:selected="${#strings.equalsIgnoreCase(ML_cita.ML_estado, 'Cancelada')}">
+                                        Cancelada
+                                    </option>
+
+                                </select>
+
+                            </form>
+                            <small class="ML_texto_muted" th:if="${#strings.equalsIgnoreCase(ML_cita.ML_estado, 'Atendida')}">Bloqueada</small>
+                        </td>
+
+                    </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+            <div class="ML_paginacion_pacientes">
+                <p>Mostrando citas registradas</p>
+
+                <div class="ML_paginacion_botones">
+                    <button class="ML_pagina_activa">1</button>
+                </div>
+            </div>
+
+        </section>
+
+    </main>
+
+</div>
+
+<script>
+    const ML_buscarCita = document.getElementById("ML_buscarCita");
+    const ML_filtrarEstado = document.getElementById("ML_filtrarEstado");
+    const ML_tablaCitas = document.getElementById("ML_tablaCitas");
+
+    function ML_filtrarCitas() {
+        const texto = ML_buscarCita.value.toLowerCase();
+        const estado = ML_filtrarEstado.value.toLowerCase();
+        const filas = ML_tablaCitas.querySelectorAll("tbody tr");
+
+        filas.forEach(fila => {
+            if (fila.querySelector('.ML_tabla_vacia')) return;
+            const contenido = fila.textContent.toLowerCase();
+            const coincideTexto = contenido.includes(texto);
+
+            let coincideEstado = true;
+            if (estado) {
+                const selectEstado = fila.querySelector('select[name="ML_estado"]');
+                const valorActual = selectEstado ? selectEstado.value.toLowerCase() : '';
+                coincideEstado = valorActual === estado;
+            }
+
+            fila.style.display = coincideTexto && coincideEstado ? "" : "none";
+        });
+    }
+
+    ML_buscarCita.addEventListener("keyup", ML_filtrarCitas);
+    ML_filtrarEstado.addEventListener("change", ML_filtrarCitas);
+</script>
+
+</body>
+</html>

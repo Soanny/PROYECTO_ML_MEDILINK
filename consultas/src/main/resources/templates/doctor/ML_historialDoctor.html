@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Historial Clínico</title>
+    <link rel="stylesheet" th:href="@{/css/ML_dashboardAdmin.css}" href="/css/ML_dashboardAdmin.css">
+    <link rel="stylesheet" th:href="@{/css/ML_doctor.css}" href="/css/ML_doctor.css">
+    <link rel="stylesheet" th:href="@{/css/ML_iconos.css}" href="/css/ML_iconos.css">
+</head>
+<body>
+
+<div class="ML_dashboard_layout">
+    <aside class="ML_sidebar">
+        <div class="ML_sidebar_marca">
+            <div class="ML_marca_icono">+</div>
+            <div><h2>MediLink</h2><p>Sistema de<br>Citas Médicas</p></div>
+        </div>
+        <nav class="ML_menu">
+            <a th:href="@{/doctor/dashboard}" class="ML_menu_link"><span class="ML_menu_icono"><span class="ML_icon ML_icon_home" aria-hidden="true"></span></span><span>Principal</span></a>
+            <a th:href="@{/doctor/citas}" class="ML_menu_link"><span class="ML_menu_icono"><span class="ML_icon ML_icon_appointment" aria-hidden="true"></span></span><span>Citas asignadas</span></a>
+            <a th:href="@{/doctor/seguimiento}" class="ML_menu_link ML_activo"><span class="ML_menu_icono"><span class="ML_icon ML_icon_pill" aria-hidden="true"></span></span><span>Seguimiento</span></a>
+        </nav>
+        <div class="ML_sidebar_footer">
+            <form th:action="@{/logout}" method="post"><button type="submit" class="ML_btn_logout">Cerrar sesión</button></form>
+        </div>
+    </aside>
+
+    <main class="ML_contenido ML_doctor_contenido">
+        <section class="ML_pacientes_topbar">
+            <div class="ML_topbar_left"><span class="ML_topbar_menu"><span class="ML_icon ML_icon_menu" aria-hidden="true"></span></span><h1>Historial clínico</h1></div>
+            <div class="ML_topbar_user">
+                <span class="ML_notificacion"><span class="ML_icon ML_icon_bell" aria-hidden="true"></span></span>
+                <div class="ML_topbar_avatar">D</div>
+                <div><strong th:text="${ML_perfilDoctor.doctor}">Doctor</strong><p th:text="${ML_perfilDoctor.especialidad}">Especialidad</p></div>
+            </div>
+        </section>
+
+        <section class="ML_doctor_header">
+            <div>
+                <h2>Historial clínico acumulativo por paciente</h2>
+                <p>Registra el historial de cada cita y consulta el expediente acumulado de cada paciente atendido.</p>
+            </div>
+        </section>
+
+        <div class="ML_alerta_exito" th:if="${ML_mensajeExito}" th:text="${ML_mensajeExito}">Mensaje</div>
+        <div class="ML_alerta_error" th:if="${ML_mensajeError}" th:text="${ML_mensajeError}">Error</div>
+
+        <section class="ML_paneles ML_doctor_resumen ML_doctor_resumen_3">
+            <div class="ML_panel">
+                <div><p>Pacientes con historial</p><h2 th:text="${ML_totalPacientesHistorial}">0</h2><span class="ML_badge ML_badge_azul">Acumulativo</span></div>
+                <div class="ML_panel_icono ML_icono_azul"><span class="ML_icon ML_icon_users" aria-hidden="true"></span></div>
+            </div>
+            <div class="ML_panel">
+                <div><p>Atenciones registradas</p><h2 th:text="${ML_totalHistoriales}">0</h2><span class="ML_badge ML_badge_morado">Historial clínico</span></div>
+                <div class="ML_panel_icono ML_icono_morado"><span class="ML_icon ML_icon_history" aria-hidden="true"></span></div>
+            </div>
+            <div class="ML_panel">
+                <div><p>Seguimientos visibles</p><h2 th:text="${ML_tratamientosSeguimiento}">0</h2><span class="ML_badge ML_badge_verde">Tratamiento</span></div>
+                <div class="ML_panel_icono ML_icono_verde"><span class="ML_icon ML_icon_pill" aria-hidden="true"></span></div>
+            </div>
+        </section>
+
+        <section class="ML_doctor_panel ML_doctor_panel_tabla">
+            <div class="ML_doctor_panel_header">
+                <div>
+                    <h3>Registrar historial clínico</h3>
+                    <p>Selecciona una cita asignada para agregar un nuevo registro clínico. Cada guardado se suma al historial acumulado del paciente y no reemplaza registros anteriores.</p>
+                </div>
+                <a th:href="@{/doctor/citas}" class="ML_btn_doctor_secondary">Ver citas asignadas</a>
+            </div>
+
+            <div class="ML_tabla_contenedor">
+                <table class="ML_tabla_pacientes_admin ML_tabla_doctor">
+                    <thead>
+                    <tr>
+                        <th>Paciente</th>
+                        <th>Fecha</th>
+                        <th>Horario</th>
+                        <th>Motivo</th>
+                        <th>Estado</th>
+                        <th>Registros</th>
+                        <th>Acción</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:if="${#lists.isEmpty(ML_citasParaHistorial)}">
+                        <td colspan="7" class="ML_tabla_vacia">No hay citas disponibles para agregar historial clínico.</td>
+                    </tr>
+                    <tr th:each="ML_cita : ${ML_citasParaHistorial}">
+                        <td>
+                            <div class="ML_paciente_info">
+                                <div class="ML_paciente_foto" th:text="${#strings.substring(ML_cita.paciente, 0, 1)}">P</div>
+                                <div><strong th:text="${ML_cita.paciente}">Paciente</strong><span th:text="${'DNI: ' + ML_cita.dni_paciente}">DNI</span></div>
+                            </div>
+                        </td>
+                        <td th:text="${ML_cita.fecha_cita_texto}">Fecha</td>
+                        <td th:text="${ML_cita.hora_inicio_texto + ' - ' + ML_cita.hora_fin_texto}">Horario</td>
+                        <td class="ML_td_texto" th:text="${ML_cita.motivo}">Motivo</td>
+                        <td><span class="ML_badge ML_badge_azul" th:text="${ML_cita.estado}">Estado</span></td>
+                        <td><span class="ML_badge ML_badge_morado" th:text="${ML_cita.total_historiales_cita + ' registro(s)'}">0 registro(s)</span></td>
+                        <td><a th:href="@{/doctor/seguimiento/registros/{id}(id=${ML_cita.id_cita})}" class="ML_btn_doctor_table">Agregar registros</a></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <section class="ML_doctor_panel ML_doctor_panel_tabla">
+            <div class="ML_doctor_panel_header">
+                <div>
+                    <h3>Pacientes con historial acumulado</h3>
+                    <p>Cada fila representa un paciente. El detalle muestra todas sus atenciones clínicas registradas.</p>
+                </div>
+                <a th:href="@{/doctor/seguimiento}" class="ML_btn_doctor_secondary">Ver seguimiento</a>
+            </div>
+
+            <div class="ML_pacientes_filtros">
+                <div class="ML_buscador"><span><span class="ML_icon ML_icon_search" aria-hidden="true"></span></span><input type="text" id="ML_buscarHistorialDoctor" placeholder="Buscar por paciente, DNI, último diagnóstico o alergias..."></div>
+            </div>
+
+            <div class="ML_tabla_contenedor">
+                <table class="ML_tabla_pacientes_admin ML_tabla_doctor" id="ML_tablaHistorialDoctor">
+                    <thead>
+                    <tr>
+                        <th>Paciente</th>
+                        <th>Datos clínicos</th>
+                        <th>Atenciones</th>
+                        <th>Último diagnóstico</th>
+                        <th>Última cita</th>
+                        <th>Último registro</th>
+                        <th>Detalle</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:if="${#lists.isEmpty(ML_pacientesHistorial)}">
+                        <td colspan="7" class="ML_tabla_vacia">No hay pacientes con historial clínico registrado.</td>
+                    </tr>
+                    <tr th:each="ML_paciente : ${ML_pacientesHistorial}">
+                        <td>
+                            <div class="ML_paciente_info">
+                                <div class="ML_paciente_foto" th:text="${#strings.substring(ML_paciente.paciente, 0, 1)}">P</div>
+                                <div>
+                                    <strong th:text="${ML_paciente.paciente}">Paciente</strong>
+                                    <span th:text="${'DNI: ' + ML_paciente.dni_paciente + ' | ' + ML_paciente.celular_paciente}">DNI</span>
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <strong th:text="${ML_paciente.grupo_sanguineo != null ? 'Grupo: ' + ML_paciente.grupo_sanguineo : 'Grupo no registrado'}">Grupo</strong>
+                            <span class="ML_texto_secundario" th:text="${ML_paciente.alergias != null ? 'Alergias: ' + ML_paciente.alergias : 'Alergias no registradas'}">Alergias</span>
+                        </td>
+                        <td><span class="ML_badge ML_badge_azul" th:text="${ML_paciente.total_atenciones + ' registro(s)'}">0 registros</span></td>
+                        <td class="ML_td_texto" th:text="${ML_paciente.ultimo_diagnostico}">Diagnóstico</td>
+                        <td th:text="${ML_paciente.ultima_cita_texto}">Cita</td>
+                        <td th:text="${ML_paciente.ultimo_registro_texto}">Registro</td>
+                        <td><a th:href="@{/doctor/seguimiento/paciente/{id}(id=${ML_paciente.id_paciente})}" class="ML_btn_doctor_table">Ver historial</a></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </main>
+</div>
+
+<script>
+    const ML_buscarHistorialDoctor = document.getElementById('ML_buscarHistorialDoctor');
+    const ML_tablaHistorialDoctor = document.getElementById('ML_tablaHistorialDoctor');
+    ML_buscarHistorialDoctor.addEventListener('keyup', () => {
+        const texto = ML_buscarHistorialDoctor.value.toLowerCase();
+        ML_tablaHistorialDoctor.querySelectorAll('tbody tr').forEach(fila => {
+            fila.style.display = fila.textContent.toLowerCase().includes(texto) ? '' : 'none';
+        });
+    });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro de Paciente</title>
+    <link rel="stylesheet" th:href="@{/css/ML_login.css}" href="/css/ML_login.css">
+    <link rel="stylesheet" th:href="@{/css/ML_iconos.css}" href="/css/ML_iconos.css">
+</head>
+<body class="ML_body_registro">
+
+<div class="ML_registro_page">
+
+    <div class="ML_registro_card">
+
+        <div class="ML_registro_header">
+
+            <div class="ML_registro_logo">
+                <span>+</span>
+            </div>
+
+            <div>
+                <h1>Registro de Paciente</h1>
+                <p>Completa todos tus datos para crear tu usuario en MediLink.</p>
+            </div>
+
+        </div>
+
+        <div th:if="${ML_error}">
+            <p class="mensaje-error" th:text="${ML_error}">
+                Error al registrar paciente
+            </p>
+        </div>
+
+        <form th:action="@{/registro/paciente}" th:object="${ML_paciente}" method="post" class="ML_form_registro">
+
+            <div class="ML_registro_seccion">
+
+                <h2>Datos personales</h2>
+
+                <div class="ML_registro_grid">
+
+                    <div class="ML_registro_input">
+                        <label>Nombres</label>
+                        <input type="text"
+                               th:field="*{ML_nombres}"
+                               placeholder="Ingresa tus nombres"
+                               required>
+                    </div>
+
+                    <div class="ML_registro_input">
+                        <label>Apellidos</label>
+                        <input type="text"
+                               th:field="*{ML_apellidos}"
+                               placeholder="Ingresa tus apellidos"
+                               required>
+                    </div>
+
+                    <div class="ML_registro_input">
+                        <label>DNI</label>
+                        <input type="text"
+                               th:field="*{ML_dni}"
+                               placeholder="Ingresa tu DNI"
+                               maxlength="8"
+                               required>
+                    </div>
+
+                    <div class="ML_registro_input">
+                        <label>Celular</label>
+                        <input type="text"
+                               th:field="*{ML_celular}"
+                               placeholder="Ingresa tu celular"
+                               maxlength="9"
+                               required>
+                    </div>
+
+                    <div class="ML_registro_input ML_registro_full">
+                        <label>Dirección</label>
+                        <input type="text"
+                               th:field="*{ML_direccion}"
+                               placeholder="Ingresa tu dirección"
+                               required>
+                    </div>
+
+                    <div class="ML_registro_input">
+                        <label>Correo electrónico</label>
+                        <input type="email"
+                               th:field="*{ML_correo}"
+                               placeholder="Ingresa tu correo electrónico"
+                               required>
+                    </div>
+
+                    <div class="ML_registro_input">
+                        <label>Contraseña</label>
+                        <input type="password"
+                               th:field="*{ML_contrasena}"
+                               placeholder="Crea una contraseña"
+                               required>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="ML_registro_seccion">
+
+                <h2>Datos médicos</h2>
+
+                <div class="ML_registro_grid">
+
+                    <div class="ML_registro_input">
+                        <label>Fecha de nacimiento</label>
+                        <input type="date"
+                               th:field="*{ML_fechaNacimiento}"
+                               required>
+                    </div>
+
+                    <div class="ML_registro_input">
+                        <label>Género</label>
+                        <select th:field="*{ML_genero}" required>
+                            <option value="">Selecciona género</option>
+                            <option value="Masculino">Masculino</option>
+                            <option value="Femenino">Femenino</option>
+                        </select>
+                    </div>
+
+                    <div class="ML_registro_input">
+                        <label>Grupo sanguíneo</label>
+                        <select th:field="*{ML_grupoSanguineo}" required>
+                            <option value="">Selecciona grupo sanguíneo</option>
+                            <option value="O+">O+</option>
+                            <option value="O-">O-</option>
+                            <option value="A+">A+</option>
+                            <option value="A-">A-</option>
+                            <option value="B+">B+</option>
+                            <option value="B-">B-</option>
+                            <option value="AB+">AB+</option>
+                            <option value="AB-">AB-</option>
+                        </select>
+                    </div>
+
+                    <div class="ML_registro_input">
+                        <label>Alergias</label>
+                        <input type="text"
+                               th:field="*{ML_alergias}"
+                               placeholder="Ejemplo: Ninguna, penicilina, etc."
+                               required>
+                    </div>
+
+                    <div class="ML_registro_input">
+                        <label>Contacto de emergencia</label>
+                        <input type="text"
+                               th:field="*{ML_contactoEmergencia}"
+                               placeholder="Nombre del contacto de emergencia"
+                               required>
+                    </div>
+
+                    <div class="ML_registro_input">
+                        <label>Celular de emergencia</label>
+                        <input type="text"
+                               th:field="*{ML_celularEmergencia}"
+                               placeholder="Celular del contacto"
+                               maxlength="9"
+                               required>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="ML_registro_acciones">
+
+                <a th:href="@{/login}" href="/login" class="ML_btn_volver_login">
+                    Volver al login
+                </a>
+
+                <button type="submit" class="ML_btn_guardar_registro">
+                    Crear cuenta paciente
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+</body>
+</html>

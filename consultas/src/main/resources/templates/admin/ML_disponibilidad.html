@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" th:href="@{/css/ML_dashboardAdmin.css}" href="/css/ML_dashboardAdmin.css">
+    <link rel="stylesheet" th:href="@{/css/ML_citasAdmin.css}" href="/css/ML_citasAdmin.css">
+    <link rel="stylesheet" th:href="@{/css/ML_reportesAdmin.css}" href="/css/ML_reportesAdmin.css">
+    <link rel="stylesheet" th:href="@{/css/ML_iconos.css}" href="/css/ML_iconos.css">
+    <title>Disponibilidad Médica</title>
+</head>
+<body>
+<div class="ML_dashboard_layout">
+    <aside class="ML_sidebar">
+        <div class="ML_sidebar_marca">
+            <div class="ML_marca_icono">+</div>
+            <div><h2>MediLink</h2><p>Sistema de<br>Citas Médicas</p></div>
+        </div>
+        <nav class="ML_menu">
+            <a th:href="@{/admin/dashboard}" class="ML_menu_link">
+                <span class="ML_menu_icono"><span class="ML_icon ML_icon_home" aria-hidden="true"></span></span>
+                <span>Principal</span>
+            </a>
+            <a th:href="@{/admin/usuarios}" class="ML_menu_link">
+                <span class="ML_menu_icono"><span class="ML_icon ML_icon_users" aria-hidden="true"></span></span>
+                <span>Usuarios</span>
+            </a>
+            <a th:href="@{/admin/citas}" class="ML_menu_link">
+                <span class="ML_menu_icono"><span class="ML_icon ML_icon_appointment" aria-hidden="true"></span></span>
+                <span>Citas</span>
+            </a>
+            <a th:href="@{/admin/horarios}" class="ML_menu_link">
+                <span class="ML_menu_icono"><span class="ML_icon ML_icon_calendar" aria-hidden="true"></span></span>
+                <span>Calendario</span>
+            </a>
+            <a th:href="@{/admin/disponibilidad}" class="ML_menu_link ML_activo">
+                <span class="ML_menu_icono"><span class="ML_icon ML_icon_clock" aria-hidden="true"></span></span>
+                <span>Disponibilidad</span>
+            </a>
+            <a th:href="@{/admin/horarios-doctores}" class="ML_menu_link">
+                <span class="ML_menu_icono"><span class="ML_icon ML_icon_clock" aria-hidden="true"></span></span>
+                <span>Horarios doctores</span>
+            </a>
+            <a th:href="@{/admin/consultorios}" class="ML_menu_link">
+                <span class="ML_menu_icono"><span class="ML_icon ML_icon_clipboard" aria-hidden="true"></span></span>
+                <span>Consultorios</span>
+            </a>
+            <a th:href="@{/admin/pagos}" class="ML_menu_link">
+                <span class="ML_menu_icono"><span class="ML_icon ML_icon_payment" aria-hidden="true"></span></span>
+                <span>Pagos</span>
+            </a>
+            <a th:href="@{/admin/correos}" class="ML_menu_link">
+                <span class="ML_menu_icono"><span class="ML_icon ML_icon_report" aria-hidden="true"></span></span>
+                <span>Notificaciones</span>
+            </a>
+            <a th:href="@{/admin/reportes}" class="ML_menu_link">
+                <span class="ML_menu_icono"><span class="ML_icon ML_icon_report" aria-hidden="true"></span></span>
+                <span>Reportes</span>
+            </a>
+            <a th:href="@{/admin/especialidades}" class="ML_menu_link">
+                <span class="ML_menu_icono"><span class="ML_icon ML_icon_add" aria-hidden="true"></span></span>
+                <span>Especialidades</span>
+            </a>
+            <a th:href="@{/admin/ranking-doctores}" class="ML_menu_link">
+                <span class="ML_menu_icono"><span class="ML_icon ML_icon_ranking" aria-hidden="true"></span></span>
+                <span>Ranking Doctores</span>
+            </a>
+            <a th:href="@{/admin/historial}" class="ML_menu_link">
+                <span class="ML_menu_icono"><span class="ML_icon ML_icon_history" aria-hidden="true"></span></span>
+                <span>Historial Clínico</span>
+            </a>
+        </nav>
+        <div class="ML_sidebar_footer">
+            <form th:action="@{/logout}" method="post"><button type="submit" class="ML_btn_logout">Cerrar sesión</button></form>
+        </div>
+    </aside>
+    <main class="ML_contenido">
+        <section class="ML_header"><div><h1>Disponibilidad Médica</h1><p>Asigna días y rangos de horas a cada doctor.</p></div><div class="ML_usuario_panel"><div class="ML_usuario_texto"><strong>Administrador</strong><span>Horarios</span></div><div class="ML_avatar">A</div></div></section>
+        <div th:if="${ML_mensajeExito}" class="ML_admin_alerta ML_admin_alerta_exito"><span th:text="${ML_mensajeExito}">Correcto</span></div>
+        <div th:if="${ML_mensajeError}" class="ML_admin_alerta ML_admin_alerta_error"><span th:text="${ML_mensajeError}">Error</span></div>
+
+        <section class="ML_tarjetas_totales ML_tarjetas_totales_auto">
+            <div class="ML_panel_resumen"><div class="ML_panel_resumen_texto"><p>Total horarios</p><h2 th:text="${ML_totalHorarios}">0</h2><span class="ML_badge ML_badge_azul">Reg.</span></div><div class="ML_panel_icono ML_icono_azul"><span class="ML_icon ML_icon_clock"></span></div></div>
+            <div class="ML_panel_resumen"><div class="ML_panel_resumen_texto"><p>Activos</p><h2 th:text="${ML_horariosActivos}">0</h2><span class="ML_badge ML_badge_verde">OK</span></div><div class="ML_panel_icono ML_icono_verde"><span class="ML_icon ML_icon_check"></span></div></div>
+            <div class="ML_panel_resumen"><div class="ML_panel_resumen_texto"><p>Inactivos</p><h2 th:text="${ML_horariosInactivos}">0</h2><span class="ML_badge ML_badge_rojo">Pausado</span></div><div class="ML_panel_icono ML_icono_rojo"><span class="ML_icon ML_icon_close"></span></div></div>
+        </section>
+
+        <section class="ML_form_admin_panel">
+            <form th:action="@{/admin/disponibilidad/guardar}" method="post" class="ML_form_admin">
+                <div class="ML_form_section_header"><div class="ML_form_section_icon"><span class="ML_icon ML_icon_calendar"></span></div><div><h3>Nuevo horario de atención</h3><p>La cita solo podrá registrarse dentro de este rango.</p></div></div>
+                <div class="ML_form_admin_grid">
+                    <div class="ML_form_admin_input ML_form_admin_full"><label>Doctor <span>*</span></label><select name="ML_idDoctor" required><option value="">Selecciona un doctor</option><option th:each="ML_doc : ${ML_doctores}" th:value="${ML_doc.ML_id}" th:text="${ML_doc.ML_nombre}">Doctor</option></select></div>
+                    <div class="ML_form_admin_input"><label>Día <span>*</span></label><select name="ML_diaSemana" required><option th:each="ML_dia : ${ML_diasSemana}" th:value="${ML_dia}" th:text="${ML_dia}">Lunes</option></select></div>
+                    <div class="ML_form_admin_input"><label>Hora inicio <span>*</span></label><input type="time" name="ML_horaInicio" required></div>
+                    <div class="ML_form_admin_input"><label>Hora fin <span>*</span></label><input type="time" name="ML_horaFin" required></div>
+                    <div class="ML_form_admin_input"><label>Estado</label><select name="ML_estado"><option th:each="ML_estado : ${ML_estadosHorario}" th:value="${ML_estado}" th:text="${ML_estado}">Activo</option></select></div>
+                </div>
+                <div class="ML_form_admin_acciones"><button type="submit" class="ML_btn_guardar_admin">Guardar horario</button></div>
+            </form>
+        </section>
+
+        <section class="ML_panel ML_panel_tabla_vertical ML_panel_ordenado">
+            <div class="ML_panel_header_vertical"><div><h3>Horarios registrados</h3><p>Evita cruces de horarios por doctor y consultorio.</p></div></div>
+            <div class="ML_tabla_contenedor"><table class="ML_tabla_pacientes_admin"><thead><tr><th>ID</th><th>Doctor</th><th>Especialidad</th><th>Consultorio</th><th>Día</th><th>Rango</th><th>Estado</th><th>Actualizar</th></tr></thead><tbody>
+                <tr th:if="${#lists.isEmpty(ML_horarios)}"><td colspan="8" class="ML_tabla_vacia">No hay horarios registrados.</td></tr>
+                <tr th:each="ML_horario : ${ML_horarios}"><td th:text="${'#H-' + ML_horario.id_horario}">#H-1</td><td><strong th:text="${ML_horario.doctor}">Doctor</strong></td><td th:text="${ML_horario.especialidad}">Especialidad</td><td th:text="${ML_horario.consultorio}">Consultorio</td><td th:text="${ML_horario.dia_semana}">Lunes</td><td><span th:text="${ML_horario.hora_inicio}">08:00</span> - <span th:text="${ML_horario.hora_fin}">12:00</span></td><td><span class="ML_badge" th:text="${ML_horario.estado}">Activo</span></td><td><form th:action="@{/admin/disponibilidad/{id}/estado(id=${ML_horario.id_horario})}" method="post" class="ML_form_estado_inline"><select name="ML_estado"><option th:each="ML_estado : ${ML_estadosHorario}" th:value="${ML_estado}" th:text="${ML_estado}" th:selected="${ML_estado == ML_horario.estado}">Activo</option></select><button type="submit" class="ML_btn_panel">Guardar</button></form></td></tr>
+            </tbody></table></div>
+        </section>
+    </main>
+</div>
+</body>
+</html>

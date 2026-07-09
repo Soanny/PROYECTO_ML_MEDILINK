@@ -1,0 +1,461 @@
+.ML_correo_contenido {
+    background: #f4f7fb;
+    min-height: 100vh;
+}
+
+.ML_correo_hero {
+    margin: 0;
+    padding: 38px 42px 58px;
+    background: linear-gradient(135deg, #0b63e5 0%, #12b5cb 55%, #22c55e 130%);
+    color: #fff;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 24px;
+    box-shadow: 0 18px 36px rgba(11, 99, 229, 0.18);
+    border-radius: 0 0 32px 32px;
+}
+
+.ML_correo_hero h1 {
+    margin: 8px 0 10px;
+    font-size: 34px;
+    font-weight: 950;
+    letter-spacing: -0.8px;
+}
+
+.ML_correo_hero p {
+    margin: 0;
+    max-width: 740px;
+    color: rgba(255,255,255,.9);
+    font-weight: 700;
+    line-height: 1.55;
+}
+
+.ML_correo_etiqueta {
+    display: inline-flex;
+    align-items: center;
+    border-radius: 999px;
+    padding: 8px 12px;
+    background: rgba(255,255,255,.16);
+    border: 1px solid rgba(255,255,255,.34);
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: .6px;
+    font-weight: 900;
+}
+
+.ML_correo_estado_box {
+    min-width: 260px;
+    background: rgba(255,255,255,.16);
+    border: 1px solid rgba(255,255,255,.28);
+    border-radius: 22px;
+    padding: 18px;
+    backdrop-filter: blur(8px);
+}
+
+.ML_correo_estado_box small,
+.ML_correo_estado_box span {
+    display: block;
+    color: rgba(255,255,255,.86);
+    font-weight: 800;
+}
+
+.ML_correo_estado_box strong {
+    display: block;
+    margin: 8px 0;
+    font-size: 24px;
+    font-weight: 950;
+}
+
+.ML_correo_metricas {
+    margin: -32px 42px 24px;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 18px;
+    position: relative;
+    z-index: 2;
+}
+
+.ML_correo_card_estado,
+.ML_correo_panel {
+    background: #fff;
+    border: 1px solid #e5e7eb;
+    box-shadow: 0 14px 30px rgba(15, 23, 42, .08);
+    border-radius: 22px;
+}
+
+.ML_correo_card_estado {
+    padding: 20px 22px;
+    overflow: hidden;
+}
+
+.ML_correo_card_estado span,
+.ML_correo_card_estado small {
+    display: block;
+    color: #64748b;
+    font-weight: 800;
+    overflow-wrap: anywhere;
+}
+
+.ML_correo_card_estado strong {
+    display: block;
+    color: #0f172a;
+    font-size: 20px;
+    font-weight: 950;
+    margin: 8px 0;
+    overflow-wrap: anywhere;
+}
+
+.ML_correo_grid {
+    margin: 0 42px 24px;
+    display: grid;
+    grid-template-columns: minmax(0, .8fr) minmax(0, 1.2fr);
+    gap: 22px;
+    align-items: start;
+}
+
+.ML_correo_grid_datos {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    padding-bottom: 42px;
+}
+
+.ML_correo_panel {
+    padding: 24px;
+}
+
+.ML_correo_panel_head {
+    margin-bottom: 18px;
+}
+
+.ML_correo_panel_head h3 {
+    margin: 0 0 7px;
+    color: #0f172a;
+    font-size: 20px;
+    font-weight: 950;
+}
+
+.ML_correo_panel_head p {
+    margin: 0;
+    color: #64748b;
+    font-weight: 700;
+    line-height: 1.45;
+}
+
+.ML_correo_form {
+    display: grid;
+    gap: 12px;
+}
+
+.ML_correo_form label {
+    color: #334155;
+    font-weight: 900;
+    font-size: 13px;
+}
+
+.ML_correo_form input,
+.ML_correo_form select {
+    width: 100%;
+    min-height: 46px;
+    border-radius: 14px;
+    border: 1px solid #dbe3ee;
+    background: #f8fafc;
+    padding: 0 14px;
+    color: #0f172a;
+    font-weight: 700;
+    outline: none;
+}
+
+.ML_correo_form input:focus,
+.ML_correo_form select:focus {
+    border-color: #0b63e5;
+    background: #fff;
+    box-shadow: 0 0 0 4px rgba(11, 99, 229, .12);
+}
+
+.ML_btn_correo {
+    border: 0;
+    border-radius: 14px;
+    min-height: 46px;
+    padding: 0 18px;
+    background: linear-gradient(135deg, #0b63e5, #12b5cb);
+    color: #fff;
+    font-weight: 950;
+    cursor: pointer;
+    box-shadow: 0 12px 22px rgba(11, 99, 229, .24);
+}
+
+.ML_correo_api_panel {
+    display: grid;
+    gap: 10px;
+}
+
+.ML_correo_api_panel code {
+    display: block;
+    padding: 12px 14px;
+    border-radius: 14px;
+    background: #0f172a;
+    color: #e2e8f0;
+    font-weight: 800;
+    overflow-x: auto;
+}
+
+.ML_correo_tabla {
+    margin-top: 18px;
+    max-height: 360px;
+    overflow: auto;
+}
+
+.ML_correo_tabla td span {
+    display: block;
+    color: #64748b;
+    font-size: 12px;
+    font-weight: 700;
+    margin-top: 4px;
+}
+
+.ML_correo_secretaria_header {
+    margin-bottom: 0;
+}
+
+@media (max-width: 1180px) {
+    .ML_correo_metricas,
+    .ML_correo_grid,
+    .ML_correo_grid_datos {
+        grid-template-columns: 1fr;
+    }
+    .ML_correo_hero {
+        flex-direction: column;
+    }
+}
+
+@media (max-width: 760px) {
+    .ML_correo_hero,
+    .ML_correo_metricas,
+    .ML_correo_grid,
+    .ML_correo_grid_datos {
+        margin-left: 20px;
+        margin-right: 20px;
+    }
+    .ML_correo_hero {
+        padding-left: 22px;
+        padding-right: 22px;
+    }
+}
+
+/* Ajuste final: interfaz de notificaciones sin mensajes técnicos visibles */
+.ML_correo_contenido {
+    background: #f5f7fb;
+}
+
+.ML_correo_hero_limpio {
+    margin: 32px 42px 24px;
+    padding: 30px 34px;
+    border-radius: 28px;
+    background: linear-gradient(135deg, #ffffff 0%, #eef6ff 100%);
+    border: 1px solid #dbeafe;
+    box-shadow: 0 18px 40px rgba(15, 23, 42, .08);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 24px;
+}
+
+.ML_correo_hero_limpio h1,
+.ML_correo_hero_limpio h2 {
+    margin: 6px 0 10px;
+    color: #0f172a;
+    font-size: 30px;
+    font-weight: 950;
+    letter-spacing: -.02em;
+}
+
+.ML_correo_hero_limpio p {
+    max-width: 760px;
+    margin: 0;
+    color: #475569;
+    line-height: 1.65;
+    font-weight: 750;
+}
+
+.ML_correo_resumen_acciones {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    min-width: 230px;
+}
+
+.ML_correo_resumen_acciones span {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: #ffffff;
+    border: 1px solid #dbeafe;
+    color: #0b63e5;
+    border-radius: 999px;
+    padding: 10px 14px;
+    font-weight: 900;
+    box-shadow: 0 8px 18px rgba(11, 99, 229, .08);
+}
+
+.ML_correo_resumen_acciones span::before {
+    content: "";
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #12b5cb;
+}
+
+.ML_correo_acciones_grid,
+.ML_correo_listas_grid {
+    margin: 0 42px 26px;
+    display: grid;
+    gap: 24px;
+}
+
+.ML_correo_acciones_grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    align-items: stretch;
+}
+
+.ML_correo_acciones_grid_secretaria {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.ML_correo_listas_grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    padding-bottom: 44px;
+}
+
+.ML_correo_accion_card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    min-height: 100%;
+    border-top: 5px solid #0b63e5;
+}
+
+.ML_correo_icono_card {
+    width: 48px;
+    height: 48px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 16px;
+    background: #eaf3ff;
+    color: #0b63e5;
+    font-size: 22px;
+    box-shadow: inset 0 0 0 1px #cfe1ff;
+}
+
+.ML_correo_panel {
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 24px;
+    box-shadow: 0 16px 34px rgba(15, 23, 42, .07);
+}
+
+.ML_correo_panel_head {
+    margin-bottom: 18px;
+}
+
+.ML_correo_panel_head h3 {
+    margin-bottom: 10px;
+}
+
+.ML_correo_panel_head p {
+    line-height: 1.65;
+    color: #64748b;
+}
+
+.ML_correo_form {
+    gap: 14px;
+    margin-top: auto;
+}
+
+.ML_correo_form label {
+    letter-spacing: .01em;
+}
+
+.ML_correo_form input,
+.ML_correo_form select {
+    min-height: 50px;
+    line-height: 1.35;
+}
+
+.ML_btn_correo {
+    margin-top: 4px;
+    min-height: 50px;
+    transition: transform .16s ease, box-shadow .16s ease, filter .16s ease;
+}
+
+.ML_btn_correo:hover {
+    transform: translateY(-1px);
+    filter: brightness(.98);
+    box-shadow: 0 16px 28px rgba(11, 99, 229, .28);
+}
+
+.ML_correo_tabla {
+    margin-top: 8px;
+    max-height: 420px;
+    border-radius: 18px;
+}
+
+.ML_correo_tabla_limpia th,
+.ML_correo_tabla_limpia td {
+    padding: 15px 16px !important;
+    vertical-align: middle;
+}
+
+.ML_correo_tabla_limpia td strong {
+    display: block;
+    margin-bottom: 5px;
+    color: #0f172a;
+}
+
+.ML_correo_tabla_limpia td span:not(.ML_estado_horario) {
+    color: #64748b;
+    font-size: 12px;
+    font-weight: 750;
+    line-height: 1.35;
+}
+
+.ML_correo_metricas,
+.ML_correo_estado_box,
+.ML_correo_api_panel,
+.ML_correo_panel_discreto {
+    display: none !important;
+}
+
+@media (max-width: 1180px) {
+    .ML_correo_hero_limpio,
+    .ML_secretaria_header.ML_correo_hero_limpio {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .ML_correo_acciones_grid,
+    .ML_correo_acciones_grid_secretaria,
+    .ML_correo_listas_grid {
+        grid-template-columns: 1fr;
+    }
+
+    .ML_correo_resumen_acciones {
+        width: 100%;
+        min-width: 0;
+    }
+}
+
+@media (max-width: 760px) {
+    .ML_correo_hero_limpio,
+    .ML_secretaria_header.ML_correo_hero_limpio,
+    .ML_correo_acciones_grid,
+    .ML_correo_listas_grid {
+        margin-left: 20px;
+        margin-right: 20px;
+    }
+
+    .ML_correo_hero_limpio {
+        padding: 24px;
+    }
+}

@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crear Usuario Doctor</title>
+
+    <link rel="stylesheet" th:href="@{/css/ML_dashboardAdmin.css}" href="/css/ML_dashboardAdmin.css">
+    <link rel="stylesheet" th:href="@{/css/ML_ARegistrarDoctor.css}" href="/css/ML_ARegistrarDoctor.css">
+    <link rel="stylesheet" th:href="@{/css/ML_iconos.css}" href="/css/ML_iconos.css">
+</head>
+
+<body class="ML_registrar_doctor_page">
+
+<div class="ML_dashboard_layout">
+
+    <aside class="ML_sidebar">
+
+        <div class="ML_sidebar_marca">
+            <div class="ML_marca_icono">+</div>
+            <div>
+                <h2>MediLink</h2>
+                <p>Sistema de<br>Citas Médicas</p>
+            </div>
+        </div>
+
+        <nav class="ML_menu">
+
+            <a th:href="@{/admin/dashboard}" class="ML_menu_link">
+                <span class="ML_menu_icono"><span class="ML_icon ML_icon_home" aria-hidden="true"></span></span>
+                <span>Principal</span>
+            </a>
+            <a th:href="@{/admin/usuarios}" class="ML_menu_link ML_activo">
+                <span class="ML_menu_icono"><span class="ML_icon ML_icon_users" aria-hidden="true"></span></span>
+                <span>Usuarios</span>
+            </a>
+
+            <a th:href="@{/admin/citas}" class="ML_menu_link">
+                <span class="ML_menu_icono"><span class="ML_icon ML_icon_appointment" aria-hidden="true"></span></span>
+                <span>Citas</span>
+            </a>
+
+            <a th:href="@{/admin/horarios}" class="ML_menu_link">
+                <span class="ML_menu_icono"><span class="ML_icon ML_icon_calendar" aria-hidden="true"></span></span>
+                <span>Calendario</span>
+            </a>
+
+            
+            <a th:href="@{/admin/disponibilidad}" class="ML_menu_link">
+                <span class="ML_menu_icono"><span class="ML_icon ML_icon_clock" aria-hidden="true"></span></span>
+                <span>Disponibilidad</span>
+            </a>
+            <a th:href="@{/admin/horarios-doctores}" class="ML_menu_link">
+                <span class="ML_menu_icono"><span class="ML_icon ML_icon_clock" aria-hidden="true"></span></span>
+                <span>Horarios doctores</span>
+            </a>
+
+            <a th:href="@{/admin/consultorios}" class="ML_menu_link">
+                <span class="ML_menu_icono"><span class="ML_icon ML_icon_clipboard" aria-hidden="true"></span></span>
+                <span>Consultorios</span>
+            </a>
+
+            <a th:href="@{/admin/pagos}" class="ML_menu_link">
+                <span class="ML_menu_icono"><span class="ML_icon ML_icon_payment" aria-hidden="true"></span></span>
+                <span>Pagos</span>
+            </a>
+            <a th:href="@{/admin/correos}" class="ML_menu_link">
+                <span class="ML_menu_icono"><span class="ML_icon ML_icon_report" aria-hidden="true"></span></span>
+                <span>Notificaciones</span>
+            </a>
+<a th:href="@{/admin/reportes}" class="ML_menu_link">
+                <span class="ML_menu_icono"><span class="ML_icon ML_icon_report" aria-hidden="true"></span></span>
+                <span>Reportes</span>
+            </a>
+
+            <a th:href="@{/admin/especialidades}" class="ML_menu_link">
+                <span class="ML_menu_icono"><span class="ML_icon ML_icon_add" aria-hidden="true"></span></span>
+                <span>Especialidades</span>
+            </a>
+
+            <a th:href="@{/admin/ranking-doctores}" class="ML_menu_link">
+                <span class="ML_menu_icono"><span class="ML_icon ML_icon_ranking" aria-hidden="true"></span></span>
+                <span>Ranking Doctores</span>
+            </a>
+
+            <a th:href="@{/admin/historial}" class="ML_menu_link">
+                <span class="ML_menu_icono"><span class="ML_icon ML_icon_history" aria-hidden="true"></span></span>
+                <span>Historial Clínico</span>
+            </a>
+
+        </nav>
+
+        <div class="ML_sidebar_footer">
+            <form th:action="@{/logout}" method="post">
+                <button type="submit" class="ML_btn_logout">Cerrar sesión</button>
+            </form>
+        </div>
+
+    </aside>
+
+    <main class="ML_contenido">
+
+        <section class="ML_pacientes_topbar">
+            <div class="ML_topbar_left">
+                <span class="ML_topbar_menu"><span class="ML_icon ML_icon_menu" aria-hidden="true"></span></span>
+                <h1>Crear Usuario Doctor</h1>
+            </div>
+
+            <div class="ML_topbar_user">
+                <span class="ML_notificacion"><span class="ML_icon ML_icon_bell" aria-hidden="true"></span></span>
+                <div class="ML_topbar_avatar">A</div>
+                <div>
+                    <strong>Admin</strong>
+                    <p>Administrador</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="ML_pacientes_header">
+            <div>
+                <h2>Nuevo Doctor</h2>
+                <p>Registra un usuario con rol Doctor y sus datos profesionales.</p>
+            </div>
+
+            <a th:href="@{/admin/doctores}" class="ML_btn_volver_doctor">
+                <span><span class="ML_icon ML_icon_arrow-left" aria-hidden="true"></span></span>
+                Volver
+            </a>
+        </section>
+
+        <section class="ML_form_admin_panel">
+
+            <div th:if="${ML_errorRegistro}" class="ML_admin_alerta ML_admin_alerta_error">
+                <span th:text="${ML_errorRegistro}">Error al registrar</span>
+            </div>
+
+            <form th:action="@{/admin/doctores/guardar}"
+                  th:object="${ML_doctorNuevo}"
+                  method="post"
+                  class="ML_form_admin">
+
+                <div class="ML_form_section_header">
+                    <div class="ML_form_section_icon"><span class="ML_icon ML_icon_user" aria-hidden="true"></span></div>
+                    <div>
+                        <h3>Datos del usuario</h3>
+                        <p>Información personal y credenciales de acceso del doctor.</p>
+                    </div>
+                </div>
+
+                <div class="ML_form_admin_grid">
+
+                    <div class="ML_form_admin_input">
+                        <label for="ML_nombres">Nombres <span>*</span></label>
+                        <input type="text" id="ML_nombres" th:field="*{ML_nombres}" placeholder="Ingrese los nombres" required>
+                    </div>
+
+                    <div class="ML_form_admin_input">
+                        <label for="ML_apellidos">Apellidos <span>*</span></label>
+                        <input type="text" id="ML_apellidos" th:field="*{ML_apellidos}" placeholder="Ingrese los apellidos" required>
+                    </div>
+
+                    <div class="ML_form_admin_input">
+                        <label for="ML_dni">DNI <span>*</span></label>
+                        <input type="text" id="ML_dni" th:field="*{ML_dni}" maxlength="15" placeholder="Ingrese el DNI" required>
+                    </div>
+
+                    <div class="ML_form_admin_input">
+                        <label for="ML_celular">Celular</label>
+                        <input type="text" id="ML_celular" th:field="*{ML_celular}" maxlength="20" placeholder="Ingrese el celular">
+                    </div>
+
+                    <div class="ML_form_admin_input ML_form_admin_full">
+                        <label for="ML_direccion">Dirección</label>
+                        <input type="text" id="ML_direccion" th:field="*{ML_direccion}" placeholder="Ingrese la dirección completa">
+                    </div>
+
+                    <div class="ML_form_admin_input">
+                        <label for="ML_correo">Correo electrónico <span>*</span></label>
+                        <input type="email" id="ML_correo" th:field="*{ML_correo}" placeholder="correo@ejemplo.com" required>
+                    </div>
+
+                    <div class="ML_form_admin_input">
+                        <label for="ML_contrasena">Contraseña <span>*</span></label>
+                        <input type="password" id="ML_contrasena" th:field="*{ML_contrasena}" placeholder="Ingrese la contraseña" required>
+                    </div>
+
+                </div>
+
+                <div class="ML_form_section_header ML_form_section_header_second">
+                    <div class="ML_form_section_icon"><span class="ML_icon ML_icon_doctor" aria-hidden="true"></span></div>
+                    <div>
+                        <h3>Datos del doctor</h3>
+                        <p>Información profesional y consultorio asignado.</p>
+                    </div>
+                </div>
+
+                <div class="ML_form_admin_grid">
+
+                    <div class="ML_form_admin_input">
+                        <label for="ML_idEspecialidad">Especialidad <span>*</span></label>
+                        <select id="ML_idEspecialidad" th:field="*{ML_idEspecialidad}" required>
+                            <option value="">Seleccione especialidad</option>
+                            <option th:each="ML_especialidad : ${ML_especialidades}"
+                                    th:value="${ML_especialidad.ML_id}"
+                                    th:text="${ML_especialidad.ML_nombre}">
+                                Especialidad
+                            </option>
+                        </select>
+                    </div>
+
+                    <div class="ML_form_admin_input">
+                        <label for="ML_idConsultorio">Consultorio <span>*</span></label>
+                        <select id="ML_idConsultorio" th:field="*{ML_idConsultorio}" required>
+                            <option value="">Seleccione consultorio</option>
+                            <option th:each="ML_consultorio : ${ML_consultorios}"
+                                    th:value="${ML_consultorio.ML_id}"
+                                    th:text="${ML_consultorio.ML_nombre}">
+                                Consultorio
+                            </option>
+                        </select>
+                    </div>
+
+                    <div class="ML_form_admin_input">
+                        <label for="ML_nroColegiatura">Nro. Colegiatura <span>*</span></label>
+                        <input type="text" id="ML_nroColegiatura" th:field="*{ML_nroColegiatura}" placeholder="CMP-00000" required>
+                    </div>
+
+                    <div class="ML_form_admin_input">
+                        <label for="ML_precioConsulta">Precio de consulta <span>*</span></label>
+                        <input type="number" id="ML_precioConsulta" th:field="*{ML_precioConsulta}" min="0" step="0.01" placeholder="50.00" required>
+                    </div>
+
+                </div>
+
+                <div class="ML_form_admin_acciones">
+                    <a th:href="@{/admin/doctores}" class="ML_btn_cancelar_admin">Cancelar</a>
+                    <button type="submit" class="ML_btn_guardar_admin">Crear Usuario Doctor</button>
+                </div>
+
+            </form>
+
+        </section>
+
+    </main>
+
+</div>
+
+</body>
+</html>
